@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   chk_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 10:20:43 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 18:31:13 by bbrahim          ###   ########.fr       */
+/*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
+/*   Updated: 2022/11/02 18:30:48 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/cub3d.h"
-
-int	main(int ac, char **av)
-{
-	t_root	root;
-
-	if (ac != 2 || !av[1])
-	{
-		printf("\033[0;31mA MAP IN FORMAT `*.CUB` IS REQUIRED!\033[0;37m\n");
-		return (EXIT_FAILURE);
-	}
-	ft_chk_map_ext(av[1]);
-	ft_read_map(av[1], &root);
-	ft_init_texture(&root);
-	return (0);
-}
+#include "../../headers/cub3d.h"

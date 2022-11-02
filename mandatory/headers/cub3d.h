@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 13:09:07 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/02 18:44:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@
 void	ft_chk_map_ext(char *av);
 char	*ft_read_file(int fd);
 void	ft_read_map(char *av, t_root *root);
+int		ft_txtchr(char *text);
+int		ft_chk_texture(t_root *root);
+void	ft_init_texture(t_root *root);
 
 #endif
