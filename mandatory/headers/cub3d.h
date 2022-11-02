@@ -1,0 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
+/*   Updated: 2022/11/02 13:09:07 by bbrahim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "macros.h"
+# include "types.h"
+# include "../../libs/Libft/libft.h"
+# include "../../libs/mlx/mlx.h"
+
+void	ft_chk_map_ext(char *av);
+char	*ft_read_file(int fd);
+void	ft_read_map(char *av, t_root *root);
+
+#endif
