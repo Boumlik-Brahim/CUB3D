@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 18:31:32 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:52:29 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	ft_read_map(char *av, t_root *root)
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
+	{
 		ft_putstr_fd("INVALID MAP", 1);
+		exit(1);
+	}
 	line = ft_read_file(fd);
 	if (!line)
 		ft_putstr_fd("MAP IS EMPTY", 1);

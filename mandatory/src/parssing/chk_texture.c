@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 18:29:12 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/03 17:56:20 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,50 @@
 
 int	ft_txtchr(char *text)
 {
+	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
+		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
+	{
+		if (!ft_chk_ext(text, ".xpm"))
+			return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
+}
+
+void	ft_init_array_texture(t_root *root)
+{
+	int		i;
+	int		j;
 	char	*res;
 
-	res = ft_strtrim(text, " ");
-	if (!ft_strncmp(res, "NO ", 3)
-		|| !ft_strncmp(res, "SO ", 3)
-		|| !ft_strncmp(res, "WE ", 3)
-		|| !ft_strncmp(res, "EA ", 3)
-		|| !ft_strncmp(res, "F ", 2)
-		|| !ft_strncmp(res, "C ", 2))
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
+	i = -1;
+	j = 0;
+	root->map.texture = (char **)malloc(sizeof(char *) * 5);
+	if (!root->map.texture)
+		return ;
+	while (root->map.data[++i])
+	{
+		res = ft_strtrim(root->map.data[i], " ");
+		if (!ft_txtchr(res))
+		{
+			root->map.texture[j] = ft_strdup(res);
+			j++;
+		}
+	}
+	root->map.texture[j] = NULL;
 }
 
 int	ft_chk_texture(t_root *root)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	char	*res;
 
 	i = -1;
 	count = 0;
 	while (root->map.data[++i])
 	{
-		if (!ft_txtchr(root->map.data[i]))
+		res = ft_strtrim(root->map.data[i], " ");
+		if (!ft_txtchr(res) || !ft_colorchr(res))
 			count++;
 		else
 			break ;
@@ -46,6 +67,19 @@ int	ft_chk_texture(t_root *root)
 
 void	ft_init_texture(t_root *root)
 {
+	int	i;
+
 	if (ft_chk_texture(root) != 6)
+	{
 		printf("\033[0;31mA INVALID TEXTURE\033[0;37m\n");
+		return ;
+	}
+	// ft_init_array_texture(root);
+	// i = -1;
+	// while (root->map.texture[++i])
+	// 	printf("%s\n", root->map.texture[i]);
+	ft_init_array_collor(root);
+	i = -1;
+	while (root->map.collor[++i])
+		printf("%s\n", root->map.collor[i]);
 }

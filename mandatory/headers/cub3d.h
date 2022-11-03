@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 18:44:31 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/03 14:47:48 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@
 # include "../../libs/Libft/libft.h"
 # include "../../libs/mlx/mlx.h"
 
-void	ft_chk_map_ext(char *av);
+int		ft_chk_ext(char *str, char *ext);
 char	*ft_read_file(int fd);
 void	ft_read_map(char *av, t_root *root);
+
+int		ft_colorchr(char *color);
+void	ft_init_array_collor(t_root *root);
 int		ft_txtchr(char *text);
+void	ft_init_array_texture(t_root *root);
 int		ft_chk_texture(t_root *root);
 void	ft_init_texture(t_root *root);
 
