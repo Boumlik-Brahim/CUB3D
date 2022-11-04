@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/03 17:56:20 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/04 17:57:58 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	ft_init_texture(t_root *root)
 		printf("\033[0;31mA INVALID TEXTURE\033[0;37m\n");
 		return ;
 	}
-	// ft_init_array_texture(root);
-	// i = -1;
-	// while (root->map.texture[++i])
-	// 	printf("%s\n", root->map.texture[i]);
+	ft_init_array_texture(root);
+	i = -1;
+	while (root->map.texture[++i])
+		printf("%s\n", root->map.texture[i]);
 	ft_init_array_collor(root);
 	i = -1;
 	while (root->map.collor[++i])

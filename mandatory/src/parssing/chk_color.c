@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/04 15:59:43 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/04 17:51:48 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ int	ft_chk_digit(char *color)
 
 int	ft_colorchr(char *color)
 {
-	if (!ft_strncmp(color, "F ", 2) || !ft_strncmp(color, "C ", 2)
-		|| !ft_chk_digit(color))
+	if (!ft_strncmp(color, "F ", 2) || !ft_strncmp(color, "C ", 2))
 	{
-		return (EXIT_SUCCESS);
+		if (!ft_chk_digit(color))
+			return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_FAILURE);
 }
