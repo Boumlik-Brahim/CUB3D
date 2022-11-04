@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/04 11:49:05 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/04 15:59:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,42 @@ int	ft_colorlen(char **tmp)
 	return (i);
 }
 
-int	ft_colortoint(char **tmp)
+int	ft_chk_num(char *color)
 {
 	int		i;
-	int		color;
+	char	*tmp;
+	int		res;
+	int		len;
 
-	i = 1;
-	while (tmp[i])
+	i = 0;
+	len = ft_strlen(color);
+	while (color[i])
 	{
-		color = ft_atoi(tmp[i]);
-		if (color < 0 || color > 255)
+		if (color[i] == ' ' || ft_isalpha(color[i]) || color[i] == '.')
+			i++;
+		else
+			break ;
+	}
+	tmp = ft_substr(color, i, (len - i));
+	res = ft_atoi(tmp);
+	if (res < 0 || res > 255)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_colortoint(char *color)
+{
+	char	**tmp;
+	int		i;
+
+	tmp = ft_split(color, ',');
+	if (ft_colorlen(tmp) > 3)
+		return (EXIT_FAILURE);
+	i = -1;
+	while (tmp[++i])
+	{
+		if (ft_chk_num(tmp[i]) != 0)
 			return (EXIT_FAILURE);
-		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -47,12 +71,9 @@ int	ft_chk_digit(char *color)
 {
 	int		i;
 	int		clen;
-	char	**tmp;
 
 	clen = ft_strlen(color);
-	tmp = ft_split(color, ',');
-	printf("%d\n", ft_colortoint(tmp));
-	if (color[2] == ',' || color[clen - 1] == ',' || ft_colorlen(tmp) > 3)
+	if (color[2] == ',' || color[clen - 1] == ',' || ft_colortoint(color) != 0)
 		return (EXIT_FAILURE);
 	i = 2;
 	while (color[i])
@@ -69,10 +90,9 @@ int	ft_chk_digit(char *color)
 
 int	ft_colorchr(char *color)
 {
-	if (!ft_strncmp(color, "F ", 2) || !ft_strncmp(color, "C ", 2))
+	if (!ft_strncmp(color, "F ", 2) || !ft_strncmp(color, "C ", 2)
+		|| !ft_chk_digit(color))
 	{
-		ft_chk_digit(color);
-		// printf("%d\n", ft_chk_digit(color));
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
