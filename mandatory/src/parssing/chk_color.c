@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/04 17:51:48 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/06 13:09:17 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ int	ft_colorlen(char **tmp)
 	return (i);
 }
 
+int	ft_chk_space(char *tmp)
+{
+	int	j;
+
+	j = -1;
+	while (tmp[++j])
+	{
+		if (tmp[j] == ' ' && ft_isdigit(tmp[j + 1]))
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_chk_num(char *color)
 {
 	int		i;
@@ -45,7 +58,7 @@ int	ft_chk_num(char *color)
 	}
 	tmp = ft_substr(color, i, (len - i));
 	res = ft_atoi(tmp);
-	if (res < 0 || res > 255)
+	if (res < 0 || res > 255 || ft_chk_space(tmp) != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
