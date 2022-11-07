@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:17:44 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/06 17:39:20 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/07 11:52:59 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ int	ft_chk_ext(char *str, char	*ext)
 	return (EXIT_SUCCESS);
 }
 
-// int	ft_chk_sp(t_root *root)
-// {
-// 	return (EXIT_SUCCESS);
-// }
 int	ft_col_len(t_root *root)
 {
 	int	i;
@@ -81,26 +77,64 @@ int	ft_chk_character(t_root *root)
 
 int	ft_chk_walls(t_root *root)
 {
-	int		i;
-	int		j;
+	int		r;
+	int		c;
 	int		rl;
 	int		cl;
 
 	rl = ft_row_len(root);
 	cl = ft_col_len(root);
-	i = 5;
-	printf("%s\n", root->map.data[6]);
-	while (++i < rl)
+	r = 5;
+	while (++r < rl)
 	{
-		j = 0;
-		while (j < cl)
+		c = 0;
+		while (c < cl)
 		{
-			if (root->map.data[6][j] != ' ' || root->map.data[6][j] != '1'
-				|| root->map.data[rl - 1][j] != ' '
-				|| root->map.data[rl - 1][j] != '1')
+			if ((root->map.data[6][c] != '1' && root->map.data[6][c] != ' ')
+				|| (root->map.data[r][0] != '1' && root->map.data[r][0] != ' ')
+				|| (root->map.data[r][cl - 1] != '1'
+				&& root->map.data[r][cl - 1] != ' ')
+				|| (root->map.data[rl - 1][c] != '1'
+				&& root->map.data[rl - 1][c] != ' '))
 				return (EXIT_FAILURE);
-			j++;
+			c++;
 		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_chk_sp(t_root *root)
+{
+	int		r;
+	int		i;
+	int		j;
+	int		c;
+	int		rl;
+	char	**tmp;
+
+	rl = ft_row_len(root);
+	tmp = (char **)malloc(sizeof(char *) * (rl + 1));
+	if (!tmp)
+		return (EXIT_FAILURE);
+	r = -1;
+	i = -1;
+	while (root->map.data[++r] && tmp[++i])
+		tmp[i] = ft_strtrim(root->map.data[r], " ");
+	tmp[i + 1] = NULL;
+	j = 5;
+	while (tmp[++j])
+	{
+		c = 0;
+		while (tmp[j][c])
+		{
+			if (tmp[j][c] == ' ')
+			{
+				printf("%c", tmp[j][c - 1]);
+				printf("%c", tmp[j][c + 1]);
+			}
+			c++;
+		}
+		printf("\n");
 	}
 	return (EXIT_SUCCESS);
 }

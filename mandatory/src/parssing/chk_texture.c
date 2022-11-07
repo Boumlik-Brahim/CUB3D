@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/06 17:25:41 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/07 11:01:20 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	ft_init_texture(t_root *root)
 	}
 	printf("characters====> %d\n", ft_chk_character(root));
 	printf("walls====> %d\n", ft_chk_walls(root));
+	ft_chk_sp(root);
+	// printf("space====> %d\n", ft_chk_sp(root));
 	// ft_init_array_texture(root);
 	// i = -1;
 	// while (root->map.texture[++i])
