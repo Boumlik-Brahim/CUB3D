@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/03 14:52:29 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/07 17:25:13 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_read_map(char *av, t_root *root)
 	char	**map;
 	char	*line;
 	int		fd;
+	int		i;
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
@@ -55,6 +56,21 @@ void	ft_read_map(char *av, t_root *root)
 	line = ft_read_file(fd);
 	if (!line)
 		ft_putstr_fd("MAP IS EMPTY", 1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '1' || line[i] == ' ')
+		{
+			i++;
+			if (line[i] == '\n' && line[i + 1] == '\n')
+			{
+				printf("%c", line[i]);
+				printf("error");
+				break ;
+			}
+		}
+		i++;
+	}
 	map = ft_split(line, '\n');
 	root->map.data = map;
 	close(fd);

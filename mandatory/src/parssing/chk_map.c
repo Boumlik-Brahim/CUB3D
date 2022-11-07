@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:17:44 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/07 11:52:59 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/07 15:24:11 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,13 @@ int	ft_chk_walls(t_root *root)
 	int		cl;
 
 	rl = ft_row_len(root);
-	cl = ft_col_len(root);
-	r = 5;
-	while (++r < rl)
+	// cl = ft_col_len(root);
+	r = 6;
+	while (root->map.data[r] && r < rl)
 	{
 		c = 0;
-		while (c < cl)
+		cl = ft_strlen(root->map.data[r]);
+		while (root->map.data[r][c] && c < cl)
 		{
 			if ((root->map.data[6][c] != '1' && root->map.data[6][c] != ' ')
 				|| (root->map.data[r][0] != '1' && root->map.data[r][0] != ' ')
@@ -99,6 +100,7 @@ int	ft_chk_walls(t_root *root)
 				return (EXIT_FAILURE);
 			c++;
 		}
+		r++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -129,12 +131,13 @@ int	ft_chk_sp(t_root *root)
 		{
 			if (tmp[j][c] == ' ')
 			{
-				printf("%c", tmp[j][c - 1]);
-				printf("%c", tmp[j][c + 1]);
+				if ((tmp[j][c - 1] == '0' && tmp[j][c + 1] == '0')
+					|| (tmp[j - 1][c] == '0' && tmp[j + 1][c] == '0'))
+					return (EXIT_FAILURE);
 			}
 			c++;
 		}
-		printf("\n");
+		// printf("\n");
 	}
 	return (EXIT_SUCCESS);
 }
