@@ -6,11 +6,20 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/07 17:25:13 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/08 18:52:38 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+int	ft_isalphamap(int c)
+{
+	if (c == '1' || c == '0' || c == ' ' || c == 'N'
+		|| c == 'S' || c == 'W' || c == 'E' || c == '\n')
+		return (0);
+	else
+		return (1);
+}
 
 char	*ft_read_file(int fd)
 {
@@ -45,7 +54,9 @@ void	ft_read_map(char *av, t_root *root)
 	char	**map;
 	char	*line;
 	int		fd;
-	int		i;
+	int		lineln;
+	int		j;
+	char	*res;
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
@@ -56,21 +67,14 @@ void	ft_read_map(char *av, t_root *root)
 	line = ft_read_file(fd);
 	if (!line)
 		ft_putstr_fd("MAP IS EMPTY", 1);
-	i = 0;
-	while (line[i])
+	lineln = ft_strlen(line);
+	j = lineln - 1;
+	while (!ft_isalphamap(line[j]))
 	{
-		if (line[i] == '1' || line[i] == ' ')
-		{
-			i++;
-			if (line[i] == '\n' && line[i + 1] == '\n')
-			{
-				printf("%c", line[i]);
-				printf("error");
-				break ;
-			}
-		}
-		i++;
+		j--;
 	}
+	res = ft_substr(line, j + 1, lineln - j);
+	printf("%s\n", res);
 	map = ft_split(line, '\n');
 	root->map.data = map;
 	close(fd);

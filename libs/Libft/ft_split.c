@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 18:11:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2021/11/21 10:38:22 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/08 14:18:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include"libft.h"
 
 static int	ft_count(char const *s, char c)
 {
