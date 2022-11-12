@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/07 10:56:11 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/11 09:40:22 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	ft_init_texture(t_root *root);
 int		ft_chk_character(t_root *root);
 int		ft_chk_walls(t_root *root);
 int		ft_chk_sp(t_root *root);
+
+char	*get_next_line(int fd);
 
 #endif
