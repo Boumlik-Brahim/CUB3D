@@ -6,22 +6,22 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/07 15:24:40 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/13 13:07:16 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-int	ft_txtchr(char *text)
-{
-	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
-		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
-	{
-		if (!ft_chk_ext(text, ".xpm"))
-			return (EXIT_SUCCESS);
-	}
-	return (EXIT_FAILURE);
-}
+// int	ft_txtchr(char *text)
+// {
+// 	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
+// 		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
+// 	{
+// 		if (!ft_chk_ext(text, ".xpm"))
+// 			return (EXIT_SUCCESS);
+// 	}
+// 	return (EXIT_FAILURE);
+// }
 
 void	ft_init_array_texture(t_root *root)
 {
@@ -37,7 +37,7 @@ void	ft_init_array_texture(t_root *root)
 	while (root->map.data[++i])
 	{
 		res = ft_strtrim(root->map.data[i], " ");
-		if (!ft_txtchr(res))
+		if (!ft_chk_txt(res))
 		{
 			root->map.texture[j] = ft_strdup(res);
 			j++;
@@ -57,7 +57,7 @@ int	ft_chk_texture(t_root *root)
 	while (root->map.data[++i])
 	{
 		res = ft_strtrim(root->map.data[i], " ");
-		if (!ft_txtchr(res) || !ft_colorchr(res))
+		if (!ft_chk_txt(res) || !ft_chk_color(res))
 			count++;
 		else
 			break ;

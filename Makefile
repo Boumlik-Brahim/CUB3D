@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/12 16:04:29 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/13 11:23:32 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ $(NAME): $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
 	@$(MAKE) -C libs/libft
+	@$(MAKE) bonus -C libs/libft
 
 clean:
 	rm -f $(OBJ)

@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 18:43:53 by bbrahim           #+#    #+#             */
-/*   Updated: 2021/11/22 18:44:03 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/13 13:20:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -52,6 +55,10 @@ void	ft_putnbr_fd(int n, int fd);
 typedef struct s_list
 {
 	void			*content;
+	bool			istext;
+	bool			iscolor;
+	bool			ismap;
+	bool			isvempty;
 	struct s_list	*next;
 }t_list;
 t_list	*ft_lstnew(void *content);
