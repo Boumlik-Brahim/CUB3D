@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 18:43:53 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 13:20:43 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:12:13 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ void	ft_putnbr_fd(int n, int fd);
 typedef struct s_list
 {
 	void			*content;
-	bool			istext;
-	bool			iscolor;
+	bool			valid;
 	bool			ismap;
-	bool			isvempty;
 	struct s_list	*next;
 }t_list;
 t_list	*ft_lstnew(void *content);

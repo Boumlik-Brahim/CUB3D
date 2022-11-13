@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 16:14:54 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:57:32 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_chk_map(char *text)
 	int		i;
 
 	i = 0;
+	if (!text)
+		return (EXIT_FAILURE);
 	while (text[i])
 	{
 		if (text[i] == '1' || text[i] == '0' || text[i] == ' ' || text[i] == 'N'
@@ -122,6 +124,8 @@ int	ft_chk_digit(char *color)
 
 int	ft_chk_color(char *color)
 {
+	if (!color)
+		return (EXIT_FAILURE);
 	if (!ft_strncmp(color, "F ", 2) || !ft_strncmp(color, "C ", 2))
 	{
 		if (!ft_chk_digit(color))
@@ -181,6 +185,8 @@ int	ft_chk_ext(char *str, char	*ext)
 
 int	ft_chk_txt(char *text)
 {
+	if (!text)
+		return (EXIT_FAILURE);
 	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
 		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
 	{
@@ -197,6 +203,7 @@ void	ft_read_map(char *av, t_root *root)
 	char	*line;
 	int		fd;
 	t_list	*list;
+	t_list	*current;
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
@@ -210,36 +217,29 @@ void	ft_read_map(char *av, t_root *root)
 		line = get_next_line(fd);
 		ft_lstadd_back(&list, ft_lstnew(ft_strtrim(line, " \n")));
 	}
-	t_list	*current;
 	current = list;
 	while (list->next)
 	{
 		if (is_empty_line(list->content))
 		{
-			if (!ft_chk_txt(list->content)
-				&& !ft_chk_dup(&list, list->content, 3))
-				list->istext = true;
-			else if (!ft_chk_color(list->content)
-				&& !ft_chk_dup(&list, list->content, 2))
-				list->iscolor = true;
-			else if (!ft_chk_map(list->content)
+			if (!ft_chk_map(list->content)
 				&& (ft_chk_txt(list->next->content)
 					&& ft_chk_color(list->next->content)))
 				list->ismap = true;
 		}
-		else if (!is_empty_line(list->content))
-		{
-			
-		}
 		list = list->next;
 	}
-	// while (current->next)
-	// {
-	// 	printf("%s |istxt==>%d|isclr==>%d|ismap==>%d|isempty==>%d|\n",
-	// 		current->content, current->istext,
-	// 		current->iscolor, current->ismap, current->isvempty);
-	// 	current = current->next;
-	// }
+	while (current->next && !current->ismap)
+	{
+		if (is_empty_line(current->content))
+		{
+			if ((ft_chk_txt(current->content) && ft_chk_color(current->content))
+				|| (ft_chk_dup(&current, current->content, 3)
+					&& ft_chk_dup(&current, current->content, 2)))
+					current->valid = false;
+		}
+		current = current->next;
+	}
 	root->map.data = NULL;
 	close(fd);
 }
