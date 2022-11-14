@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/02 14:07:03 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/14 18:44:32 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 typedef struct s_map
 {
-	char	**data;
 	char	**texture;
 	char	**collor;
-	char	**map;
+	char	**content;
 }	t_map;
 
 typedef struct s_root

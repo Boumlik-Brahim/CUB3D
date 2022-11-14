@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/14 14:38:04 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/14 19:04:33 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,8 +197,107 @@ int	ft_chk_txt(char *text)
 	return (EXIT_FAILURE);
 }
 
-/*--------------------------------chk_txt-------------------------------------*/
+void ft_chk_header(t_list	*header)
+{
+	t_list	*mheader;
 
+	mheader = header;
+	while (mheader)
+	{
+		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
+			|| (ft_chk_dup(&mheader, mheader->content, 3)
+				&& ft_chk_dup(&mheader, mheader->content, 2)))
+		{
+			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
+			break ;
+		}
+		mheader = mheader->next;
+	}
+}
+
+void ft_init_header(t_list *header, t_root *root)
+{
+	t_list	*mheader;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	mheader = header;
+	root->map.collor = (char **)malloc(sizeof(char *) * 3);
+	if (!root->map.collor)
+		return ;
+	root->map.texture = (char **)malloc(sizeof(char *) * 5);
+	if (!root->map.texture)
+		return ;
+	i = 0;
+	j = 0;
+	while (mheader)
+	{
+		if (!ft_chk_txt(mheader->content))
+		{
+			root->map.texture[i] = ft_strdup(mheader->content);
+			i++;
+		}
+		else if (!ft_chk_color(mheader->content))
+		{
+			root->map.collor[j] = ft_strdup(mheader->content);
+			j++;
+		}
+		mheader = mheader->next;
+	}
+	root->map.texture[i] = NULL;
+	root->map.collor[j] = NULL;
+}
+
+void ft_chk_body(t_list	*body, int *count)
+{
+	t_list	*mbody;
+
+	mbody = body;
+	while (!is_empty_line(mbody->content))
+		mbody = mbody->next;
+	while (mbody->next)
+	{
+		if (!ft_chk_txt(mbody->content) || !ft_chk_color(mbody->content))
+		{
+			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
+			break ;
+		}
+		if (!is_empty_line(mbody->content)
+			&& is_empty_line(mbody->next->content))
+		{
+			printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
+			break ;
+		}
+		else if (is_empty_line(mbody->content))
+			(*count)++;
+		mbody = mbody->next;
+	}
+}
+
+void ft_init_body(t_list *body, t_root *root, int count)
+{
+	t_list	*mbody;
+	int		i;
+
+	mbody = body;
+	root->map.content = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!root->map.content)
+		return ;
+	i = 0;
+	while (mbody->next && i < count)
+	{
+		if (is_empty_line(mbody->content))
+		{
+			root->map.content[i] = ft_strdup(mbody->content);
+			i++;
+		}
+		mbody = mbody->next;
+	}
+	root->map.content[count] = NULL;
+}
+/*--------------------------------chk_txt-------------------------------------*/
 void	ft_read_map(char *av, t_root *root)
 {
 	char	*line;
@@ -207,13 +306,16 @@ void	ft_read_map(char *av, t_root *root)
 	t_list	*mbody;
 	t_list	*new;
 	int		i;
+	int		count;
 
+	count = 0;
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
 	{
 		ft_putstr_fd("INVALID MAP", 1);
 		exit(1);
 	}
+	/*----------------------------------------------*/
 	line = "";
 	i = 0;
 	while (line != NULL && i < 6)
@@ -232,28 +334,9 @@ void	ft_read_map(char *av, t_root *root)
 		new = ft_lstnew(ft_strtrim(line, "\n"));
 		ft_lstadd_back(&mbody, new);
 	}
-	while (mheader)
-	{
-		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
-			|| (ft_chk_dup(&mheader, mheader->content, 3)
-				&& ft_chk_dup(&mheader, mheader->content, 2)))
-		{
-			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
-			break ;
-		}
-		mheader = mheader->next;
-	}
-	while (!is_empty_line(mbody->content))
-		mbody = mbody->next;
-	while (mbody->next)
-	{
-		if (!is_empty_line(mbody->content) && is_empty_line(mbody->next->content))
-		{
-			printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
-			break ;
-		}
-		mbody = mbody->next;
-	}
-	root->map.data = NULL;
+	ft_chk_header(mheader);
+	ft_chk_body(mbody, &count);
+	ft_init_header(mheader, root);
+	ft_init_body(mbody, root, count);
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 13:07:16 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:40:27 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,25 +112,25 @@
 // 	return (EXIT_FAILURE);
 // }
 
-void	ft_init_array_collor(t_root *root)
-{
-	int		i;
-	int		j;
-	char	*res;
+// void	ft_init_array_collor(t_root *root)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*res;
 
-	i = -1;
-	j = 0;
-	root->map.collor = (char **)malloc(sizeof(char *) * 3);
-	if (!root->map.collor)
-		return ;
-	while (root->map.data[++i])
-	{
-		res = ft_strtrim(root->map.data[i], " ");
-		if (!ft_chk_color(res))
-		{
-			root->map.collor[j] = ft_strdup(res);
-			j++;
-		}
-	}
-	root->map.collor[j] = NULL;
-}
+// 	i = -1;
+// 	j = 0;
+// 	root->map.collor = (char **)malloc(sizeof(char *) * 3);
+// 	if (!root->map.collor)
+// 		return ;
+// 	while (root->map.data[++i])
+// 	{
+// 		res = ft_strtrim(root->map.data[i], " ");
+// 		if (!ft_chk_color(res))
+// 		{
+// 			root->map.collor[j] = ft_strdup(res);
+// 			j++;
+// 		}
+// 	}
+// 	root->map.collor[j] = NULL;
+// }
