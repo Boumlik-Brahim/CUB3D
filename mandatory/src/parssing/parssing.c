@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 18:57:32 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/14 14:38:04 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	ft_chk_dup(t_list **list, char *text, int size)
 	t_list	*current;
 
 	current = (*list)->next;
-	while (current->next)
+	while (current)
 	{
 		if (ft_strncmp(text, current->content, size))
 			current = current->next;
@@ -154,8 +154,7 @@ int	ft_chk_dup(t_list **list, char *text, int size)
 
 int	ft_is_space(char c)
 {
-	if (c == '\t' || c == '\n'
-		|| c == '\r' || c == '\v'
+	if (c == '\n' || c == '\r' || c == '\v'
 		|| c == ' ' || c == '\f')
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -166,6 +165,8 @@ int	is_empty_line(char *line)
 	int	i;
 
 	i = 0;
+	if (!line)
+		return (EXIT_SUCCESS);
 	while (line[i] && ft_is_space(line[i]) != 0)
 		i++;
 	if (line[i] != '\0')
@@ -202,8 +203,10 @@ void	ft_read_map(char *av, t_root *root)
 {
 	char	*line;
 	int		fd;
-	t_list	*list;
-	t_list	*current;
+	t_list	*mheader;
+	t_list	*mbody;
+	t_list	*new;
+	int		i;
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
@@ -212,33 +215,44 @@ void	ft_read_map(char *av, t_root *root)
 		exit(1);
 	}
 	line = "";
+	i = 0;
+	while (line != NULL && i < 6)
+	{
+		line = get_next_line(fd);
+		if (is_empty_line(line))
+		{
+			new = ft_lstnew(ft_strtrim(line, " \n"));
+			ft_lstadd_back(&mheader, new);
+			i++;
+		}
+	}
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
-		ft_lstadd_back(&list, ft_lstnew(ft_strtrim(line, " \n")));
+		new = ft_lstnew(ft_strtrim(line, "\n"));
+		ft_lstadd_back(&mbody, new);
 	}
-	current = list;
-	while (list->next)
+	while (mheader)
 	{
-		if (is_empty_line(list->content))
+		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
+			|| (ft_chk_dup(&mheader, mheader->content, 3)
+				&& ft_chk_dup(&mheader, mheader->content, 2)))
 		{
-			if (!ft_chk_map(list->content)
-				&& (ft_chk_txt(list->next->content)
-					&& ft_chk_color(list->next->content)))
-				list->ismap = true;
+			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
+			break ;
 		}
-		list = list->next;
+		mheader = mheader->next;
 	}
-	while (current->next && !current->ismap)
+	while (!is_empty_line(mbody->content))
+		mbody = mbody->next;
+	while (mbody->next)
 	{
-		if (is_empty_line(current->content))
+		if (!is_empty_line(mbody->content) && is_empty_line(mbody->next->content))
 		{
-			if ((ft_chk_txt(current->content) && ft_chk_color(current->content))
-				|| (ft_chk_dup(&current, current->content, 3)
-					&& ft_chk_dup(&current, current->content, 2)))
-					current->valid = false;
+			printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
+			break ;
 		}
-		current = current->next;
+		mbody = mbody->next;
 	}
 	root->map.data = NULL;
 	close(fd);

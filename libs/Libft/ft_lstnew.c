@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:33:41 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 18:12:55 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/14 10:04:15 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	tmp->content = content;
 	tmp->ismap = false;
-	tmp->valid = true;
 	tmp->next = NULL;
 	return (tmp);
 }
