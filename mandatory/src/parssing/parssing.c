@@ -6,28 +6,18 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/14 19:04:33 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/15 11:34:12 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
 /*--------------------------------chk_map-------------------------------------*/
-int	ft_chk_map(char *text)
+int	ft_chk_map(char c)
 {
-	int		i;
-
-	i = 0;
-	if (!text)
+	if (c != '1' && c != '0' && c != ' '
+		&& c != 'N' && c != 'S' && c != 'E' && c != 'W')
 		return (EXIT_FAILURE);
-	while (text[i])
-	{
-		if (text[i] == '1' || text[i] == '0' || text[i] == ' ' || text[i] == 'N'
-			|| text[i] == 'S' || text[i] == 'E' || text[i] == 'W')
-			i++;
-		else
-			return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }
 /*--------------------------------chk_map-------------------------------------*/
@@ -297,6 +287,57 @@ void ft_init_body(t_list *body, t_root *root, int count)
 	}
 	root->map.content[count] = NULL;
 }
+
+int ft_chkm_vertical(int r, int c, t_root *root)
+{
+	int	i;
+
+	i = r + 1;
+	while (root->map.content[i] && root->map.content[i][c] != '1')
+	{
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	i = r;
+	while (root->map.content[i] && root->map.content[i][c] != '1' && i >= 0)
+	{
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i--;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int ft_chkm_horizontal(int r, int c, t_root *root)
+{
+	int	j;
+
+	j = c + 1;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1')
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j++;
+	}
+	j = c;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1' && j >= 0)
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j--;
+	}
+	return (EXIT_SUCCESS);
+}
+
 /*--------------------------------chk_txt-------------------------------------*/
 void	ft_read_map(char *av, t_root *root)
 {
@@ -306,6 +347,8 @@ void	ft_read_map(char *av, t_root *root)
 	t_list	*mbody;
 	t_list	*new;
 	int		i;
+	int		r;
+	int		c;
 	int		count;
 
 	count = 0;
@@ -338,5 +381,23 @@ void	ft_read_map(char *av, t_root *root)
 	ft_chk_body(mbody, &count);
 	ft_init_header(mheader, root);
 	ft_init_body(mbody, root, count);
+	r = -1;
+	while (root->map.content[++r])
+	{
+		c = 0;
+		while (root->map.content[r][c])
+		{
+			printf("chkmap========>%d\n", ft_chk_map(root->map.content[r][c]));
+			if (root->map.content[r][c] == '0')
+			{
+				// if (ft_chkm_vertical(r, c, root) || ft_chkm_horizontal(r, c, root))
+				// {
+				// 	printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
+				// 	exit(1);
+				// }
+			}
+			c++;
+		}
+	}
 	close(fd);
 }
