@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/15 13:14:25 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:27:28 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	ft_chk_player(t_root *root)
 		exit(1);
 	}
 }
-
 /*--------------------------------chk_map-------------------------------------*/
 
 /*--------------------------------chk_color-----------------------------------*/
@@ -277,7 +276,7 @@ void ft_chk_header(t_list	*header)
 				&& ft_chk_dup(&mheader, mheader->content, 2)))
 		{
 			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
-			break ;
+			exit(1);
 		}
 		mheader = mheader->next;
 	}
@@ -330,13 +329,13 @@ void ft_chk_body(t_list	*body, int *count)
 		if (!ft_chk_txt(mbody->content) || !ft_chk_color(mbody->content))
 		{
 			printf("\033[0;31mA INVALID MAP HEADER\033[0;37m\n");
-			break ;
+			exit(1);
 		}
 		if (!is_empty_line(mbody->content)
 			&& is_empty_line(mbody->next->content))
 		{
 			printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
-			break ;
+			exit(1);
 		}
 		else if (is_empty_line(mbody->content))
 			(*count)++;
@@ -366,6 +365,36 @@ void ft_init_body(t_list *body, t_root *root, int count)
 	root->map.content[count] = NULL;
 }
 
+void ft_chk_body_content(t_root *root)
+{
+	int		r;
+	int		c;
+
+	r = -1;
+	while (root->map.content[++r])
+	{
+		c = 0;
+		while (root->map.content[r][c])
+		{
+			if (ft_chk_map(root->map.content[r][c]))
+			{
+				printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
+				exit(1);
+			}
+			if (root->map.content[r][c] == '0')
+			{
+				if (ft_chkm_vertical(r, c, root)
+					|| ft_chkm_horizontal(r, c, root))
+				{
+					printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
+					exit(1);
+				}
+			}
+			c++;
+		}
+	}
+	ft_chk_player(root);
+}
 /*--------------------------------chk_txt-------------------------------------*/
 void	ft_read_map(char *av, t_root *root)
 {
@@ -375,8 +404,6 @@ void	ft_read_map(char *av, t_root *root)
 	t_list	*mbody;
 	t_list	*new;
 	int		i;
-	int		r;
-	int		c;
 	int		count;
 
 	count = 0;
@@ -392,6 +419,11 @@ void	ft_read_map(char *av, t_root *root)
 	while (line != NULL && i < 6)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+		{
+			printf("error");
+			exit(1);
+		}
 		if (is_empty_line(line))
 		{
 			new = ft_lstnew(ft_strtrim(line, " \n"));
@@ -402,6 +434,8 @@ void	ft_read_map(char *av, t_root *root)
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		new = ft_lstnew(ft_strtrim(line, "\n"));
 		ft_lstadd_back(&mbody, new);
 	}
@@ -409,28 +443,6 @@ void	ft_read_map(char *av, t_root *root)
 	ft_chk_body(mbody, &count);
 	ft_init_header(mheader, root);
 	ft_init_body(mbody, root, count);
-	r = -1;
-	while (root->map.content[++r])
-	{
-		c = 0;
-		while (root->map.content[r][c])
-		{
-			if (ft_chk_map(root->map.content[r][c]))
-			{
-				printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
-				exit(1);
-			}
-			if (root->map.content[r][c] == '0')
-			{
-				if (ft_chkm_vertical(r, c, root) || ft_chkm_horizontal(r, c, root))
-				{
-					printf("\033[0;31mA INVALID MAP BODY\033[0;37m\n");
-					exit(1);
-				}
-			}
-			c++;
-		}
-	}
-	ft_chk_player(root);
+	ft_chk_body_content(root);
 	close(fd);
 }
