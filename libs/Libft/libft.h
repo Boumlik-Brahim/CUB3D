@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 18:43:53 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/14 13:17:59 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 10:02:59 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_putnbr_fd(int n, int fd);
 typedef struct s_list
 {
 	void			*content;
-	bool			ismap;
 	struct s_list	*next;
 }t_list;
 t_list	*ft_lstnew(void *content);

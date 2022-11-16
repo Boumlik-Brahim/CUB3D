@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:20:43 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/13 11:09:23 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 17:32:14 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 		printf("\033[0;31mA MAP IN FORMAT `*.CUB` IS REQUIRED!\033[0;37m\n");
 		return (EXIT_FAILURE);
 	}
-	ft_read_map(av[1], &root);
-	// ft_init_texture(&root);
+	ft_backbone(av[1], &root);
+	// system("leaks cub3D");
 	return (0);
 }

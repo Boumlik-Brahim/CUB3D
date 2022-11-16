@@ -1,36 +1,37 @@
 # CUB3D
 
-while (list->next)
+void	ft_read_map(char *av, t_root *root)
 {
-    if (is_empty_line(list->content))
-    {
-        if (!ft_chk_map(list->content)
-            && (ft_chk_txt(list->next->content)
-                && ft_chk_color(list->next->content)))
-            list->ismap = true;
-    }
-    list = list->next;
-}
-while (current->next && !current->ismap)
-{
-    if (is_empty_line(current->content))
-    {
-        if ((ft_chk_txt(current->content) && ft_chk_color(current->content))
-            || (ft_chk_dup(&current, current->content, 3)
-                && ft_chk_dup(&current, current->content, 2)))
-                current->valid = false;
-    }
-    current = current->next;
-}
+	int		fd;
+	int		i;
+	char	*line;
+	// t_list	*new;
 
-// while (list->next)
-// {
-// 	if (is_empty_line(list->content))
-// 	{
-// 		if (!ft_chk_map(list->content)
-// 			&& (ft_chk_txt(list->next->content)
-// 				&& ft_chk_color(list->next->content)))
-// 			list->ismap = true;
-// 	}
-// 	list = list->next;
-// }
+	fd = open(av, O_RDONLY);
+	if (fd != 3)
+		put_errors("INVALID FILE");
+	i = 0;
+	while (i < 6)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			put_errors("EMPTY MAP");
+		if (is_empty_line(line))
+		{
+			new = ft_lstnew(ft_strtrim(line, " \n"));
+			free(line);
+			ft_lstadd_back(&root->mheader, new);
+			i++;
+		}
+		else
+			free(line);
+	}
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		new = ft_lstnew(ft_strtrim(line, "\n"));
+		free(line);
+		ft_lstadd_back(&root->mbody, new);
+	}
+	close(fd);
+}

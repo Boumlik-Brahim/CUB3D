@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:22:38 by bbrahim           #+#    #+#             */
-/*   Updated: 2021/11/21 11:01:47 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:59:18 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_isther(char const *set, char c)

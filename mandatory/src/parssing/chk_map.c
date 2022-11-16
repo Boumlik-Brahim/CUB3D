@@ -6,138 +6,90 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:17:44 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/14 16:39:41 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 17:26:42 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-// int	ft_chk_ext(char *str, char	*ext)
-// {
-// 	char	*extntion;
+int	ft_chk_map(char c)
+{
+	if (c != '1' && c != '0' && c != ' '
+		&& c != 'N' && c != 'S' && c != 'E' && c != 'W')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
-// 	extntion = ft_strrchr(str, '.');
-// 	if (!extntion || ft_strncmp(extntion, ext, 5))
-// 		return (EXIT_FAILURE);
-// 	return (EXIT_SUCCESS);
-// }
+int	ft_chkm_vertical(int r, int c, t_root *root)
+{
+	int	i;
 
-// int	ft_col_len(t_root *root)
-// {
-// 	int	i;
-// 	int	j;
+	i = r + 1;
+	while (root->map.content[i] && root->map.content[i][c] != '1')
+	{
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	i = r;
+	while (root->map.content[i] && root->map.content[i][c] != '1' && i >= 0)
+	{
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i--;
+	}
+	return (EXIT_SUCCESS);
+}
 
-// 	i = 5;
-// 	while (root->map.data[++i])
-// 	{
-// 		j = 0;
-// 		while (root->map.data[i][j])
-// 			j++;
-// 	}
-// 	return (j);
-// }
+int	ft_chkm_horizontal(int r, int c, t_root *root)
+{
+	int	j;
 
-// int	ft_row_len(t_root *root)
-// {
-// 	int	i;
-// 	int	j;
+	j = c + 1;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1')
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j++;
+	}
+	j = c;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1' && j >= 0)
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j--;
+	}
+	return (EXIT_SUCCESS);
+}
 
-// 	i = 5;
-// 	while (root->map.data[++i])
-// 	{
-// 		j = 0;
-// 		while (root->map.data[i][j])
-// 			j++;
-// 	}
-// 	return (i);
-// }
+void	ft_chk_player(t_root *root)
+{
+	int	r;
+	int	c;
+	int	count;
 
-// int	ft_chk_character(t_root *root)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = 5;
-// 	while (root->map.data[++i])
-// 	{
-// 		j = 0;
-// 		while (root->map.data[i][j])
-// 		{
-// 			if (root->map.data[i][j] == '1' || root->map.data[i][j] == '0'
-// 				|| root->map.data[i][j] == ' ' || root->map.data[i][j] == 'N'
-// 				|| root->map.data[i][j] == 'S' || root->map.data[i][j] == 'E'
-// 				|| root->map.data[i][j] == 'W')
-// 				j++;
-// 			else
-// 				return (EXIT_FAILURE);
-// 		}
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
-
-// int	ft_chk_walls(t_root *root)
-// {
-// 	int		r;
-// 	int		c;
-// 	int		rl;
-// 	int		cl;
-
-// 	rl = ft_row_len(root);
-// 	// cl = ft_col_len(root);
-// 	r = 6;
-// 	while (root->map.data[r] && r < rl)
-// 	{
-// 		c = 0;
-// 		cl = ft_strlen(root->map.data[r]);
-// 		while (root->map.data[r][c] && c < cl)
-// 		{
-// 			if ((root->map.data[6][c] != '1' && root->map.data[6][c] != ' ')
-// 				|| (root->map.data[r][0] != '1' && root->map.data[r][0] != ' ')
-// 				|| (root->map.data[r][cl - 1] != '1'
-// 				&& root->map.data[r][cl - 1] != ' ')
-// 				|| (root->map.data[rl - 1][c] != '1'
-// 				&& root->map.data[rl - 1][c] != ' '))
-// 				return (EXIT_FAILURE);
-// 			c++;
-// 		}
-// 		r++;
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
-
-// int	ft_chk_sp(t_root *root)
-// {
-// 	int		r;
-// 	int		i;
-// 	int		j;
-// 	int		c;
-// 	int		rl;
-// 	char	**tmp;
-
-// 	rl = ft_row_len(root);
-// 	tmp = (char **)malloc(sizeof(char *) * (rl + 1));
-// 	if (!tmp)
-// 		return (EXIT_FAILURE);
-// 	r = -1;
-// 	i = -1;
-// 	while (root->map.data[++r] && tmp[++i])
-// 		tmp[i] = ft_strtrim(root->map.data[r], " ");
-// 	tmp[i + 1] = NULL;
-// 	j = 5;
-// 	while (tmp[++j])
-// 	{
-// 		c = 0;
-// 		while (tmp[j][c])
-// 		{
-// 			if (tmp[j][c] == ' ')
-// 			{
-// 				if ((tmp[j][c - 1] == '0' && tmp[j][c + 1] == '0')
-// 					|| (tmp[j - 1][c] == '0' && tmp[j + 1][c] == '0'))
-// 					return (EXIT_FAILURE);
-// 			}
-// 			c++;
-// 		}
-// 		// printf("\n");
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
+	count = 0;
+	r = -1;
+	while (root->map.content[++r])
+	{
+		c = 0;
+		while (root->map.content[r][c])
+		{
+			if (root->map.content[r][c] == 'N' || root->map.content[r][c] == 'S'
+				|| root->map.content[r][c] == 'W'
+				|| root->map.content[r][c] == 'E')
+				count++;
+			c++;
+		}
+	}
+	if (count != 1)
+		put_errors("INVALID MAP BODY");
+}

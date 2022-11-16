@@ -6,84 +6,68 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/14 16:40:38 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 17:24:52 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-// int	ft_txtchr(char *text)
-// {
-// 	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
-// 		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
-// 	{
-// 		if (!ft_chk_ext(text, ".xpm"))
-// 			return (EXIT_SUCCESS);
-// 	}
-// 	return (EXIT_FAILURE);
-// }
+int	ft_chk_dup(t_list **list, char *text, int size)
+{
+	t_list	*current;
 
-// void	ft_init_array_texture(t_root *root)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*res;
+	current = (*list)->next;
+	while (current)
+	{
+		if (ft_strncmp(text, current->content, size))
+			current = current->next;
+		else
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
-// 	i = -1;
-// 	j = 0;
-// 	root->map.texture = (char **)malloc(sizeof(char *) * 5);
-// 	if (!root->map.texture)
-// 		return ;
-// 	while (root->map.data[++i])
-// 	{
-// 		res = ft_strtrim(root->map.data[i], " ");
-// 		if (!ft_chk_txt(res))
-// 		{
-// 			root->map.texture[j] = ft_strdup(res);
-// 			j++;
-// 		}
-// 	}
-// 	root->map.texture[j] = NULL;
-// }
+int	ft_is_space(char c)
+{
+	if (c == '\n' || c == '\r' || c == '\v'
+		|| c == ' ' || c == '\f')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
-// int	ft_chk_texture(t_root *root)
-// {
-// 	int		i;
-// 	int		count;
-// 	char	*res;
+int	is_empty_line(char *line)
+{
+	int	i;
 
-// 	i = -1;
-// 	count = 0;
-// 	while (root->map.data[++i])
-// 	{
-// 		res = ft_strtrim(root->map.data[i], " ");
-// 		if (!ft_chk_txt(res) || !ft_chk_color(res))
-// 			count++;
-// 		else
-// 			break ;
-// 	}
-// 	return (count);
-// }
+	i = 0;
+	if (!line)
+		return (EXIT_SUCCESS);
+	while (line[i] && ft_is_space(line[i]) != 0)
+		i++;
+	if (line[i] != '\0')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
-// void	ft_init_texture(t_root *root)
-// {
-// 	// int	i;
+int	ft_chk_ext(char *str, char	*ext)
+{
+	char	*extntion;
 
-// 	if (ft_chk_texture(root) != 6)
-// 	{
-// 		printf("\033[0;31mA INVALID TEXTURE\033[0;37m\n");
-// 		return ;
-// 	}
-// 	// printf("characters====> %d\n", ft_chk_character(root));
-// 	// printf("walls====> %d\n", ft_chk_walls(root));
-// 	// ft_chk_sp(root);
-// 	// printf("space====> %d\n", ft_chk_sp(root));
-// 	// ft_init_array_texture(root);
-// 	// i = -1;
-// 	// while (root->map.texture[++i])
-// 	// 	printf("%s\n", root->map.texture[i]);
-// 	// ft_init_array_collor(root);
-// 	// i = -1;
-// 	// while (root->map.collor[++i])
-// 	// 	printf("%s\n", root->map.collor[i]);
-// }
+	extntion = ft_strrchr(str, '.');
+	if (!extntion || ft_strncmp(extntion, ext, 5))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_chk_txt(char *text)
+{
+	if (!text)
+		return (EXIT_FAILURE);
+	if (!ft_strncmp(text, "NO ", 3) || !ft_strncmp(text, "SO ", 3)
+		|| !ft_strncmp(text, "WE ", 3) || !ft_strncmp(text, "EA ", 3))
+	{
+		if (!ft_chk_ext(text, ".xpm"))
+			return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
+}
