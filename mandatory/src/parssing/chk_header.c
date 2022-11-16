@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:19 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:30:04 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 18:47:39 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ void	ft_init_header(t_root *root)
 	root->map.texture = (char **)malloc(sizeof(char *) * 5);
 	if (!root->map.texture)
 		return ;
-	i = -1;
-	j = -1;
 	while (mheader)
 	{
 		if (!ft_chk_txt(mheader->content))
-			root->map.texture[++i] = ft_strdup(mheader->content);
+		{
+			root->map.texture[i] = ft_strdup(mheader->content);
+			i++;
+		}
 		else if (!ft_chk_color(mheader->content))
-			root->map.collor[++j] = ft_strdup(mheader->content);
+		{
+			root->map.collor[j] = ft_strdup(mheader->content);
+			j++;
+		}
 		mheader = mheader->next;
 	}
 	root->map.texture[i] = NULL;

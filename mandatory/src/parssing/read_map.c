@@ -6,22 +6,17 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:21:03 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 18:37:36 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	ft_read_map(char *av, t_root *root)
+void	ft_get_map_line(int fd, t_root *root)
 {
-	int		fd;
-	int		i;
 	char	*line;
-	t_list	*new;
+	int		i;
 
-	fd = open(av, O_RDONLY);
-	if (fd != 3)
-		put_errors("INVALID FILE");
 	i = 0;
 	while (i < 6)
 	{
@@ -30,9 +25,8 @@ void	ft_read_map(char *av, t_root *root)
 			put_errors("EMPTY MAP");
 		if (is_empty_line(line))
 		{
-			new = ft_lstnew(ft_strtrim(line, " \n"));
+			ft_lstadd_back(&root->mheader, ft_lstnew(ft_strtrim(line, " \n")));
 			free(line);
-			ft_lstadd_back(&root->mheader, new);
 			i++;
 		}
 		else
@@ -41,9 +35,18 @@ void	ft_read_map(char *av, t_root *root)
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
-		new = ft_lstnew(ft_strtrim(line, "\n"));
+		ft_lstadd_back(&root->mbody, ft_lstnew(ft_strtrim(line, "\n")));
 		free(line);
-		ft_lstadd_back(&root->mbody, new);
 	}
+}
+
+void	ft_read_map(char *av, t_root *root)
+{
+	int		fd;
+
+	fd = open(av, O_RDONLY);
+	if (fd != 3)
+		put_errors("INVALID FILE");
+	ft_get_map_line(fd, root);
 	close(fd);
 }

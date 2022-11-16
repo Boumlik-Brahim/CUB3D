@@ -6,13 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:22 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:30:42 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/16 18:39:05 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void ft_chk_body(t_root *root, int *count)
+void	ft_chk_body(t_root *root, int *count)
 {
 	t_list	*mbody;
 
