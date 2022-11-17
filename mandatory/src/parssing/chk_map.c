@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:17:44 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 11:10:57 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/17 15:36:59 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_chkmc_vertical(int r, int c, t_root *root)
 {
 	int	i;
 
-	i = r + 1;
+	i = r;
 	while (root->map.content[i] && root->map.content[i][c] != '1')
 	{
 		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
@@ -37,6 +37,8 @@ int	ft_chkmc_vertical(int r, int c, t_root *root)
 			return (EXIT_FAILURE);
 		i++;
 	}
+	if (!root->map.content[i])
+		return (EXIT_FAILURE);
 	i = r;
 	while (root->map.content[i] && root->map.content[i][c] != '1' && i > 0)
 	{
@@ -46,6 +48,8 @@ int	ft_chkmc_vertical(int r, int c, t_root *root)
 			return (EXIT_FAILURE);
 		i--;
 	}
+	if (root->map.content[i][c] != '1')
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -55,7 +59,7 @@ int	ft_chkmc_horizontal(int r, int c, t_root *root)
 {
 	int	j;
 
-	j = c + 1;
+	j = c;
 	while (root->map.content[r][j] && root->map.content[r][j] != '1')
 	{
 		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
@@ -64,6 +68,8 @@ int	ft_chkmc_horizontal(int r, int c, t_root *root)
 			return (EXIT_FAILURE);
 		j++;
 	}
+	if (root->map.content[r][j] != '1')
+		return (EXIT_FAILURE);
 	j = c;
 	while (root->map.content[r][j] && root->map.content[r][j] != '1' && j > 0)
 	{
@@ -73,6 +79,8 @@ int	ft_chkmc_horizontal(int r, int c, t_root *root)
 			return (EXIT_FAILURE);
 		j--;
 	}
+	if (root->map.content[r][j] != '1')
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
