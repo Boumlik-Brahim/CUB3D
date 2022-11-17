@@ -6,26 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 11:52:45 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/17 13:03:50 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-int	ft_colorlen(char **tmp)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (tmp[++i])
-	{
-		j = 0;
-		while (tmp[i][j])
-			j++;
-	}
-	return (i);
-}
+/* -------------------------------------------------------------------------- */
 
 int	ft_chk_space(char *tmp)
 {
@@ -39,6 +26,8 @@ int	ft_chk_space(char *tmp)
 	}
 	return (EXIT_SUCCESS);
 }
+
+/* -------------------------------------------------------------------------- */
 
 int	ft_chk_num(char *color)
 {
@@ -64,6 +53,8 @@ int	ft_chk_num(char *color)
 	return (EXIT_SUCCESS);
 }
 
+/* -------------------------------------------------------------------------- */
+
 int	ft_colortoint(char *color)
 {
 	char	**tmp;
@@ -88,13 +79,15 @@ int	ft_colortoint(char *color)
 	return (EXIT_SUCCESS);
 }
 
+/* -------------------------------------------------------------------------- */
+
 int	ft_chk_digit(char *color)
 {
 	int		i;
 	int		clen;
 
 	clen = ft_strlen(color);
-	if (color[2] == ',' || color[clen - 1] == ',' || ft_colortoint(color) != 0)
+	if (color[2] == ',' || color[clen - 1] == ',' || ft_colortoint(color))
 		return (EXIT_FAILURE);
 	i = 2;
 	while (color[i])
@@ -109,6 +102,8 @@ int	ft_chk_digit(char *color)
 	return (EXIT_SUCCESS);
 }
 
+/* -------------------------------------------------------------------------- */
+
 int	ft_chk_color(char *color)
 {
 	if (!color)
@@ -121,3 +116,5 @@ int	ft_chk_color(char *color)
 	}
 	return (EXIT_FAILURE);
 }
+
+/* -------------------------------------------------------------------------- */
