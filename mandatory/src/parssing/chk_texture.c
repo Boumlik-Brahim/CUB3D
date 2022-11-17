@@ -6,11 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:24:52 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/17 10:55:36 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+/* -------------------------------------------------------------------------- */
 
 int	ft_chk_dup(t_list **list, char *text, int size)
 {
@@ -27,6 +29,8 @@ int	ft_chk_dup(t_list **list, char *text, int size)
 	return (EXIT_SUCCESS);
 }
 
+/* -------------------------------------------------------------------------- */
+
 int	ft_is_space(char c)
 {
 	if (c == '\n' || c == '\r' || c == '\v'
@@ -35,7 +39,7 @@ int	ft_is_space(char c)
 	return (EXIT_SUCCESS);
 }
 
-int	is_empty_line(char *line)
+int	is_nempty_line(char *line)
 {
 	int	i;
 
@@ -48,6 +52,8 @@ int	is_empty_line(char *line)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
+
+/* -------------------------------------------------------------------------- */
 
 int	ft_chk_ext(char *str, char	*ext)
 {
@@ -71,3 +77,5 @@ int	ft_chk_txt(char *text)
 	}
 	return (EXIT_FAILURE);
 }
+
+/* -------------------------------------------------------------------------- */

@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parssing.c                                         :+:      :+:    :+:   */
+/*   parssing_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 11:52:15 by bbrahim          ###   ########.fr       */
+/*   Created: 2022/11/17 11:32:17 by bbrahim           #+#    #+#             */
+/*   Updated: 2022/11/17 11:36:10 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	ft_backbone(char *av, t_root *root)
-{
-	int		count;
+/* -------------------------------------------------------------------------- */
 
-	count = 0;
-	ft_read_map(av, root);
-	ft_chk_header(root);
-	ft_chk_body(root, &count);
-	ft_alloc_tables(root, count);
-	ft_init_header(root);
-	ft_init_body(root, count);
-	ft_chk_body_content(root);
+void	put_errors(char *str)
+{
+	printf("%sError%s\n%s\n", RED, RED, str);
+	exit(1);
 }
+
+/* -------------------------------------------------------------------------- */
+
+void	ft_free_table(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i] != NULL)
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
+}
+
+/* -------------------------------------------------------------------------- */

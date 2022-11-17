@@ -16,7 +16,7 @@ void	ft_read_map(char *av, t_root *root)
 		line = get_next_line(fd);
 		if (!line)
 			put_errors("EMPTY MAP");
-		if (is_empty_line(line))
+		if (is_nempty_line(line))
 		{
 			new = ft_lstnew(ft_strtrim(line, " \n"));
 			free(line);

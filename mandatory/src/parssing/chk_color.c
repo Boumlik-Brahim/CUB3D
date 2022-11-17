@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:30:25 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/17 11:52:45 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,6 @@ int	ft_chk_space(char *tmp)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
-}
-
-void	ft_free_table(char **ptr)
-{
-	int	i;
-
-	i = 0;
-	while (ptr[i] != NULL)
-	{
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
 }
 
 int	ft_chk_num(char *color)
