@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:19 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 15:28:05 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 15:32:00 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,31 @@ void	ft_init_colors(t_root *root)
 			ft_split_color(root->map.collor[r], 'C');
 		else if (!ft_strncmp(root->map.collor[r], "F ", 2))
 			ft_split_color(root->map.collor[r], 'F');
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+
+void	ft_chk_path(t_root *root)
+{
+	int		r;
+	char	*res;
+	char	*tmp;
+
+	r = -1;
+	while (root->map.texture[++r])
+	{
+		res = ft_substr(root->map.texture[r], 3,
+				(ft_strlen(root->map.texture[r]) - 3));
+		tmp = ft_strtrim(res, " ");
+		if (open(tmp, O_RDONLY) < 0)
+		{
+			free(res);
+			free(tmp);
+			put_errors("INVALID MAP HEADER");
+		}
+		free(res);
+		free(tmp);
 	}
 }
 
