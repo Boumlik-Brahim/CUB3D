@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 14:40:00 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:01:07 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_backbone(char *av, t_root *root)
 {
 	int		count;
-	int		i;
 
 	count = 0;
 	ft_read_map(av, root);
@@ -25,7 +24,8 @@ void	ft_backbone(char *av, t_root *root)
 	ft_init_header(root);
 	ft_init_body(root, count);
 	ft_chk_body_content(root);
-	i = -1;
+	// int i;
+	// i = -1;
 	// while (root->map.collor[++i])
 	// {
 	// 	printf("|%s|\n", root->map.collor[i]);
@@ -40,4 +40,6 @@ void	ft_backbone(char *av, t_root *root)
 	// {
 	// 	printf("|%s|\n", root->map.content[i]);
 	// }
+	ft_free_map_listes(root);
+	ft_free_map_tables(root);
 }

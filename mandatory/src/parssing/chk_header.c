@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:19 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 15:32:00 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:53:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_chk_header(t_root *root)
 		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
 			|| (ft_chk_dup(&mheader, mheader->content, 3)
 				&& ft_chk_dup(&mheader, mheader->content, 2)))
-			put_errors("INVALID MAP HEADER");
+			ft_error(root, "INVALID MAP HEADER");
 		mheader = mheader->next;
 	}
 }
@@ -49,6 +49,7 @@ int	ft_convert_color(char *color)
 	}
 	res = ft_substr(color, i, (len - i));
 	cval = ft_atoi(res);
+	free(res);
 	return (cval);
 }
 
@@ -67,6 +68,7 @@ void	ft_split_color(char *color, char id)
 		ceillingcolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
 	else if (id == 'F')
 		floorcolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
+	ft_free_table(tmp);
 }
 
 void	ft_init_colors(t_root *root)
@@ -101,7 +103,7 @@ void	ft_chk_path(t_root *root)
 		{
 			free(res);
 			free(tmp);
-			put_errors("INVALID MAP HEADER");
+			ft_error(root, "INVALID MAP HEADER");
 		}
 		free(res);
 		free(tmp);

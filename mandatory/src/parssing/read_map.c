@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 10:55:36 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:57:42 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_get_map_line(int fd, t_root *root)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			put_errors("INVALID MAP");
+			ft_error(root, "INVALID MAP");
 		if (is_nempty_line(line))
 		{
 			ft_lstadd_back(&root->mheader, ft_lstnew(ft_strtrim(line, " \n")));
@@ -46,7 +46,7 @@ void	ft_read_map(char *av, t_root *root)
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
-		put_errors("INVALID FILE");
+		ft_error(root, "INVALID FILE");
 	ft_get_map_line(fd, root);
 	close(fd);
 }

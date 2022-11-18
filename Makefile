@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/18 10:12:03 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/18 17:11:20 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ NAME = cub3D
 CC = CC
 
 # ---------------------------------- Flags ----------------------------------- #
-# -fsanitize=address -static-libsan
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address -static-libsan
 MLX_EFLAGS := -lmlx -framework OpenGL -framework AppKit
 MLX_OFLAGS := -Imlx
 
@@ -29,7 +28,8 @@ MANDATORY_HEADERS := $(addprefix mandatory/headers/, $(addsuffix .h, $(HEADERS))
 
 MAIN := mandatory/main.c
 
-PARSSING := parssing get_next_line parssing_utils chk_header chk_body read_map chk_map chk_texture chk_color
+PARSSING := parssing get_next_line parssing_utils chk_header chk_body read_map \
+			chk_map chk_texture chk_color
 RAYCASING := raycasting
 
 SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \

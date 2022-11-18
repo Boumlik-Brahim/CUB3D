@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 11:40:47 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:52:55 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include "../../libs/Libft/libft.h"
 # include "../../libs/mlx/mlx.h"
 
-void	put_errors(char *str);
+void	ft_error(t_root *root, char *str);
 void	ft_free_table(char **ptr);
+void	ft_free_map_listes(t_root *root);
+void	ft_free_map_tables(t_root *root);
 
 void	ft_chk_player(t_root *root);
 int		ft_chkmc_horizontal(int r, int c, t_root *root);
@@ -46,6 +48,8 @@ int		is_nempty_line(char *line);
 
 void	ft_init_body(t_root *root, int count);
 
+int		ft_convert_color(char *color);
+void	ft_split_color(char *color, char id);
 void	ft_init_colors(t_root *root);
 void	ft_chk_path(t_root *root);
 void	ft_init_header(t_root *root);

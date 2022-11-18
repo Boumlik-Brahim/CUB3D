@@ -9,13 +9,13 @@ void	ft_read_map(char *av, t_root *root)
 
 	fd = open(av, O_RDONLY);
 	if (fd != 3)
-		put_errors("INVALID FILE");
+		ft_error(root, "INVALID FILE");
 	i = 0;
 	while (i < 6)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			put_errors("EMPTY MAP");
+			ft_error("EMPTY MAP");
 		if (is_nempty_line(line))
 		{
 			new = ft_lstnew(ft_strtrim(line, " \n"));

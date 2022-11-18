@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:22 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 14:37:47 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:56:29 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	ft_chk_body(t_root *root, int *count)
 	while (mbody && mbody->next)
 	{
 		if (!ft_chk_txt(mbody->content) || !ft_chk_color(mbody->content))
-			put_errors("INVALID MAP HEADER");
+			ft_error(root, "INVALID MAP HEADER");
 		if (!is_nempty_line(mbody->content)
 			&& is_nempty_line(mbody->next->content))
-			put_errors("INVALID MAP BODY");
+			ft_error(root, "INVALID MAP BODY");
 		else if (is_nempty_line(mbody->content))
 			(*count)++;
 		mbody = mbody->next;
@@ -40,13 +40,13 @@ void	ft_alloc_tables(t_root *root, int count)
 {
 	root->map.content = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!root->map.content)
-		put_errors("CONTENT TABLE ALLOC ERROR");
+		ft_error(root, "CONTENT TABLE ALLOC ERROR");
 	root->map.collor = (char **)malloc(sizeof(char *) * 3);
 	if (!root->map.collor)
-		put_errors("COLLOR TABLE ALLOC ERROR");
+		ft_error(root, "COLLOR TABLE ALLOC ERROR");
 	root->map.texture = (char **)malloc(sizeof(char *) * 5);
 	if (!root->map.texture)
-		put_errors("TEXTURE TABLE ALLOC ERROR");
+		ft_error(root, "TEXTURE TABLE ALLOC ERROR");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -93,7 +93,7 @@ void	ft_chk_player(t_root *root)
 		}
 	}
 	if (count != 1)
-		put_errors("INVALID MAP BODY");
+		ft_error(root, "INVALID MAP BODY");
 }
 
 /* -------------------------------------------------------------------------- */
@@ -110,12 +110,12 @@ void	ft_chk_body_content(t_root *root)
 		while (root->map.content[r][c])
 		{
 			if (ft_chkm_content(root->map.content[r][c]))
-				put_errors("INVALID MAP BODY");
+				ft_error(root, "INVALID MAP BODY");
 			if (ft_strchr("0NSWE", root->map.content[r][c]))
 			{
 				if (ft_chkmc_vertical(r, c, root)
 					|| ft_chkmc_horizontal(r, c, root))
-					put_errors("INVALID MAP BODY");
+					ft_error(root, "INVALID MAP BODY");
 			}
 			c++;
 		}
