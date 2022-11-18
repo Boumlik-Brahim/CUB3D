@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:32:17 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:51:52 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:32:19 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void	ft_free_map_listes(t_root *root)
 
 /* -------------------------------------------------------------------------- */
 
-void	ft_error(t_root *root, char *str)
+void	ft_error(char *str)
 {
 	printf("%sError%s\n%s\n", RED, RED, str);
-	ft_free_map_listes(root);
-	ft_free_map_tables(root);
 	exit(1);
 }
 

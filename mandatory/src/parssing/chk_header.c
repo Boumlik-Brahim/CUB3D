@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:19 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:53:43 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:32:53 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_chk_header(t_root *root)
 		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
 			|| (ft_chk_dup(&mheader, mheader->content, 3)
 				&& ft_chk_dup(&mheader, mheader->content, 2)))
-			ft_error(root, "INVALID MAP HEADER");
+			ft_error("INVALID MAP HEADER");
 		mheader = mheader->next;
 	}
 }
@@ -103,7 +103,7 @@ void	ft_chk_path(t_root *root)
 		{
 			free(res);
 			free(tmp);
-			ft_error(root, "INVALID MAP HEADER");
+			ft_error("INVALID MAP HEADER");
 		}
 		free(res);
 		free(tmp);

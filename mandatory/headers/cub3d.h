@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:52:55 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 18:33:03 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "../../libs/Libft/libft.h"
 # include "../../libs/mlx/mlx.h"
 
-void	ft_error(t_root *root, char *str);
+void	ft_error(char *str);
 void	ft_free_table(char **ptr);
 void	ft_free_map_listes(t_root *root);
 void	ft_free_map_tables(t_root *root);
