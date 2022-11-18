@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:13:40 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 10:55:36 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 10:11:05 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,29 @@ int	is_nempty_line(char *line)
 }
 
 /* -------------------------------------------------------------------------- */
+
+void	ft_chk_path(t_root *root)
+{
+	int		r;
+	char	*res;
+	char	*tmp;
+
+	r = -1;
+	while (root->map.texture[++r])
+	{
+		res = ft_substr(root->map.texture[r], 3,
+				(ft_strlen(root->map.texture[r]) - 3));
+		tmp = ft_strtrim(res, " ");
+		if (open(tmp, O_RDONLY) < 0)
+		{
+			free(res);
+			free(tmp);
+			put_errors("INVALID MAP HEADER");
+		}
+		free(res);
+		free(tmp);
+	}
+}
 
 int	ft_chk_ext(char *str, char	*ext)
 {

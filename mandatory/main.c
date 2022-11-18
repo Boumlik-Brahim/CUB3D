@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:20:43 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/17 11:52:33 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/18 10:12:40 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	ft_backbone(av[1], &root);
+	// system("leaks cub3D");
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/17 11:33:33 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/18 10:12:03 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = cub3D
 CC = CC
 
 # ---------------------------------- Flags ----------------------------------- #
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -static-libsan
+# -fsanitize=address -static-libsan
+CFLAGS := -Wall -Wextra -Werror
 MLX_EFLAGS := -lmlx -framework OpenGL -framework AppKit
 MLX_OFLAGS := -Imlx
 

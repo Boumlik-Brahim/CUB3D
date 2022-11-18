@@ -1,11 +1,11 @@
-C 1,30,100  
+C 1,30,100        
 F 255,10,50
 
 
-EA ./assets/textures/ea.xpm.xpm.xpm
-NO ./assets/textures/no.xpm
-SO ./assets/textures/so.xpm
-WE ./assets/textures/we.xpm
+EA ./assets/textures/txt1.xpm           
+NO ./assets/textures/txt2.xpm
+SO ./assets/textures/txt3.xpm
+WE ./assets/textures/txt4.xpm
    
                      
     
