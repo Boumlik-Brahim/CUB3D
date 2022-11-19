@@ -6,13 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 18:01:07 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/19 10:33:00 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	ft_backbone(char *av, t_root *root)
+void	ft_parssing(char *av, t_root *root)
 {
 	int		count;
 
@@ -24,22 +24,6 @@ void	ft_backbone(char *av, t_root *root)
 	ft_init_header(root);
 	ft_init_body(root, count);
 	ft_chk_body_content(root);
-	// int i;
-	// i = -1;
-	// while (root->map.collor[++i])
-	// {
-	// 	printf("|%s|\n", root->map.collor[i]);
-	// }
-	// i = -1;
-	// while (root->map.texture[++i])
-	// {
-	// 	printf("|%s|\n", root->map.texture[i]);
-	// }
-	// i = -1;
-	// while (root->map.content[++i])
-	// {
-	// 	printf("|%s|\n", root->map.content[i]);
-	// }
 	ft_free_map_listes(root);
 	ft_free_map_tables(root);
 }

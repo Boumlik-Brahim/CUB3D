@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/18 17:11:20 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/19 10:26:32 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MANDATORY_HEADERS := $(addprefix mandatory/headers/, $(addsuffix .h, $(HEADERS))
 MAIN := mandatory/main.c
 
 PARSSING := parssing get_next_line parssing_utils chk_header chk_body read_map \
-			chk_map chk_texture chk_color
+			chk_map chk_texture chk_color calc_color
 RAYCASING := raycasting
 
 SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \
