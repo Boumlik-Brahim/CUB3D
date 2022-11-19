@@ -6,13 +6,13 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:57:50 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 14:32:13 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:59:57 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../headers/cub3d.h"
 
-void	check_angle(t_readmap *map)
+void	check_angle(t_map *map)
 {
 	if (map->window.player.ray_angle >= 0
 		&& map->window.player.ray_angle <= M_PI)
@@ -26,7 +26,7 @@ void	check_angle(t_readmap *map)
 		map->window.player.left = 1;
 }
 
-void	init_ray(t_readmap *map)
+void	init_ray(t_map *map)
 {
 	map->window.player.wall_hx = 0;
 	map->window.player.wall_hy = 0;

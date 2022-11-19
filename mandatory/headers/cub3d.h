@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 17:41:22 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:15:26 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <math.h>
 # include "macros.h"
 # include "types.h"
 # include "../../libs/Libft/libft.h"
@@ -67,32 +68,32 @@ void	ft_parssing(char *av, t_root *root);
 /*----------------------------------parsiing----------------------------------*/
 
 /*---------------------------------raycasting---------------------------------*/
-int		long_len(t_readmap *map);
-void	mlx(t_readmap *map);
-void	paint_minimap(t_readmap *map);
-void	where_player(t_readmap *map);
-void	drawplayer(t_readmap *map);
-void	paint_win(t_readmap *map ,int x,int y);
-void	map_to_window(t_readmap *map,int x,int y,int add);
-void	update_win(t_readmap *map);
-void	init_ray(t_readmap *map);
+int		long_len(t_map *map);
+void	mlx(t_map *map);
+void	paint_minimap(t_map *map);
+void	where_player(t_map *map);
+void	drawplayer(t_map *map);
+void	paint_win(t_map *map ,int x,int y);
+void	map_to_window(t_map *map,int x,int y,int add);
+void	update_win(t_map *map);
+void	init_ray(t_map *map);
 void	init_player(t_window *window);
-void	find_intersection_horiz(t_readmap *map);
-void	find_intersection_verticale(t_readmap *map);
-int		is_wall(t_readmap *map, int x, int y);
+void	find_intersection_horiz(t_map *map);
+void	find_intersection_verticale(t_map *map);
+int		is_wall(t_map *map, int x, int y);
 double	normalize_angle(double angle);
-void	create_angle(t_readmap *map);
-void	create_line_ddl_alg(t_readmap *map, double newposx, double newposy, int color);
-void	check_angle(t_readmap *map);
-void	draw_wall(t_readmap *map, int x, int y, int width_fi);
-void	add_tree_project_wall(t_readmap *map);
-void	calcule_new_x_y(t_readmap *map);
-void	mini_map(t_readmap *map);
-int		funct_ptr(int keycode, t_readmap *map);
-void	move_player_left_right(t_readmap *map);
-void	move_player_up_down(t_readmap *map);
-void	turndir(t_readmap *map);
-double	distancebetwen_posx_and_inter(t_readmap *map, double inter_x, double inter_y);
+void	create_angle(t_map *map);
+void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color);
+void	check_angle(t_map *map);
+void	draw_wall(t_map *map, int x, int y, int width_fi);
+void	add_tree_project_wall(t_map *map);
+void	calcule_new_x_y(t_map *map);
+void	mini_map(t_map *map);
+int		funct_ptr(int keycode, t_map *map);
+void	move_player_left_right(t_map *map);
+void	move_player_up_down(t_map *map);
+void	turndir(t_map *map);
+double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
 /*---------------------------------raycasting---------------------------------*/
 
 #endif

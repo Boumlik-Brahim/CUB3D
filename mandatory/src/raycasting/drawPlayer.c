@@ -6,22 +6,22 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 14:57:25 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 14:02:53 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:11:05 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../headers/cub3d.h"
 
-int	long_len(t_readmap *map)
+int	long_len(t_map *map)
 {
 	int	long_len;
 	int	len;
 
 	long_len = 0;
 	map->j = 0;
-	while (map->arr_map[map->j])
+	while (map->content[map->j])
 	{
-		len = ft_strlen(map->arr_map[map->j]);
+		len = ft_strlen(map->content[map->j]);
 		if (long_len < len)
 			long_len = len;
 		map->j++;
@@ -29,7 +29,7 @@ int	long_len(t_readmap *map)
 	return (long_len);
 }
 
-void	paint_minimap(t_readmap *map)
+void	paint_minimap(t_map *map)
 {
 	int	i;
 	int	j;
@@ -44,7 +44,7 @@ void	paint_minimap(t_readmap *map)
 	}
 }
 
-void	paint_win(t_readmap *map, int x, int y)
+void	paint_win(t_map *map, int x, int y)
 {
 	int	i;
 	int	j;
@@ -59,7 +59,7 @@ void	paint_win(t_readmap *map, int x, int y)
 	}
 }
 
-void	draw_wall(t_readmap *map, int x, int y, int width_fi)
+void	draw_wall(t_map *map, int x, int y, int width_fi)
 {
 	int	j;
 
@@ -68,7 +68,7 @@ void	draw_wall(t_readmap *map, int x, int y, int width_fi)
 		mlx_pixel_put(map->window.mlx, map->window.win, x, j++, 0x3F3BEE);
 }
 
-void	map_to_window(t_readmap *map, int x, int y, int add)
+void	map_to_window(t_map *map, int x, int y, int add)
 {
 	int	i;
 	int	j;
@@ -88,15 +88,15 @@ void	map_to_window(t_readmap *map, int x, int y, int add)
 	}
 }
 
-void	where_player(t_readmap *map)
+void	where_player(t_map *map)
 {
 	map->j = 0;
-	while (map->arr_map[map->j])
+	while (map->content[map->j])
 	{
 		map->i = 0;
-		while (map->arr_map[map->j][map->i])
+		while (map->content[map->j][map->i])
 		{
-			if (map->arr_map[map->j][map->i] == 'N')
+			if (map->content[map->j][map->i] == 'N')
 			{
 				map->window.player.posx = (double)map->i * 32;
 				map->window.player.posy = (double)map->j * 32;

@@ -6,18 +6,18 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 14:37:33 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 15:38:55 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:59:57 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../headers/cub3d.h"
 
-double	distancebetwen_posx_and_inter(t_readmap *map, double inter_x, double inter_y)
+double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y)
 {
 	return (sqrt((inter_x - map->window.player.posx) * (inter_x - map->window.player.posx) + (inter_y - map->window.player.posy) * (inter_y - map->window.player.posy)));
 }
 
-void	check_intersection_vertical(t_readmap *map,t_inter *inter)
+void	check_intersection_vertical(t_map *map,t_inter *inter)
 {
 	map->window.player.dis_v = 0;
 	while (inter->x_intercet > 0 && inter->x_intercet < map->window.width * 32 && inter->y_intercet > 0 && inter->y_intercet < map->window.height * 32)
@@ -38,7 +38,7 @@ void	check_intersection_vertical(t_readmap *map,t_inter *inter)
 	map->window.player.dis_v = distancebetwen_posx_and_inter(map, map->window.player.wall_vx, map->window.player.wall_vy);
 }
 
-void	check_intersection_horiz(t_readmap *map, t_inter *inter)
+void	check_intersection_horiz(t_map *map, t_inter *inter)
 {
 	map->window.player.dis_h = 0;
 	while (inter->x_intercet > 0 && inter->x_intercet <= map->window.width * 32 && inter->y_intercet > 0 && inter->y_intercet <= map->window.height * 32)
@@ -60,7 +60,7 @@ void	check_intersection_horiz(t_readmap *map, t_inter *inter)
 }
 
 
-void	find_intersection_horiz(t_readmap *map)
+void	find_intersection_horiz(t_map *map)
 {
 	t_inter inter;
 
@@ -82,7 +82,7 @@ void	find_intersection_horiz(t_readmap *map)
 	check_intersection_horiz(map, &inter);
 }
 
-void	find_intersection_verticale(t_readmap *map)
+void	find_intersection_verticale(t_map *map)
 {
 	t_inter inter;
 

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 17:48:38 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:10:14 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_window
 	int			height;
 	int			width;
 	int			*data;
-	t_img		img;
 	t_player	player;
 }	t_window;
 

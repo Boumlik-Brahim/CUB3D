@@ -6,13 +6,13 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 14:30:58 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:06:44 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../headers/cub3d.h"
 
-void	move_player_left_right(t_readmap *map)
+void	move_player_left_right(t_map *map)
 {
 	double	angle;
 	double	posx;
@@ -32,7 +32,7 @@ void	move_player_left_right(t_readmap *map)
 	map_to_window(map, 100, 100, 4);
 }
 
-void	move_player_up_down(t_readmap *map)
+void	move_player_up_down(t_map *map)
 {
 	double	movestep;
 	double	posx;
@@ -52,7 +52,7 @@ void	move_player_up_down(t_readmap *map)
 	map_to_window(map, 100, 100, 4);
 }
 
-void	turndir(t_readmap *map)
+void	turndir(t_map *map)
 {
 	mlx_clear_window(map->window.mlx, map->window.win);
 	update_win(map);
@@ -60,7 +60,7 @@ void	turndir(t_readmap *map)
 	map->window.player.rot_angle += map->window.player.turndir * map->window.player.turnspeed;
 }
 
-int	funct_ptr(int keycode, t_readmap *map)
+int	funct_ptr(int keycode, t_map *map)
 {
 	if (keycode == 2)
 	{

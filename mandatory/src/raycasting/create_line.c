@@ -6,36 +6,36 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:44:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 15:59:09 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:11:05 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../cub3d.h"
+#include "../../headers/cub3d.h"
 
-void	update_win(t_readmap *map)
+void	update_win(t_map *map)
 {
 	paint_minimap(map);
 	map->j = 0;
-	while (map->arr_map[map->j])
+	while (map->content[map->j])
 	{
 		map->i = 0;
-		while (map->arr_map[map->j][map->i])
+		while (map->content[map->j][map->i])
 		{
-			if (map->arr_map[map->j][map->i] == '1')
+			if (map->content[map->j][map->i] == '1')
 				map_to_window(map, map->i * 32 - map->window.player.newx,
 					map->j * 32 - map->window.player.newy, 32);
-			// if (map->arr_map[map->j][map->i] == '0')
+			// if (map->content[map->j][map->i] == '0')
 			// 	map_to_window(map, map->i * 32 - map->window.player.newx,
 			// 		map->j * 32 - map->window.player.newy, 32);
-			if (map->arr_map[map->j][map->i] == 'N')
-				map->arr_map[map->j][map->i] = '0';
+			if (map->content[map->j][map->i] == 'N')
+				map->content[map->j][map->i] = '0';
 			map->i++;
 		}
 		map->j++;
 	}
 }
 
-void	create_line_ddl_alg(t_readmap *map, double newposx, double newposy, int color)
+void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 {
 	double	x;
 	double	y;
@@ -65,7 +65,7 @@ void	create_line_ddl_alg(t_readmap *map, double newposx, double newposy, int col
 	}
 }
 
-void	create_angle(t_readmap *map)
+void	create_angle(t_map *map)
 {
 	int		i;
 	double	pointx;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:45 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 17:12:50 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/19 18:09:59 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_parssing(char *av, t_root *root)
 	ft_init_header(root);
 	ft_init_body(root, count);
 	ft_chk_body_content(root);
+	mlx(&root->map);
 	ft_free_map_listes(root);
 	ft_free_map_tables(root);
 }

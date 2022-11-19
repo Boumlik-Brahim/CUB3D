@@ -6,13 +6,13 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 15:41:27 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:59:57 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../headers/cub3d.h"
 
-void	add_tree_project_wall(t_readmap *map)
+void	add_tree_project_wall(t_map *map)
 {
 	int		i;
 	t_inter inter;
