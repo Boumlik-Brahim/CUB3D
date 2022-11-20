@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 18:15:26 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:23:23 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	paint_win(t_map *map ,int x,int y);
 void	map_to_window(t_map *map,int x,int y,int add);
 void	update_win(t_map *map);
 void	init_ray(t_map *map);
-void	init_player(t_window *window);
+void	init_player(t_player *s_player);
 void	find_intersection_horiz(t_map *map);
 void	find_intersection_verticale(t_map *map);
 int		is_wall(t_map *map, int x, int y);

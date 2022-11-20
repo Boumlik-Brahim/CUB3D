@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 18:10:14 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:19:15 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_window
 	int			height;
 	int			width;
 	int			*data;
-	t_player	player;
 }	t_window;
 
 typedef struct s_inter
@@ -81,6 +80,7 @@ typedef struct s_map
 	int			j;
 	int			len;
 	int			count;
+	t_player	player;
 	t_window	window;
 
 }	t_map;

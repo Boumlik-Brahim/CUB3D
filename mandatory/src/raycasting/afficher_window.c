@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:03:53 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/20 12:44:09 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	mini_map(t_map *map)
 
 void	calcule_new_x_y(t_map *map)
 {
-	map->window.player.newx = map->window.player.posx - 100;
-	map->window.player.newy = map->window.player.posy - 100;
+	map->player.newx = map->player.posx - 100;
+	map->player.newy = map->player.posy - 100;
 }
 
 int	ft_strnum(char	**str)
@@ -40,9 +40,9 @@ int	ft_strnum(char	**str)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (str[i])
 	{
+		j = 0;
 		while (str[i][j])
             j++;
         i++;
@@ -55,14 +55,11 @@ void	mlx(t_map *map)
 	map->window.height = ft_strnum(map->content);
 	map->window.width = long_len(map);
 	map->window.mlx = mlx_init();
-	// Code te7tani ghaytbedel la79ach khass WIN_WIDTH ou WIN_HEIGHT ykounou static
-	// map->window.win = mlx_new_window(map->window.mlx,
-	// 		map->window.width * 32, map->window.height * 32, "cub3D");
 	map->window.win = mlx_new_window(map->window.mlx,
 			WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	where_player(map);
 	calcule_new_x_y(map);
-	init_player(&map->window);
+	init_player(&map->player);
 	add_tree_project_wall(map);
 	mini_map(map);
 	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);

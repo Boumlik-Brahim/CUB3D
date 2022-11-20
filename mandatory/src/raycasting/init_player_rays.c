@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_rays.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:57:50 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:10:29 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/20 12:24:47 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,41 @@
 
 void	check_angle(t_map *map)
 {
-	if (map->window.player.ray_angle >= 0
-		&& map->window.player.ray_angle <= M_PI)
-		map->window.player.up = 1;
+	if (map->player.ray_angle >= 0
+		&& map->player.ray_angle <= M_PI)
+		map->player.up = 1;
 	else
-		map->window.player.down = 1;
-	if (map->window.player.ray_angle <= 0.5 * M_PI
-		|| map->window.player.ray_angle >= 1.5 * M_PI)
-		map->window.player.right = 1;
+		map->player.down = 1;
+	if (map->player.ray_angle <= 0.5 * M_PI
+		|| map->player.ray_angle >= 1.5 * M_PI)
+		map->player.right = 1;
 	else
-		map->window.player.left = 1;
+		map->player.left = 1;
 }
 
 void	init_ray(t_map *map)
 {
-	map->window.player.wall_hx = 0;
-	map->window.player.wall_hy = 0;
-	map->window.player.wall_vy = 0;
-	map->window.player.wall_vx = 0;
-	map->window.player.down = 0;
-	map->window.player.up = 0;
-	map->window.player.left = 0;
-	map->window.player.right = 0;
+	map->player.wall_hx = 0;
+	map->player.wall_hy = 0;
+	map->player.wall_vy = 0;
+	map->player.wall_vx = 0;
+	map->player.down = 0;
+	map->player.up = 0;
+	map->player.left = 0;
+	map->player.right = 0;
 	check_angle(map);
 }
 
-void	init_player(t_window *window)
+void	init_player(t_player *player)
 {
-	window->player.turndir = 0;
-	window->player.walkdir = 0;
-	window->player.rot_angle = M_PI / 2;
-	window->player.walkspeed = 0;
-	window->player.movespeed = 3.0;
-	window->player.turnspeed = 4 * M_PI / 180;
-	window->player.fov_angle = 60 * M_PI / 180;
-	// window->player.num_rays = window->width * 32;
-	window->player.num_rays = WIN_WIDTH;
+	player->turndir = 0;
+	player->walkdir = 0;
+	player->rot_angle = M_PI / 2;
+	player->walkspeed = 0;
+	player->movespeed = 3.0;
+	player->turnspeed = 4 * M_PI / 180;
+	player->fov_angle = 60 * M_PI / 180;
+	player->num_rays = WIN_WIDTH;
 }
 
 double	normalize_angle(double angle)

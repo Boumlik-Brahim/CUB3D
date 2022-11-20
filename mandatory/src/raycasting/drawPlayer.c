@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawPlayer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 14:57:25 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:09:33 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/20 12:21:22 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	paint_win(t_map *map, int x, int y)
 	while (i >= 0 && i < y)
 	{
 		j = 0;
-
-		// while (j >= 0 && j < map->window.width * 32)
 		while (j >= 0 && j < WIN_WIDTH)
 			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0xA3C7D6);
 		++i;
@@ -100,8 +98,8 @@ void	where_player(t_map *map)
 		{
 			if (map->content[map->j][map->i] == 'N')
 			{
-				map->window.player.posx = (double)map->i * 32;
-				map->window.player.posy = (double)map->j * 32;
+				map->player.posx = (double)map->i * 32;
+				map->player.posy = (double)map->j * 32;
 			}
 			map->i++;
 		}
