@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 15:24:20 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:46:35 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void move_player(t_map *map)
 	angle = map->player.rot_angle + M_PI / 2;
 	angle = normalize_angle(angle);
 	if (map->player.direction == 0)
-		angle = map->player.rot_angle;
+	{
+		angle = normalize_angle(map->player.rot_angle);
+		map->player.direction = -1;
+	}
 	posx = map->player.posx + cos(angle) * movestep;
 	posy = map->player.posy + sin(angle) * movestep;
 	if (is_wall(map, posx, posy) == 0)
@@ -34,9 +37,7 @@ void move_player(t_map *map)
 	}
 	map_to_window(map, 100, 100, 4);
 	if (map->player.direction == 2)
-	{
 		map->player.rot_angle += map->player.turndir * map->player.turnspeed;
-	}
 }
 
 // void	move_player_left_right(t_map *map)
