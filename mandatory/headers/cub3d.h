@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 12:23:23 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:15:17 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	create_angle(t_map *map);
 void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color);
 void	check_angle(t_map *map);
 void	draw_wall(t_map *map, int x, int y, int width_fi);
-void	add_tree_project_wall(t_map *map);
+int	add_tree_project_wall(t_map *map);
 void	calcule_new_x_y(t_map *map);
 void	mini_map(t_map *map);
 int		funct_ptr(int keycode, t_map *map);

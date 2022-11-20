@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:44:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 13:16:54 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:52:39 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	update_win(t_map *map)
 			if (map->content[map->j][map->i] == '1')
 				map_to_window(map, map->i * 32 - map->player.newx,
 					map->j * 32 - map->player.newy, 32);
-			// if (map->content[map->j][map->i] == '0')
-			// 	map_to_window(map, map->i * 32 - map->player.newx,
-			// 		map->j * 32 - map->player.newy, 32);
 			if (map->content[map->j][map->i] == 'N')
 				map->content[map->j][map->i] = '0';
 			map->i++;
@@ -69,8 +66,10 @@ void	create_angle(t_map *map)
 	int		i;
 	double	pointx;
 	double	pointy;
+	double	rangle;
 
 	i = 0;
+	rangle = (map->player.fov_angle / map->player.num_rays);
 	map->player.ray_angle = map->player.rot_angle - (map->player.fov_angle / 2);
 	while (i < map->player.num_rays)
 	{
@@ -102,7 +101,8 @@ void	create_angle(t_map *map)
 			pointy = map->player.wall_hy - map->player.newy;
 		}
 		create_line_ddl_alg(map, pointx, pointy, 0xD4D925);
-		map->player.ray_angle += (map->player.fov_angle / map->player.num_rays);
+		// map->player.ray_angle += (map->player.fov_angle / map->player.num_rays);
+		map->player.ray_angle += rangle;
 		i++;
 	}
 }

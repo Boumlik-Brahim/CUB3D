@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:44:09 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:03:33 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	mini_map(t_map *map)
 	calcule_new_x_y(map);
 	paint_minimap(map);
 	update_win(map);
-	map_to_window(map, 100, 100, 4);
+	map_to_window(map, 100, 100, 1);
 	create_angle(map);
 }
 
@@ -50,6 +50,20 @@ int	ft_strnum(char	**str)
 	return (i);
 }
 
+int	handle_keypress(void *ptr)
+{
+	t_map *map;
+
+	map = (t_map *)ptr;
+	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
+	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
+	mlx_clear_window(map->window.mlx, map->window.win);
+	add_tree_project_wall(map);
+	// mini_map(map);
+	// map_to_window(map, 100, 100, 4);
+	return (0);
+}
+
 void	mlx(t_map *map)
 {
 	map->window.height = ft_strnum(map->content);
@@ -61,8 +75,7 @@ void	mlx(t_map *map)
 	calcule_new_x_y(map);
 	init_player(&map->player);
 	add_tree_project_wall(map);
-	mini_map(map);
-	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
-	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
+	// mini_map(map);
+	mlx_loop_hook(map->window.mlx, &handle_keypress, (void *)map);
 	mlx_loop(map->window.mlx);
 }

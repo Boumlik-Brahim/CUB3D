@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 17:04:22 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:28:19 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_player
 	double		dis_v;
 	double		rot_angle;
 	double		turnspeed;
-	double		movespeed;
 	double		ray_angle;
 	double		wall_hx;
 	double		wall_hy;

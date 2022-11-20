@@ -6,20 +6,19 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:34:00 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:58:52 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	add_tree_project_wall(t_map *map)
+int	add_tree_project_wall(t_map *map)
 {
 	int		i;
 	t_inter inter;
 
 	i = 0;
 
-	paint_win(map, 0, WIN_HEIGHT / 2);
 	map->player.ray_angle = map->player.rot_angle - (map->player.fov_angle / 2);
 	map->player.dis_v = 0;
 	map->player.dis_h = 0;
@@ -41,9 +40,9 @@ void	add_tree_project_wall(t_map *map)
 		inter.bottom = (WIN_HEIGHT / 2) + (inter.wallstripheight / 2);
 		if (inter.bottom > WIN_HEIGHT)
 			inter.bottom = WIN_HEIGHT;
-
 		draw_wall(map, i, inter.top, inter.bottom);
 		map->player.ray_angle += (map->player.fov_angle / map->player.num_rays);
 		i++;
 	}
+	return (0);
 }
