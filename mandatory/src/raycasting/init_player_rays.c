@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_rays.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:57:50 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 17:59:57 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:10:29 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	init_player(t_window *window)
 	window->player.movespeed = 3.0;
 	window->player.turnspeed = 4 * M_PI / 180;
 	window->player.fov_angle = 60 * M_PI / 180;
-	window->player.num_rays = window->width * 32;
+	// window->player.num_rays = window->width * 32;
+	window->player.num_rays = WIN_WIDTH;
 }
 
 double	normalize_angle(double angle)

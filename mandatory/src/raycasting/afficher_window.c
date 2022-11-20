@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 18:14:06 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:03:53 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,11 @@ void	mlx(t_map *map)
 	map->window.height = ft_strnum(map->content);
 	map->window.width = long_len(map);
 	map->window.mlx = mlx_init();
+	// Code te7tani ghaytbedel la79ach khass WIN_WIDTH ou WIN_HEIGHT ykounou static
+	// map->window.win = mlx_new_window(map->window.mlx,
+	// 		map->window.width * 32, map->window.height * 32, "cub3D");
 	map->window.win = mlx_new_window(map->window.mlx,
-			map->window.width * 32, map->window.height * 32, "cub3D");
+			WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	where_player(map);
 	calcule_new_x_y(map);
 	init_player(&map->window);
