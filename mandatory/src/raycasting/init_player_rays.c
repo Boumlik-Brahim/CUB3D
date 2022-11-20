@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:57:50 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:24:47 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:11:25 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_player(t_player *player)
 	player->movespeed = 3.0;
 	player->turnspeed = 4 * M_PI / 180;
 	player->fov_angle = 60 * M_PI / 180;
+	player->direction = -1;
 	player->num_rays = WIN_WIDTH;
 }
 
