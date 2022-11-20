@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 15:11:07 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:04:22 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_player
 	int			up;
 	int			right;
 	int			left;
-	int			direction;
 	int			num_rays;
 }	t_player;
 

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 15:46:35 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:02:21 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ void move_player(t_map *map)
 	
 	mlx_clear_window(map->window.mlx, map->window.win);
 	update_win(map);
-	movestep = map->player.walkdir * map->player.movespeed;
+	if (map->player.walkdir != 0)
+		movestep = map->player.walkdir * map->player.movespeed;
+	if (map->player.walkspeed != 0)
+		movestep = map->player.walkspeed * map->player.movespeed;
 	angle = map->player.rot_angle + M_PI / 2;
+	map->player.rot_angle += map->player.turndir * map->player.turnspeed;
 	angle = normalize_angle(angle);
-	if (map->player.direction == 0)
-	{
+	if (map->player.walkdir != 0)
 		angle = normalize_angle(map->player.rot_angle);
-		map->player.direction = -1;
-	}
 	posx = map->player.posx + cos(angle) * movestep;
 	posy = map->player.posy + sin(angle) * movestep;
 	if (is_wall(map, posx, posy) == 0)
@@ -36,8 +37,6 @@ void move_player(t_map *map)
 		map->player.posy = posy;
 	}
 	map_to_window(map, 100, 100, 4);
-	if (map->player.direction == 2)
-		map->player.rot_angle += map->player.turndir * map->player.turnspeed;
 }
 
 // void	move_player_left_right(t_map *map)
@@ -90,34 +89,21 @@ void move_player(t_map *map)
 
 int	funct_ptr(int keycode, t_map *map)
 {
+	map->player.turndir = 0;
+	map->player.walkdir = 0;
+	map->player.walkspeed = 0;
 	if (keycode == 2)
-	{
-		map->player.walkdir = 1;
-	}
+		map->player.walkspeed = 1;
 	if (keycode == 0)
-	{
-		map->player.walkdir = -1;
-	}
+		map->player.walkspeed = -1;
 	if (keycode == 1)
-	{
 		map->player.walkdir = -1;
-		map->player.direction = 0;
-	}
 	if (keycode == 13)
-	{
 		map->player.walkdir = 1;
-		map->player.direction = 0;
-	}
 	if (keycode == 124)
-	{
 		map->player.turndir = 1;
-		map->player.direction = 2;
-	}
 	if (keycode == 123)
-	{
 		map->player.turndir = -1;
-		map->player.direction = 2;
-	}
 	if (keycode == 53)
 	{
 		mlx_clear_window(map->window.mlx, map->window.win);
