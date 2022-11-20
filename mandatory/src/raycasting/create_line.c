@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:44:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 12:28:32 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:16:54 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	update_win(t_map *map)
 {
-	paint_minimap(map);
 	map->j = 0;
 	while (map->content[map->j])
 	{
