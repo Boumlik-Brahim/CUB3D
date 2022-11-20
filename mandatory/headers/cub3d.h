@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 19:15:17 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:18:15 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	mlx(t_map *map);
 void	paint_minimap(t_map *map);
 void	where_player(t_map *map);
 void	drawplayer(t_map *map);
-void	paint_win(t_map *map ,int x,int y);
+void	draw_background(t_map *map);
 void	map_to_window(t_map *map,int x,int y,int add);
 void	update_win(t_map *map);
 void	init_ray(t_map *map);

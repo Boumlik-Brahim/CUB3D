@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 20:58:52 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:13:51 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	add_tree_project_wall(t_map *map)
 {
 	int		i;
 	t_inter inter;
+	double	rangle;
 
 	i = 0;
 
+	rangle = (map->player.fov_angle / map->player.num_rays);
 	map->player.ray_angle = map->player.rot_angle - (map->player.fov_angle / 2);
 	map->player.dis_v = 0;
 	map->player.dis_h = 0;
@@ -41,7 +43,7 @@ int	add_tree_project_wall(t_map *map)
 		if (inter.bottom > WIN_HEIGHT)
 			inter.bottom = WIN_HEIGHT;
 		draw_wall(map, i, inter.top, inter.bottom);
-		map->player.ray_angle += (map->player.fov_angle / map->player.num_rays);
+		map->player.ray_angle += rangle;
 		i++;
 	}
 	return (0);

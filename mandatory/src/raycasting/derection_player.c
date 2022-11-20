@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 21:04:05 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:09:15 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	funct_ptr(int keycode, t_map *map)
 		mlx_clear_window(map->window.mlx, map->window.win);
 		exit (0);
 	}
-	// update_win(map);
 	move_player(map);
 
 	return (0);

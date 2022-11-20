@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:44:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 20:52:39 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:42:26 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,43 @@ void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 	}
 }
 
+void ckeck_hor_ver(t_map *map)
+{
+	double	pointx;
+	double	pointy;
+
+	pointx = 0.0;
+	pointy = 0.0;
+	if (map->player.is_intv == 1 && map->player.is_inth == 1)
+	{
+		if (map->player.dis_v < map->player.dis_h)
+		{
+			pointx = map->player.wall_vx - map->player.newx;
+			pointy = map->player.wall_vy - map->player.newy;
+		}
+		else
+		{
+			pointx = map->player.wall_hx - map->player.newx;
+			pointy = map->player.wall_hy - map->player.newy;
+		}
+	}
+	else if (map->player.is_intv == 1 && map->player.is_inth == 0)
+	{
+		pointx = map->player.wall_vx - map->player.newx;
+		pointy = map->player.wall_vy - map->player.newy;
+	}
+	else if (map->player.is_intv == 0 && map->player.is_inth == 1)
+	{
+		pointx = map->player.wall_hx - map->player.newx;
+		pointy = map->player.wall_hy - map->player.newy;
+	}
+	create_line_ddl_alg(map, pointx, pointy, 0xD4D925);
+}
+
 void	create_angle(t_map *map)
 {
 	int		i;
-	double	pointx;
-	double	pointy;
+
 	double	rangle;
 
 	i = 0;
@@ -77,31 +109,7 @@ void	create_angle(t_map *map)
 		init_ray(map);
 		find_intersection_horiz(map);
 		find_intersection_verticale(map);
-		if (map->player.is_intv == 1 && map->player.is_inth == 1)
-		{
-			if (map->player.dis_v < map->player.dis_h)
-			{
-				pointx = map->player.wall_vx - map->player.newx;
-				pointy = map->player.wall_vy - map->player.newy;
-			}
-			else
-			{
-				pointx = map->player.wall_hx - map->player.newx;
-				pointy = map->player.wall_hy - map->player.newy;
-			}
-		}
-		else if (map->player.is_intv == 1 && map->player.is_inth == 0)
-		{
-			pointx = map->player.wall_vx - map->player.newx;
-			pointy = map->player.wall_vy - map->player.newy;
-		}
-		else if (map->player.is_intv == 0 && map->player.is_inth == 1)
-		{
-			pointx = map->player.wall_hx - map->player.newx;
-			pointy = map->player.wall_hy - map->player.newy;
-		}
-		create_line_ddl_alg(map, pointx, pointy, 0xD4D925);
-		// map->player.ray_angle += (map->player.fov_angle / map->player.num_rays);
+		ckeck_hor_ver(map);
 		map->player.ray_angle += rangle;
 		i++;
 	}

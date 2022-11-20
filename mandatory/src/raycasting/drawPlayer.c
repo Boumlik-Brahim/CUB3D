@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 14:57:25 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 13:19:35 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:20:53 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,26 @@ void	paint_minimap(t_map *map)
 	}
 }
 
-void	paint_win(t_map *map, int x, int y)
+void	draw_background(t_map *map)
 {
 	int	i;
 	int	j;
 
-	i = x;
-	while (i >= 0 && i < y)
+	i = 0;
+	while (i < WIN_HEIGHT / 2)
 	{
 		j = 0;
-		while (j >= 0 && j < WIN_WIDTH)
-			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0xA3C7D6);
+		while (j < WIN_WIDTH)
+			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0x8758FF);
+		++i;
+	}
+	
+	i = WIN_HEIGHT / 2;
+	while (i < WIN_HEIGHT)
+	{
+		j = 0;
+		while (j < WIN_WIDTH)
+			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0x003865);
 		++i;
 	}
 }

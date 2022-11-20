@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 21:03:33 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/20 21:28:54 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int	handle_keypress(void *ptr)
 	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
 	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
 	mlx_clear_window(map->window.mlx, map->window.win);
+	// draw_background(map);
 	add_tree_project_wall(map);
-	// mini_map(map);
-	// map_to_window(map, 100, 100, 4);
+	mini_map(map);
+	map_to_window(map, 100, 100, 4);
 	return (0);
 }
 
@@ -74,8 +75,6 @@ void	mlx(t_map *map)
 	where_player(map);
 	calcule_new_x_y(map);
 	init_player(&map->player);
-	add_tree_project_wall(map);
-	// mini_map(map);
 	mlx_loop_hook(map->window.mlx, &handle_keypress, (void *)map);
 	mlx_loop(map->window.mlx);
 }
