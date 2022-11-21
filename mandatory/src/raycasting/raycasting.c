@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 15:00:38 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:23:02 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,49 @@ int	handle_keypress(void *ptr)
 	return (0);
 }
 
-void	init_player(t_player *player)
+void	ft_find_pdirection(t_map *map)
 {
-	player->turndir = 0;
-	player->walkdir = 0;
-	player->walkspeed = 0;
-	player->rot_angle = M_PI / 2;
-	player->turnspeed = 4.0 * (M_PI / 180);
-	player->fov_angle = 60 * (M_PI / 180);
-	player->num_rays = WIN_WIDTH;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->content[i])
+	{
+		j = 0;
+		while (map->content[i][j])
+		{
+			if (map->content[i][j] == 'N')
+			{
+				map->player.rot_angle = M_PI / 2;
+			}
+			if (map->content[i][j] == 'S')
+			{
+				map->player.rot_angle = (3 * M_PI) / 2;
+			}
+			if (map->content[i][j] == 'W')
+			{
+				map->player.rot_angle = M_PI;
+			}
+			if (map->content[i][j] == 'E')
+			{
+				map->player.rot_angle = 2 * M_PI;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	init_player(t_map *map)
+{
+	map->player.turndir = 0;
+	map->player.walkdir = 0;
+	map->player.walkspeed = 0;
+	// map->player.rot_angle = M_PI / 2;
+	ft_find_pdirection(map);
+	map->player.turnspeed = 4.0 * (M_PI / 180);
+	map->player.fov_angle = 60 * (M_PI / 180);
+	map->player.num_rays = WIN_WIDTH;
 }
 
 void	calcule_new_x_y(t_map *map)
@@ -88,7 +122,7 @@ void	mlx(t_map *map)
 	map->window.img.addr = mlx_get_data_addr(map->window.img.mlx_img,&map->window.img.bpp, &map->window.img.line_len, &map->window.img.endian);
 	where_player(map);
 	calcule_new_x_y(map);
-	init_player(&map->player);
+	init_player(map);
 	mlx_loop_hook(map->window.mlx, &handle_keypress, (void *)map);
 	mlx_loop(map->window.mlx);
 }
