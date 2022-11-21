@@ -4,6 +4,7 @@
         "libft.h": "c",
         "__locale": "c",
         "locale": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "complex": "c"
     }
 }

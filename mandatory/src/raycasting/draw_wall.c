@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 17:03:08 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:18:44 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ int	add_tree_project_wall(t_map *map)
 	t_inter inter;
 	double	rangle;
 	double	tang;
+	double	coss;
+	double	halfwallstripheight;
 
 	i = 0;
 	rangle = (map->player.fov_angle / map->player.num_rays);
@@ -178,22 +180,23 @@ int	add_tree_project_wall(t_map *map)
 		init_ray(map);
 		find_intersection_horiz(map,i);
 		find_intersection_verticale(map,i);
+		coss = cos(map->player.ray_angle - map->player.rot_angle);
 		if (map->rays.dis_v[i] < map->rays.dis_h[i])
-			inter.raydistance = map->rays.dis_v[i] * cos(map->player.ray_angle - map->player.rot_angle);
+			inter.raydistance = map->rays.dis_v[i] * coss;
 		else
-			inter.raydistance = map->rays.dis_h[i] * cos(map->player.ray_angle - map->player.rot_angle);
-		inter.projectplan = (WIN_WIDTH / 2) / tang;
+			inter.raydistance = map->rays.dis_h[i] * coss;
+		inter.projectplan = /*(WIN_WIDTH / 2)*/ 400 / tang;
 		inter.wallstripheight = (32 / inter.raydistance) * inter.projectplan;
-		inter.top = (WIN_HEIGHT / 2) - (inter.wallstripheight / 2);
+		halfwallstripheight = (inter.wallstripheight / 2);
+		inter.top = /*(WIN_HEIGHT / 2)*/ 300 - halfwallstripheight;
 		if (inter.top < 0)
 			inter.top = 0;
-		inter.bottom = (WIN_HEIGHT / 2) + (inter.wallstripheight / 2);
+		inter.bottom = /*(WIN_HEIGHT / 2)*/ 300 + halfwallstripheight;
 		if (inter.bottom > WIN_HEIGHT)
 			inter.bottom = WIN_HEIGHT;
 		draw_wall(map, i, inter.top, inter.bottom);
 		map->player.ray_angle += rangle;
 		i++;
 	}
-
 	return (0);
 }

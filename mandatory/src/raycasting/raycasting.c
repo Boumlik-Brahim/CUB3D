@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 15:58:29 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:03:20 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	where_player(t_map *map)
 		i = 0;
 		while (map->content[j][i])
 		{
-			if (ft_strchr("NSWE", map->content[j][i]))
+			if (map->content[j][i] == 'N' || map->content[j][i] == 'S' || map->content[j][i] == 'W' || map->content[j][i] == 'N')
 			{
 				map->player.posx = (double)i * 32;
 				map->player.posy = (double)j * 32;

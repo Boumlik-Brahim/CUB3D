@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 15:09:19 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:44:28 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,21 @@ void	create_angle(t_map *map)
 	}
 }
 
+/* add variables yadd xadd*/
 void	map_to_window(t_map *map, int x, int y, int add)
 {
 	int	i;
 	int	j;
+	int	yadd;
+	int	xadd;
 
 	i = y;
-	while (i < y + add)
+	yadd = y + add;
+	xadd = x + add;
+	while (i < yadd)
 	{
 		j = x;
-		while (j < x + add)
+		while (j < xadd)
 		{
 			if (j >= 0 && j < 200 && i >= 0 && i < 200)
 				img_pix_put(&map->window.img, j, i, 0x3F3BEE);
@@ -113,20 +118,23 @@ void	map_to_window(t_map *map, int x, int y, int add)
 
 void	update_win(t_map *map)
 {
-	map->j = 0;
-	while (map->content[map->j])
+	int	i;
+	int	j;
+
+	j = 0;
+	while (map->content[j])
 	{
-		map->i = 0;
-		while (map->content[map->j][map->i])
+		i = 0;
+		while (map->content[j][i])
 		{
-			if (map->content[map->j][map->i] == '1')
-				map_to_window(map, map->i * 32 - map->player.newx,
-					map->j * 32 - map->player.newy, 32);
-			if (map->content[map->j][map->i] == 'N')
-				map->content[map->j][map->i] = '0';
-			map->i++;
+			if (map->content[j][i] == '1')
+				map_to_window(map, i * 32 - map->player.newx,
+					j * 32 - map->player.newy, 32);
+			if (map->content[j][i] == 'N' || map->content[j][i] == 'S' || map->content[j][i] == 'W' || map->content[j][i] == 'E')
+				map->content[j][i] = '0';
+			i++;
 		}
-		map->j++;
+		j++;
 	}
 }
 
