@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:24 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 12:04:28 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/21 11:25:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@
 # define BUFFER_SIZE 1
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
+
 #endif

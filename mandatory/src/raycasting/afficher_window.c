@@ -3,20 +3,151 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/20 21:28:54 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 09:09:11 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-int	ft_close(int keycode, t_map *map)
+void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 {
-	map = 0;
-	keycode = 0;
-	exit(0);
+	double	x;
+	double	y;
+	int		i;
+	double	step;
+	double	x_inc;
+	double	y_inc;
+
+	map->player.deltax = newposx - 100;
+	map->player.deltay = newposy - 100;
+	if (fabs(map->player.deltax) > fabs(map->player.deltay))
+		step = fabs(map->player.deltax);
+	else
+		step = fabs(map->player.deltay);
+	x_inc = map->player.deltax / step;
+	y_inc = map->player.deltay / step;
+	i = 1;
+	y = 100;
+	x = 100;
+	while (i < step && x < 200 && y < 200)
+	{
+		mlx_pixel_put(map->window.mlx, map->window.win,
+			round(x), round(y), color);
+		x = x + x_inc;
+		y = y + y_inc;
+		i++;
+	}
+}
+
+void ckeck_hor_ver(t_map *map)
+{
+	double	pointx;
+	double	pointy;
+
+	pointx = 0.0;
+	pointy = 0.0;
+	if (map->player.is_intv == 1 && map->player.is_inth == 1)
+	{
+		if (map->player.dis_v < map->player.dis_h)
+		{
+			pointx = map->player.wall_vx - map->player.newx;
+			pointy = map->player.wall_vy - map->player.newy;
+		}
+		else
+		{
+			pointx = map->player.wall_hx - map->player.newx;
+			pointy = map->player.wall_hy - map->player.newy;
+		}
+	}
+	else if (map->player.is_intv == 1 && map->player.is_inth == 0)
+	{
+		pointx = map->player.wall_vx - map->player.newx;
+		pointy = map->player.wall_vy - map->player.newy;
+	}
+	else if (map->player.is_intv == 0 && map->player.is_inth == 1)
+	{
+		pointx = map->player.wall_hx - map->player.newx;
+		pointy = map->player.wall_hy - map->player.newy;
+	}
+	create_line_ddl_alg(map, pointx, pointy, 0xD4D925);
+}
+
+void	create_angle(t_map *map)
+{
+	int		i;
+
+	double	rangle;
+
+	i = 0;
+	rangle = (map->player.fov_angle / map->player.num_rays);
+	map->player.ray_angle = map->player.rot_angle - (map->player.fov_angle / 2);
+	while (i < map->player.num_rays)
+	{
+		map->player.ray_angle = normalize_angle(map->player.ray_angle);
+		init_ray(map);
+		find_intersection_horiz(map);
+		find_intersection_verticale(map);
+		ckeck_hor_ver(map);
+		map->player.ray_angle += rangle;
+		i++;
+	}
+}
+
+void	map_to_window(t_map *map, int x, int y, int add)
+{
+	int	i;
+	int	j;
+
+	i = y;
+	while (i < y + add)
+	{
+		j = x;
+		while (j < x + add)
+		{
+			if (j >= 0 && j < 200 && i >= 0 && i < 200)
+				mlx_pixel_put(map->window.mlx,
+					map->window.win, j, i, 0x3F3B6C);
+			j++;
+		}
+		++i;
+	}
+}
+
+void	update_win(t_map *map)
+{
+	map->j = 0;
+	while (map->content[map->j])
+	{
+		map->i = 0;
+		while (map->content[map->j][map->i])
+		{
+			if (map->content[map->j][map->i] == '1')
+				map_to_window(map, map->i * 32 - map->player.newx,
+					map->j * 32 - map->player.newy, 32);
+			if (map->content[map->j][map->i] == 'N')
+				map->content[map->j][map->i] = '0';
+			map->i++;
+		}
+		map->j++;
+	}
+}
+
+void	paint_minimap(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i >= 0 && i < 200)
+	{
+		j = 0;
+		while (j >= 0 && j < 200)
+			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0xFFFFFF);
+		++i;
+	}
 }
 
 void	mini_map(t_map *map)
@@ -26,55 +157,4 @@ void	mini_map(t_map *map)
 	update_win(map);
 	map_to_window(map, 100, 100, 1);
 	create_angle(map);
-}
-
-void	calcule_new_x_y(t_map *map)
-{
-	map->player.newx = map->player.posx - 100;
-	map->player.newy = map->player.posy - 100;
-}
-
-int	ft_strnum(char	**str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-            j++;
-        i++;
-	}
-	return (i);
-}
-
-int	handle_keypress(void *ptr)
-{
-	t_map *map;
-
-	map = (t_map *)ptr;
-	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
-	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
-	mlx_clear_window(map->window.mlx, map->window.win);
-	// draw_background(map);
-	add_tree_project_wall(map);
-	mini_map(map);
-	map_to_window(map, 100, 100, 4);
-	return (0);
-}
-
-void	mlx(t_map *map)
-{
-	map->window.height = ft_strnum(map->content);
-	map->window.width = long_len(map);
-	map->window.mlx = mlx_init();
-	map->window.win = mlx_new_window(map->window.mlx,
-			WIN_WIDTH, WIN_HEIGHT, "cub3D");
-	where_player(map);
-	calcule_new_x_y(map);
-	init_player(&map->player);
-	mlx_loop_hook(map->window.mlx, &handle_keypress, (void *)map);
-	mlx_loop(map->window.mlx);
 }
