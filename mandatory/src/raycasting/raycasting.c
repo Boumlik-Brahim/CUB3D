@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 15:23:02 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:58:29 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,13 @@ void	ft_find_pdirection(t_map *map)
 		while (map->content[i][j])
 		{
 			if (map->content[i][j] == 'N')
-			{
 				map->player.rot_angle = M_PI / 2;
-			}
 			if (map->content[i][j] == 'S')
-			{
 				map->player.rot_angle = (3 * M_PI) / 2;
-			}
 			if (map->content[i][j] == 'W')
-			{
 				map->player.rot_angle = M_PI;
-			}
 			if (map->content[i][j] == 'E')
-			{
 				map->player.rot_angle = 2 * M_PI;
-			}
 			j++;
 		}
 		i++;
@@ -76,7 +68,6 @@ void	init_player(t_map *map)
 	map->player.turndir = 0;
 	map->player.walkdir = 0;
 	map->player.walkspeed = 0;
-	// map->player.rot_angle = M_PI / 2;
 	ft_find_pdirection(map);
 	map->player.turnspeed = 4.0 * (M_PI / 180);
 	map->player.fov_angle = 60 * (M_PI / 180);

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 14:59:59 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:03:08 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ int	add_tree_project_wall(t_map *map)
 		find_intersection_horiz(map,i);
 		find_intersection_verticale(map,i);
 		if (map->rays.dis_v[i] < map->rays.dis_h[i])
-			inter.raydistance = map->rays.dis_v[i];
+			inter.raydistance = map->rays.dis_v[i] * cos(map->player.ray_angle - map->player.rot_angle);
 		else
-			inter.raydistance = map->rays.dis_h[i];
+			inter.raydistance = map->rays.dis_h[i] * cos(map->player.ray_angle - map->player.rot_angle);
 		inter.projectplan = (WIN_WIDTH / 2) / tang;
 		inter.wallstripheight = (32 / inter.raydistance) * inter.projectplan;
 		inter.top = (WIN_HEIGHT / 2) - (inter.wallstripheight / 2);
