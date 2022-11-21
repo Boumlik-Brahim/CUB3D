@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 11:26:25 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/21 14:59:59 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
 /*increment j outside mlx_pixel_put*/
+void	img_pix_put(t_img *img, int x, int y, int color)
+{
+	char    *pixel;
+
+    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
+}
+
 void	draw_wall(t_map *map, int x, int y, int width_fi)
 {
 	int	j;
@@ -20,7 +28,7 @@ void	draw_wall(t_map *map, int x, int y, int width_fi)
 	j = y;
 	while (j < width_fi)
 	{
-		mlx_pixel_put(map->window.mlx, map->window.win, x, j, 0x3F3BEE);
+		img_pix_put(&map->window.img, x, j, 0x3F3BEE);
 		j++;
 	}
 }
@@ -46,16 +54,16 @@ void check_wall(t_map *map, t_inter *inter)
 	}
 }
 
-void	check_intersection_vertical(t_map *map, t_inter *inter)
+void	check_intersection_vertical(t_map *map, t_inter *inter,int id)
 {
 	check_wall(map, inter);
 	map->player.is_intv = 1;
-	map->player.wall_vx = inter->x_intercet;
-	map->player.wall_vy = inter->y_intercet;
-	map->player.dis_v = distancebetwen_posx_and_inter(map, map->player.wall_vx, map->player.wall_vy);
+	map->rays.wall_vx[id] = inter->x_intercet;
+	map->rays.wall_vy[id] = inter->y_intercet;
+	map->rays.dis_v[id] = distancebetwen_posx_and_inter(map, map->rays.wall_vx[id], map->rays.wall_vy[id]);
 }
 
-void	find_intersection_verticale(t_map *map)
+void	find_intersection_verticale(t_map *map, int id)
 {
 	t_inter inter;
 	double	tang;
@@ -77,26 +85,25 @@ void	find_intersection_verticale(t_map *map)
 	if (map->player.left == 1)
 		inter.x_intercet--;
 	map->player.is_intv = 0;
-	check_intersection_vertical(map, &inter);
+	check_intersection_vertical(map, &inter, id);
 }
 
-void	check_intersection_horiz(t_map *map, t_inter *inter)
+void	check_intersection_horiz(t_map *map, t_inter *inter, int id)
 {
 	check_wall(map, inter);
 	map->player.is_inth = 1;
-	map->player.wall_hx = inter->x_intercet;
-	map->player.wall_hy = inter->y_intercet;
-	map->player.dis_h = distancebetwen_posx_and_inter(map, map->player.wall_hx, map->player.wall_hy);
+	map->rays.wall_hx[id] = inter->x_intercet;
+	map->rays.wall_hy[id] = inter->y_intercet;
+	map->rays.dis_h[id] = distancebetwen_posx_and_inter(map, map->rays.wall_hx[id], map->rays.wall_hy[id]);
 }
 
 
 /*add variable tan*/
-void	find_intersection_horiz(t_map *map)
+void	find_intersection_horiz(t_map *map,int	id)
 {
 	t_inter inter;
 	double	tang;
 
-	map->player.dis_h = 0;
 	tang = tan(map->player.ray_angle);
 	inter.y_intercet = floor(map->player.posy / 32) * 32;
 	if (map->player.up == 1)
@@ -113,7 +120,7 @@ void	find_intersection_horiz(t_map *map)
 	if (map->player.down == 1)
 			inter.y_intercet--;
 	map->player.is_inth = 0;
-	check_intersection_horiz(map, &inter);
+	check_intersection_horiz(map, &inter, id);
 }
 
 /*compare variables not formulas*/
@@ -157,20 +164,24 @@ int	add_tree_project_wall(t_map *map)
 
 	i = 0;
 	rangle = (map->player.fov_angle / map->player.num_rays);
+	map->rays.wall_hx = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_hy = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.dis_h = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_vx = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_vy = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.dis_v = malloc(sizeof(double) * map->player.num_rays);
 	tang = tan(map->player.fov_angle / 2);
 	map->player.ray_angle = map->player.rot_angle - (map->player.fov_angle / 2);
-	map->player.dis_v = 0;
-	map->player.dis_h = 0;
 	while (i < map->player.num_rays)
 	{
 		map->player.ray_angle = normalize_angle(map->player.ray_angle);
 		init_ray(map);
-		find_intersection_horiz(map);
-		find_intersection_verticale(map);
-		if (map->player.dis_v < map->player.dis_h)
-			inter.raydistance = map->player.dis_v;
+		find_intersection_horiz(map,i);
+		find_intersection_verticale(map,i);
+		if (map->rays.dis_v[i] < map->rays.dis_h[i])
+			inter.raydistance = map->rays.dis_v[i];
 		else
-			inter.raydistance = map->player.dis_h;
+			inter.raydistance = map->rays.dis_h[i];
 		inter.projectplan = (WIN_WIDTH / 2) / tang;
 		inter.wallstripheight = (32 / inter.raydistance) * inter.projectplan;
 		inter.top = (WIN_HEIGHT / 2) - (inter.wallstripheight / 2);
@@ -183,5 +194,6 @@ int	add_tree_project_wall(t_map *map)
 		map->player.ray_angle += rangle;
 		i++;
 	}
+
 	return (0);
 }

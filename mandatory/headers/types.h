@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 18:28:19 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:40:15 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,32 @@ typedef struct s_player
 	int			num_rays;
 }	t_player;
 
+typedef struct s_rays
+{
+	double		*wall_hx;
+	double		*wall_hy;
+	double		*wall_vx;
+	double		*wall_vy;
+	double		*dis_v;
+	double		*dis_h;
+} t_rays;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_window
 {
 	void		*mlx;
 	void		*win;
 	int			height;
 	int			width;
-	int			*data;
+	t_img		img;
 }	t_window;
 
 typedef struct s_inter
@@ -81,6 +100,7 @@ typedef struct s_map
 	int			count;
 	t_player	player;
 	t_window	window;
+	 t_rays		rays;
 
 }	t_map;
 

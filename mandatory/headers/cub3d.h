@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/20 21:18:15 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:03:18 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ void	map_to_window(t_map *map,int x,int y,int add);
 void	update_win(t_map *map);
 void	init_ray(t_map *map);
 void	init_player(t_player *s_player);
-void	find_intersection_horiz(t_map *map);
-void	find_intersection_verticale(t_map *map);
+void	find_intersection_horiz(t_map *map,int	id);
+void	find_intersection_verticale(t_map *map, int id);
 int		is_wall(t_map *map, int x, int y);
 double	normalize_angle(double angle);
 void	create_angle(t_map *map);
 void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color);
 void	check_angle(t_map *map);
 void	draw_wall(t_map *map, int x, int y, int width_fi);
-int	add_tree_project_wall(t_map *map);
+int		add_tree_project_wall(t_map *map);
 void	calcule_new_x_y(t_map *map);
 void	mini_map(t_map *map);
 int		funct_ptr(int keycode, t_map *map);
@@ -94,6 +94,7 @@ void	move_player_left_right(t_map *map);
 void	move_player_up_down(t_map *map);
 void	turndir(t_map *map);
 double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
+void	img_pix_put(t_img *img, int x, int y, int color);
 /*---------------------------------raycasting---------------------------------*/
 
 #endif

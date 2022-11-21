@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 10:02:59 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:00:38 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,15 @@ int	handle_keypress(void *ptr)
 	map = (t_map *)ptr;
 	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
 	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
+	mlx_destroy_image(map->window.mlx, map->window.img.mlx_img);
 	mlx_clear_window(map->window.mlx, map->window.win);
-	// draw_background(map);
+	map->window.img.mlx_img = mlx_new_image(map->window.mlx, WIN_WIDTH, WIN_HEIGHT);
+	map->window.img.addr = mlx_get_data_addr(map->window.img.mlx_img,&map->window.img.bpp, &map->window.img.line_len, &map->window.img.endian);
+	draw_background(map);
 	add_tree_project_wall(map);
-	// mini_map(map);
-	// map_to_window(map, 100, 100, 4);
+	mini_map(map);
+	map_to_window(map, 100, 100, 4);
+	mlx_put_image_to_window(map->window.mlx, map->window.win, map->window.img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -80,6 +84,8 @@ void	mlx(t_map *map)
 	map->window.mlx = mlx_init();
 	map->window.win = mlx_new_window(map->window.mlx,
 			WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	map->window.img.mlx_img = mlx_new_image(map->window.mlx, WIN_WIDTH, WIN_HEIGHT);
+	map->window.img.addr = mlx_get_data_addr(map->window.img.mlx_img,&map->window.img.bpp, &map->window.img.line_len, &map->window.img.endian);
 	where_player(map);
 	calcule_new_x_y(map);
 	init_player(&map->player);

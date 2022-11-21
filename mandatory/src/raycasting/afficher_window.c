@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 09:09:11 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:09:19 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 	i = 1;
 	y = 100;
 	x = 100;
-	while (i < step && x < 200 && y < 200)
+	while (i < step && x > 0 && y > 0 && x < 200 && y < 200)
 	{
-		mlx_pixel_put(map->window.mlx, map->window.win,
-			round(x), round(y), color);
+		img_pix_put(&map->window.img, round(x), round(y), color);
 		x = x + x_inc;
 		y = y + y_inc;
 		i++;
 	}
 }
 
-void ckeck_hor_ver(t_map *map)
+void ckeck_hor_ver(t_map *map, int i)
 {
 	double	pointx;
 	double	pointy;
@@ -51,26 +50,26 @@ void ckeck_hor_ver(t_map *map)
 	pointy = 0.0;
 	if (map->player.is_intv == 1 && map->player.is_inth == 1)
 	{
-		if (map->player.dis_v < map->player.dis_h)
+		if (map->rays.dis_v[i] < map->rays.dis_h[i])
 		{
-			pointx = map->player.wall_vx - map->player.newx;
-			pointy = map->player.wall_vy - map->player.newy;
+			pointx = map->rays.wall_vx[i] - map->player.newx;
+			pointy = map->rays.wall_vy[i] - map->player.newy;
 		}
 		else
 		{
-			pointx = map->player.wall_hx - map->player.newx;
-			pointy = map->player.wall_hy - map->player.newy;
+			pointx = map->rays.wall_hx[i] - map->player.newx;
+			pointy = map->rays.wall_hy[i] - map->player.newy;
 		}
 	}
 	else if (map->player.is_intv == 1 && map->player.is_inth == 0)
 	{
-		pointx = map->player.wall_vx - map->player.newx;
-		pointy = map->player.wall_vy - map->player.newy;
+		pointx = map->rays.wall_vx[i] - map->player.newx;
+		pointy = map->rays.wall_vy[i] - map->player.newy;
 	}
 	else if (map->player.is_intv == 0 && map->player.is_inth == 1)
 	{
-		pointx = map->player.wall_hx - map->player.newx;
-		pointy = map->player.wall_hy - map->player.newy;
+		pointx = map->rays.wall_hx[i] - map->player.newx;
+		pointy = map->rays.wall_hy[i] - map->player.newy;
 	}
 	create_line_ddl_alg(map, pointx, pointy, 0xD4D925);
 }
@@ -87,10 +86,7 @@ void	create_angle(t_map *map)
 	while (i < map->player.num_rays)
 	{
 		map->player.ray_angle = normalize_angle(map->player.ray_angle);
-		init_ray(map);
-		find_intersection_horiz(map);
-		find_intersection_verticale(map);
-		ckeck_hor_ver(map);
+		ckeck_hor_ver(map,i);
 		map->player.ray_angle += rangle;
 		i++;
 	}
@@ -108,8 +104,7 @@ void	map_to_window(t_map *map, int x, int y, int add)
 		while (j < x + add)
 		{
 			if (j >= 0 && j < 200 && i >= 0 && i < 200)
-				mlx_pixel_put(map->window.mlx,
-					map->window.win, j, i, 0x3F3B6C);
+				img_pix_put(&map->window.img, j, i, 0x3F3BEE);
 			j++;
 		}
 		++i;
@@ -145,7 +140,7 @@ void	paint_minimap(t_map *map)
 	{
 		j = 0;
 		while (j >= 0 && j < 200)
-			mlx_pixel_put(map->window.mlx, map->window.win, j++, i, 0xFFFFFF);
+			img_pix_put(&map->window.img, j++, i, 0xFFFFFF);
 		++i;
 	}
 }
@@ -157,4 +152,10 @@ void	mini_map(t_map *map)
 	update_win(map);
 	map_to_window(map, 100, 100, 1);
 	create_angle(map);
+	free(map->rays.wall_hx);
+	free(map->rays.wall_hy);
+	free(map->rays.dis_h);
+	free(map->rays.wall_vx);
+	free(map->rays.wall_vy);
+	free(map->rays.dis_v);
 }
