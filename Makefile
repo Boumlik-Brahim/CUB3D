@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/21 20:42:09 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/22 18:26:00 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = cub3D
 CC = CC
 
 # ---------------------------------- Flags ----------------------------------- #
+#-fsanitize=address -static-libsan -Ofast -march=native -fno-signed-zeros -fno-trapping-math
 CFLAGS := -Wall -Wextra -Werror -fsanitize=address -static-libsan -Ofast -march=native -fno-signed-zeros -fno-trapping-math
 MLX_EFLAGS := -lmlx -framework OpenGL -framework AppKit
 MLX_OFLAGS := -Imlx
-
 # ---------------------------------- libs ------------------------------------ #
 LIBFT := libs/Libft/libft.a
 MLX := libs/mlx/libmlx.a

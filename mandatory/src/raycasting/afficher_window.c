@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/21 20:44:28 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/22 18:25:19 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 	double	x_inc;
 	double	y_inc;
 
+	i = 1;
+	y = 100;
+	x = 100;
 	map->player.deltax = newposx - 100;
 	map->player.deltay = newposy - 100;
 	if (fabs(map->player.deltax) > fabs(map->player.deltay))
@@ -29,9 +32,6 @@ void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color)
 		step = fabs(map->player.deltay);
 	x_inc = map->player.deltax / step;
 	y_inc = map->player.deltay / step;
-	i = 1;
-	y = 100;
-	x = 100;
 	while (i < step && x > 0 && y > 0 && x < 200 && y < 200)
 	{
 		img_pix_put(&map->window.img, round(x), round(y), color);
@@ -92,7 +92,6 @@ void	create_angle(t_map *map)
 	}
 }
 
-/* add variables yadd xadd*/
 void	map_to_window(t_map *map, int x, int y, int add)
 {
 	int	i;
@@ -112,10 +111,11 @@ void	map_to_window(t_map *map, int x, int y, int add)
 				img_pix_put(&map->window.img, j, i, 0x3F3BEE);
 			j++;
 		}
-		++i;
+		i++;
 	}
 }
 
+/*color for 0 empty for space*/
 void	update_win(t_map *map)
 {
 	int	i;
@@ -148,8 +148,10 @@ void	paint_minimap(t_map *map)
 	{
 		j = 0;
 		while (j >= 0 && j < 200)
+		{
 			img_pix_put(&map->window.img, j++, i, 0xFFFFFF);
-		++i;
+		}
+		i++;
 	}
 }
 
@@ -158,12 +160,11 @@ void	mini_map(t_map *map)
 	calcule_new_x_y(map);
 	paint_minimap(map);
 	update_win(map);
-	map_to_window(map, 100, 100, 1);
 	create_angle(map);
-	free(map->rays.wall_hx);
-	free(map->rays.wall_hy);
-	free(map->rays.dis_h);
-	free(map->rays.wall_vx);
-	free(map->rays.wall_vy);
-	free(map->rays.dis_v);
+	// free(map->rays.wall_hx);
+	// free(map->rays.wall_hy);
+	// free(map->rays.dis_h);
+	// free(map->rays.wall_vx);
+	// free(map->rays.wall_vy);
+	// free(map->rays.dis_v);
 }

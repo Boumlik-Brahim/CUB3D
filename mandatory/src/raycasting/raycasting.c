@@ -6,11 +6,44 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 21:03:20 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/22 18:20:47 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
+
+int	funct_ptr(int keycode, t_map *map)
+{
+	if (keycode == 2)
+		map->player.walkspeed = 1;
+	if (keycode == 0)
+		map->player.walkspeed = -1;
+	if (keycode == 1)
+		map->player.walkdir = -1;
+	if (keycode == 13)
+		map->player.walkdir = 1;
+	if (keycode == 124)
+		map->player.turndir = 1;
+	if (keycode == 123)
+		map->player.turndir = -1;
+	if (keycode == 53)
+	{
+		mlx_clear_window(map->window.mlx, map->window.win);
+		exit (0);
+	}
+	return (0);
+}
+
+int	funct_ptr_release(int keycode, t_map *map)
+{
+	if (keycode == 2 || keycode == 0)
+		map->player.walkspeed = 0;
+	if (keycode == 1 || keycode == 13)
+		map->player.walkdir = 0;
+	if (keycode == 124 || keycode == 123)
+		map->player.turndir = 0;
+	return (0);
+}
 
 int	ft_close(int keycode, t_map *map)
 {
@@ -24,16 +57,15 @@ int	handle_keypress(void *ptr)
 	t_map *map;
 
 	map = (t_map *)ptr;
-	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
-	mlx_hook(map->window.win, 02, 0L, funct_ptr, (void *)map);
 	mlx_destroy_image(map->window.mlx, map->window.img.mlx_img);
 	mlx_clear_window(map->window.mlx, map->window.win);
 	map->window.img.mlx_img = mlx_new_image(map->window.mlx, WIN_WIDTH, WIN_HEIGHT);
 	map->window.img.addr = mlx_get_data_addr(map->window.img.mlx_img,&map->window.img.bpp, &map->window.img.line_len, &map->window.img.endian);
+	move_player(map);
 	draw_background(map);
 	add_tree_project_wall(map);
 	mini_map(map);
-	map_to_window(map, 100, 100, 4);
+	map_to_window(map, 100, 100, 1);
 	mlx_put_image_to_window(map->window.mlx, map->window.win, map->window.img.mlx_img, 0, 0);
 	return (0);
 }
@@ -72,6 +104,13 @@ void	init_player(t_map *map)
 	map->player.turnspeed = 4.0 * (M_PI / 180);
 	map->player.fov_angle = 60 * (M_PI / 180);
 	map->player.num_rays = WIN_WIDTH;
+
+	map->rays.wall_hx = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_hy = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.dis_h = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_vx = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.wall_vy = malloc(sizeof(double) * map->player.num_rays);
+	map->rays.dis_v = malloc(sizeof(double) * map->player.num_rays);
 }
 
 void	calcule_new_x_y(t_map *map)
@@ -80,7 +119,6 @@ void	calcule_new_x_y(t_map *map)
 	map->player.newy = map->player.posy - 100;
 }
 
-/*edit where playeer*/
 void	where_player(t_map *map)
 {
     int i;
@@ -103,7 +141,6 @@ void	where_player(t_map *map)
 	}
 }
 
-/*delete win height and win width*/
 void	mlx(t_map *map)
 {
 	map->window.mlx = mlx_init();
@@ -114,6 +151,9 @@ void	mlx(t_map *map)
 	where_player(map);
 	calcule_new_x_y(map);
 	init_player(map);
+	mlx_hook(map->window.win, 17, 0, ft_close, (void *)map);
+	mlx_hook(map->window.win, 03, 2L, funct_ptr_release, (void *)map);
+	mlx_hook(map->window.win, 02, 1L, funct_ptr, (void *)map);
 	mlx_loop_hook(map->window.mlx, &handle_keypress, (void *)map);
 	mlx_loop(map->window.mlx);
 }

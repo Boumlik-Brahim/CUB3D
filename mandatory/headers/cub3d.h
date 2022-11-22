@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/21 21:11:35 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/22 17:49:07 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ void	turndir(t_map *map);
 double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
 void	img_pix_put(t_img *img, int x, int y, int color);
 /*---------------------------------raycasting---------------------------------*/
+void move_player(t_map *map);
+int	funct_ptr_release(int keycode, t_map *map);
 
 #endif
