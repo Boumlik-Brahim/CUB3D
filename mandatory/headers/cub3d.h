@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/22 17:49:07 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:02:38 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,43 @@ void	ft_parssing(char *av, t_root *root);
 /*----------------------------------parsiing----------------------------------*/
 
 /*---------------------------------raycasting---------------------------------*/
-int		long_len(t_map *map);
-void	mlx(t_map *map);
-void	paint_minimap(t_map *map);
-void	where_player(t_map *map);
-void	drawplayer(t_map *map);
-void	draw_background(t_map *map);
-void	map_to_window(t_map *map,int x,int y,int add);
-void	update_win(t_map *map);
-void	init_ray(t_map *map);
+int		funct_ptr(int keycode, t_map *map);
+int		funct_ptr_release(int keycode, t_map *map);
+int     ft_close(int keycode, t_map *map);
+int     handle_keypress(void *ptr);
+void	ft_find_pdirection(t_map *map);
 void	init_player(t_map *map);
-void	find_intersection_horiz(t_map *map,int	id);
-void	find_intersection_verticale(t_map *map, int id);
+void	calcule_new_x_y(t_map *map);
+void	where_player(t_map *map);
+void	mlx(t_map *map);
+
+// void	mlx(t_root *root);
+
 int		is_wall(t_map *map, int x, int y);
 double	normalize_angle(double angle);
+void	move_player(t_map *map);
+
+void	draw_background(t_map *map);
+
+void	img_pix_put(t_img *img, int x, int y, int color);
+void	draw_wall(t_map *map, int x, int y, int width_fi);
+double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
+void    check_wall(t_map *map, t_inter *inter);
+void	check_intersection_vertical(t_map *map, t_inter *inter,int id);
+void	find_intersection_verticale(t_map *map, int id);
+void	check_intersection_horiz(t_map *map, t_inter *inter, int id);
+void	find_intersection_horiz(t_map *map,int	id);
+void	check_angle(t_map *map);
+void	init_ray(t_map *map);
+int		add_tree_project_wall(t_map *map);
+
+void	paint_minimap(t_map *map);
+void	drawplayer(t_map *map);
+void	map_to_window(t_map *map,int x,int y,int add);
+void	update_win(t_map *map);
 void	create_angle(t_map *map);
 void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color);
-void	check_angle(t_map *map);
-void	draw_wall(t_map *map, int x, int y, int width_fi);
-int		add_tree_project_wall(t_map *map);
-void	calcule_new_x_y(t_map *map);
 void	mini_map(t_map *map);
-int		funct_ptr(int keycode, t_map *map);
-void	move_player_left_right(t_map *map);
-void	move_player_up_down(t_map *map);
-void	turndir(t_map *map);
-double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
-void	img_pix_put(t_img *img, int x, int y, int color);
 /*---------------------------------raycasting---------------------------------*/
-void move_player(t_map *map);
-int	funct_ptr_release(int keycode, t_map *map);
 
 #endif

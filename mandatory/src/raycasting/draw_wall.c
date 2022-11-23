@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/22 18:21:54 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 09:56:38 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,14 @@ void	check_angle(t_map *map)
 		map->player.left = 1;
 }
 
+/*delete wall_hy wall_hx*/
+/*delete wall_vy wall_vx*/
 void	init_ray(t_map *map)
 {
-	map->player.wall_hx = 0;
-	map->player.wall_hy = 0;
-	map->player.wall_vy = 0;
-	map->player.wall_vx = 0;
+	// map->player.wall_hx = 0;
+	// map->player.wall_hy = 0;
+	// map->player.wall_vy = 0;
+	// map->player.wall_vx = 0;
 	map->player.down = 0;
 	map->player.up = 0;
 	map->player.left = 0;

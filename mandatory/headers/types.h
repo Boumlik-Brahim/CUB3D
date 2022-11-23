@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/22 18:03:00 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 15:02:18 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 # include "../../libs/Libft/libft.h"
 
 /*---------------------------------raycasting---------------------------------*/
+typedef struct s_inter
+{
+	double	xsteep;
+	double	ysteep;
+	double	x_intercet;
+	double	y_intercet;
+	double	raydistance;
+	double	projectplan;
+	double	wallstripheight;
+	double	top;
+	double	bottom;
+}			t_inter;
+
 typedef struct s_player
 {
 	double		posx;
@@ -23,15 +36,9 @@ typedef struct s_player
 	double		deltay;
 	double		newx;
 	double		newy;
-	double		dis_h;
-	double		dis_v;
 	double		rot_angle;
 	double		turnspeed;
 	double		ray_angle;
-	double		wall_hx;
-	double		wall_hy;
-	double		wall_vx;
-	double		wall_vy;
 	double		fov_angle;
 	int			is_inth;
 	int			is_intv;
@@ -68,23 +75,8 @@ typedef struct s_window
 {
 	void		*mlx;
 	void		*win;
-	int			height;
-	int			width;
 	t_img		img;
 }	t_window;
-
-typedef struct s_inter
-{
-	double	xsteep;
-	double	ysteep;
-	double	x_intercet;
-	double	y_intercet;
-	double	raydistance;
-	double	projectplan;
-	double	wallstripheight;
-	double	top;
-	double	bottom;
-}			t_inter;
 
 /*---------------------------------raycasting---------------------------------*/
 
@@ -94,10 +86,6 @@ typedef struct s_map
 	char		**collor;
 	char		**content;
 
-	int			i;
-	int			j;
-	int			len;
-	int			count;
 	t_player	player;
 	t_window	window;
 	t_rays		rays;
@@ -106,9 +94,13 @@ typedef struct s_map
 
 typedef struct s_root
 {
-	t_map	map;
 	t_list	*mheader;
 	t_list	*mbody;
+	t_map	map;
+
+	// t_player	player;
+	// t_window	window;
+	// t_rays		rays;
 }	t_root;
 
 #endif
