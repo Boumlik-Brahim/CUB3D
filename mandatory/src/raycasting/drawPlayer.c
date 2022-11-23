@@ -6,14 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 14:57:25 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/22 18:06:43 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:08:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-/*ytzad lcolor dyal lmap*/
-void	draw_background(t_map *map)
+void	draw_background(t_root *root)
 {
 	int	i;
 	int	j;
@@ -23,7 +22,7 @@ void	draw_background(t_map *map)
 	{
 		j = 0;
 		while (j < WIN_WIDTH)
-			img_pix_put(&map->window.img, j++, i, 0x8758FF);
+			img_pix_put(&root->window.img, j++, i, root->map.ceillingcolor);
 		++i;
 	}
 	i = HALF_WIN_HEIGHT;
@@ -31,7 +30,7 @@ void	draw_background(t_map *map)
 	{
 		j = 0;
 		while (j < WIN_WIDTH)
-			img_pix_put(&map->window.img, j++, i, 0x003865);
+			img_pix_put(&root->window.img, j++, i, root->map.floorcolor);
 		++i;
 	}
 }

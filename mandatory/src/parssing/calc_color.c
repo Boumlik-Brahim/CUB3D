@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 10:23:28 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/19 10:24:09 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:06:42 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,18 @@ int	ft_convert_color(char *color)
 	return (cval);
 }
 
-void	ft_split_color(char *color, char id)
+int	ft_split_color(char *color)
 {
 	int		tab[3];
 	char	**tmp;
-	int		floorcolor;
-	int		ceillingcolor;
+	int		rescolor;
 
 	tmp = ft_split(color, ',');
 	tab[0] = ft_convert_color(tmp[0]);
 	tab[1] = ft_convert_color(tmp[1]);
 	tab[2] = ft_convert_color(tmp[2]);
-	if (id == 'C')
-		ceillingcolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
-	else if (id == 'F')
-		floorcolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
+	rescolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
+	return (rescolor);
 	ft_free_table(tmp);
 }
 
@@ -62,9 +59,9 @@ void	ft_init_colors(t_root *root)
 	while (root->map.collor[++r])
 	{
 		if (!ft_strncmp(root->map.collor[r], "C ", 2))
-			ft_split_color(root->map.collor[r], 'C');
+			root->map.ceillingcolor = ft_split_color(root->map.collor[r]);
 		else if (!ft_strncmp(root->map.collor[r], "F ", 2))
-			ft_split_color(root->map.collor[r], 'F');
+			root->map.floorcolor = ft_split_color(root->map.collor[r]);
 	}
 }
 

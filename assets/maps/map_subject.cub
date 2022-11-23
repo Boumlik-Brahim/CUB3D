@@ -1,5 +1,5 @@
-C 1,30,100        
-F 255,10,50
+C 204,255,255        
+F 51,0,0
 
 
 EA ./assets/textures/txt1.xpm           

@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:24 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/22 12:07:41 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:38:45 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,13 @@
 # define HALF_WIN_HEIGHT 300
 # define HALF_WIN_WIDTH 400
 # define PI_5 4.71238898038
+
+# define ESC 53
+# define UP_KEY 13
+# define DOWN_KEY 1
+# define RIGHT_KEY 2
+# define LEFT_KEY 0
+# define TURN_LEFT 123
+# define TURN_RIGHT 124
 
 #endif

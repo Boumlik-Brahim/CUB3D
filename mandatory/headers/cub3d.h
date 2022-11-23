@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 15:02:38 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:50:11 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		is_nempty_line(char *line);
 void	ft_init_body(t_root *root, int count);
 
 int		ft_convert_color(char *color);
-void	ft_split_color(char *color, char id);
+int		ft_split_color(char *color);
 void	ft_init_colors(t_root *root);
 void	ft_chk_path(t_root *root);
 void	ft_init_header(t_root *root);
@@ -68,43 +68,41 @@ void	ft_parssing(char *av, t_root *root);
 /*----------------------------------parsiing----------------------------------*/
 
 /*---------------------------------raycasting---------------------------------*/
-int		funct_ptr(int keycode, t_map *map);
-int		funct_ptr_release(int keycode, t_map *map);
-int     ft_close(int keycode, t_map *map);
-int     handle_keypress(void *ptr);
-void	ft_find_pdirection(t_map *map);
-void	init_player(t_map *map);
-void	calcule_new_x_y(t_map *map);
-void	where_player(t_map *map);
-void	mlx(t_map *map);
+int		funct_ptr(int keycode, t_root *root);
+int		funct_ptr_release(int keycode, t_root *root);
+int		ft_close(t_root *root);
+int		handle_keypress(void *ptr);
+void	ft_find_pdirection(t_root *root);
+void	init_player(t_root *root);
+void	calcule_new_x_y(t_root *root);
+void	where_player(t_root *root);
+void	ft_raycasting(t_root *root);
 
-// void	mlx(t_root *root);
-
-int		is_wall(t_map *map, int x, int y);
+int		is_wall(t_root *root, int x, int y);
 double	normalize_angle(double angle);
-void	move_player(t_map *map);
+void	move_player(t_root *root);
 
-void	draw_background(t_map *map);
+void	draw_background(t_root *root);
 
 void	img_pix_put(t_img *img, int x, int y, int color);
-void	draw_wall(t_map *map, int x, int y, int width_fi);
-double	distancebetwen_posx_and_inter(t_map *map, double inter_x, double inter_y);
-void    check_wall(t_map *map, t_inter *inter);
-void	check_intersection_vertical(t_map *map, t_inter *inter,int id);
-void	find_intersection_verticale(t_map *map, int id);
-void	check_intersection_horiz(t_map *map, t_inter *inter, int id);
-void	find_intersection_horiz(t_map *map,int	id);
-void	check_angle(t_map *map);
-void	init_ray(t_map *map);
-int		add_tree_project_wall(t_map *map);
+void	draw_wall(t_root *root, int x, int y, int width_fi);
+double	dist_bet_posx_and_inter(t_root *root, double inter_x, double inter_y);
+void	check_wall(t_root *root);
+void	check_intersection_vertical(t_root *root, int id);
+void	find_intersection_verticale(t_root *root, int id);
+void	check_intersection_horiz(t_root *root, int id);
+void	find_intersection_horiz(t_root *root, int id);
+void	check_angle(t_root *root);
+void	init_ray(t_root *root);
+int		add_tree_project_wall(t_root *root);
 
-void	paint_minimap(t_map *map);
-void	drawplayer(t_map *map);
-void	map_to_window(t_map *map,int x,int y,int add);
-void	update_win(t_map *map);
-void	create_angle(t_map *map);
-void	create_line_ddl_alg(t_map *map, double newposx, double newposy, int color);
-void	mini_map(t_map *map);
+void	paint_minimap(t_root *root);
+void	drawplayer(t_root *root);
+void	map_to_window(t_root *root, int x, int y, int add);
+void	update_win(t_root *root);
+void	create_angle(t_root *root);
+void	creatl_ddl_alg(t_root *root, double newposx, double newposy, int color);
+void	mini_map(t_root *root);
 /*---------------------------------raycasting---------------------------------*/
 
 #endif

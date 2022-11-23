@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 15:02:18 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/23 17:08:35 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define TYPES_H
 # include "../../libs/Libft/libft.h"
 
-/*---------------------------------raycasting---------------------------------*/
 typedef struct s_inter
 {
 	double	xsteep;
@@ -28,30 +27,6 @@ typedef struct s_inter
 	double	bottom;
 }			t_inter;
 
-typedef struct s_player
-{
-	double		posx;
-	double		posy;
-	double		deltax;
-	double		deltay;
-	double		newx;
-	double		newy;
-	double		rot_angle;
-	double		turnspeed;
-	double		ray_angle;
-	double		fov_angle;
-	int			is_inth;
-	int			is_intv;
-	int			walkspeed;
-	int			walkdir;
-	int			turndir;
-	int			down;
-	int			up;
-	int			right;
-	int			left;
-	int			num_rays;
-}	t_player;
-
 typedef struct s_rays
 {
 	double		*wall_hx;
@@ -60,7 +35,31 @@ typedef struct s_rays
 	double		*wall_vy;
 	double		*dis_v;
 	double		*dis_h;
-} t_rays;
+}	t_rays;
+
+typedef struct s_player
+{
+	int			turndir;
+	int			walkdir;
+	int			walkspeed;
+	double		rot_angle;
+	double		turnspeed;
+	double		fov_angle;
+	int			num_rays;
+	double		posx;
+	double		posy;
+	double		deltax;
+	double		deltay;
+	double		newx;
+	double		newy;
+	double		ray_angle;
+	int			is_inth;
+	int			is_intv;
+	int			down;
+	int			up;
+	int			right;
+	int			left;
+}	t_player;
 
 typedef struct s_img
 {
@@ -78,29 +77,24 @@ typedef struct s_window
 	t_img		img;
 }	t_window;
 
-/*---------------------------------raycasting---------------------------------*/
-
 typedef struct s_map
 {
 	char		**texture;
 	char		**collor;
 	char		**content;
-
-	t_player	player;
-	t_window	window;
-	t_rays		rays;
-
+	int			floorcolor;
+	int			ceillingcolor;
 }	t_map;
 
 typedef struct s_root
 {
-	t_list	*mheader;
-	t_list	*mbody;
-	t_map	map;
-
-	// t_player	player;
-	// t_window	window;
-	// t_rays		rays;
+	t_list		*mheader;
+	t_list		*mbody;
+	t_map		map;
+	t_window	window;
+	t_player	player;
+	t_rays		rays;
+	t_inter		inter;
 }	t_root;
 
 #endif
