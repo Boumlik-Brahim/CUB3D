@@ -3,34 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/24 10:30:31 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:59:46 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(int *)pixel = color;
-}
-
-void	draw_wall(t_root *root, int x, int y, int width_fi)
-{
-	int	j;
-
-	j = y;
-	while (j < width_fi)
-	{
-		img_pix_put(&root->window.img, x, j, 0x3F3BEE);
-		j++;
-	}
-}
 
 double	dist_bet_posx_and_inter(t_root *root, double inter_x, double inter_y)
 {
@@ -136,7 +117,6 @@ void	init_ray(t_root *root)
 	check_angle(root);
 }
 
-/*rays allocation was here*/
 int	add_tree_project_wall(t_root *root)
 {
 	int		i;
@@ -148,6 +128,7 @@ int	add_tree_project_wall(t_root *root)
 	rangle = (root->player.fov_angle / root->player.num_rays);
 	root->player.ray_angle = root->player.rot_angle
 		- (root->player.fov_angle / 2);
+	add_texture(root);
 	while (i < root->player.num_rays)
 	{
 		root->player.ray_angle = normalize_angle(root->player.ray_angle);
@@ -159,19 +140,17 @@ int	add_tree_project_wall(t_root *root)
 			root->inter.raydistance = root->rays.dis_v[i] * coss;
 		else
 			root->inter.raydistance = root->rays.dis_h[i] * coss;
-		root->inter.projectplan = HALF_WIN_WIDTH
-			/ tan(root->player.fov_angle / 2);
-		root->inter.wallstripheight = (32 / root->inter.raydistance)
-			* root->inter.projectplan;
+		root->inter.projectplan = HALF_WIN_WIDTH / tan(root->player.fov_angle / 2);
+		root->inter.wallstripheight = (32 / root->inter.raydistance) * root->inter.projectplan;
 		halfwallstripheight = (root->inter.wallstripheight / 2);
 		root->inter.top = HALF_WIN_HEIGHT - halfwallstripheight;
 		if (root->inter.top < 0)
 			root->inter.top = 0;
-		root->inter.bottom = HALF_WIN_WIDTH + halfwallstripheight;
+		root->inter.bottom = HALF_WIN_HEIGHT + halfwallstripheight;
 		if (root->inter.bottom > WIN_HEIGHT)
 			root->inter.bottom = WIN_HEIGHT;
-		draw_wall(root, i, root->inter.top, root->inter.bottom);
-		// draw_wall(root, i);
+		put_texture(root, i);
+		draw_wall(root, i);
 		root->player.ray_angle += rangle;
 		i++;
 	}

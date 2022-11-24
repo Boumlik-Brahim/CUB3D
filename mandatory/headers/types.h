@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 10:34:05 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 20:45:26 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ typedef struct s_texture
 	void	*texture2;
 	void	*texture3;
 	void	*texture4;
-	int		*addr;
+	char	*addr1;
+	char	*addr2;
+	char	*addr3;
+	char	*addr4;
 	int		t_width;
 	int		t_height;
 	int		bpp;
