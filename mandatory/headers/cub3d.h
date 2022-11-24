@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 17:18:04 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/24 21:31:00 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		add_tree_project_wall(t_root *root);
 
 void	paint_minimap(t_root *root);
 void	drawplayer(t_root *root);
-void	map_to_window(t_root *root, int x, int y, int add);
+void	map_to_window(t_root *root, int x, int y, int color);
 void	update_win(t_root *root);
 void	create_angle(t_root *root);
 void	creatl_ddl_alg(t_root *root, double newposx, double newposy, int color);

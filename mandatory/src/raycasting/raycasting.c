@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 13:53:16 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/24 21:30:10 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	handle_keypress(void *ptr)
 	draw_background(root);
 	add_tree_project_wall(root);
 	mini_map(root);
-	map_to_window(root, 100, 100, 1);
+	root->player.add = 1;
+	map_to_window(root, 100, 100, 0x3F3BEE);
 	mlx_put_image_to_window(root->window.mlx, root->window.win,
 		root->window.img.mlx_img, 0, 0);
 	return (0);

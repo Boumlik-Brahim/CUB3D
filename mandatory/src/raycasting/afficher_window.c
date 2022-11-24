@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   afficher_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/23 18:42:34 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 21:34:23 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	create_angle(t_root *root)
 	}
 }
 
-void	map_to_window(t_root *root, int x, int y, int add)
+void	map_to_window(t_root *root, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -100,15 +100,15 @@ void	map_to_window(t_root *root, int x, int y, int add)
 	int	xadd;
 
 	i = y;
-	yadd = y + add;
-	xadd = x + add;
+	yadd = y + root->player.add;
+	xadd = x + root->player.add;
 	while (i < yadd)
 	{
 		j = x;
 		while (j < xadd)
 		{
 			if (j >= 0 && j < 200 && i >= 0 && i < 200)
-				img_pix_put(&root->window.img, j, i, 0x3F3BEE);
+				img_pix_put(&root->window.img, j, i, color);
 			j++;
 		}
 		i++;
@@ -127,9 +127,17 @@ void	update_win(t_root *root)
 		i = 0;
 		while (root->map.content[j][i])
 		{
+			root->player.add = 32;
 			if (root->map.content[j][i] == '1')
+			{
 				map_to_window(root, i * 32 - root->player.newx,
-					j * 32 - root->player.newy, 32);
+					j * 32 - root->player.newy, 0x3F3BEE);
+			}
+			if (root->map.content[j][i] == '0')
+			{
+				map_to_window(root, i * 32 - root->player.newx,
+					j * 32 - root->player.newy, 0xFFFFFF);
+			}
 			if (root->map.content[j][i] == 'N' || root->map.content[j][i] == 'S'
 				|| root->map.content[j][i] == 'W'
 				|| root->map.content[j][i] == 'E')
@@ -150,12 +158,11 @@ void	paint_minimap(t_root *root)
 	{
 		j = 0;
 		while (j >= 0 && j < 200)
-			img_pix_put(&root->window.img, j++, i, 0xFFFFFF);
+			img_pix_put(&root->window.img, j++, i, 0x000000);
 		i++;
 	}
 }
 
-/*rays free was here*/
 void	mini_map(t_root *root)
 {
 	calcule_new_x_y(root);
