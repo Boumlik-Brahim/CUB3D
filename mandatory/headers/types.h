@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 17:08:35 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 10:34:05 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,22 @@ typedef struct s_player
 	int			left;
 }	t_player;
 
+/*--------------------------------texture struct-----------------------------*/
+typedef struct s_texture
+{
+	void	*texture1;
+	void	*texture2;
+	void	*texture3;
+	void	*texture4;
+	int		*addr;
+	int		t_width;
+	int		t_height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_texture;
+/*--------------------------------texture struct-----------------------------*/
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -75,6 +91,9 @@ typedef struct s_window
 	void		*mlx;
 	void		*win;
 	t_img		img;
+
+	t_texture	tex;
+
 }	t_window;
 
 typedef struct s_map
@@ -95,6 +114,10 @@ typedef struct s_root
 	t_player	player;
 	t_rays		rays;
 	t_inter		inter;
+
+	double		x_text;
+	double		y_text;
+
 }	t_root;
 
 #endif

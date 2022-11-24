@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/23 18:49:08 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 10:30:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int	add_tree_project_wall(t_root *root)
 		if (root->inter.bottom > WIN_HEIGHT)
 			root->inter.bottom = WIN_HEIGHT;
 		draw_wall(root, i, root->inter.top, root->inter.bottom);
+		// draw_wall(root, i);
 		root->player.ray_angle += rangle;
 		i++;
 	}

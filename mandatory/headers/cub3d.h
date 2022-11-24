@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 18:50:11 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/24 10:43:49 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		funct_ptr_release(int keycode, t_root *root);
 int		ft_close(t_root *root);
 int		handle_keypress(void *ptr);
 void	ft_find_pdirection(t_root *root);
-void	init_player(t_root *root);
+void	init_data(t_root *root);
 void	calcule_new_x_y(t_root *root);
 void	where_player(t_root *root);
 void	ft_raycasting(t_root *root);
@@ -103,6 +103,13 @@ void	update_win(t_root *root);
 void	create_angle(t_root *root);
 void	creatl_ddl_alg(t_root *root, double newposx, double newposy, int color);
 void	mini_map(t_root *root);
+
+/*--------------------------------texture funct-------------------------------*/
+// void    put_texture(t_root *root, int i);
+// void    add_texture(t_root *root);
+// void    draw_wall(t_root *root,int i);
+/*--------------------------------texture funct-------------------------------*/
+
 /*---------------------------------raycasting---------------------------------*/
 
 #endif
