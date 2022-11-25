@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/25 19:22:57 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:42:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ typedef struct s_root
 	double		x_text;
 	double		y_text;
 
+	bool		isclick;
+	int			oldx;
+	int			newx;
 }	t_root;
 
 #endif

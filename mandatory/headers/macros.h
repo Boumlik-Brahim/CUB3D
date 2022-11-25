@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:24 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 18:38:45 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:40:51 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@
 # define LEFT_KEY 0
 # define TURN_LEFT 123
 # define TURN_RIGHT 124
+
+# define LEFT_CLICK 1
 
 #endif
