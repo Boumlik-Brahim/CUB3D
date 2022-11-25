@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/25 20:28:24 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:46:28 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void    draw_wall(t_root *root,int i);
 void	ckeck_hor_ver(t_root *root);
 // /*--------------------------------texture funct-----------------------------*/
 // /*--------------------------------mouse funct-------------------------------*/
-int on_mousrelease(t_root *root);
-int on_mousemove(int x, int y, t_root *root);
-int on_mouseclick(int button, int x, int y, t_root *root);
+int on_mousrelease(int button, int x, int y, void *param);
+int on_mousemove(int x, int y, void *param);
+int on_mouseclick(int button, int x, int y, void *param);
 // /*--------------------------------mouse funct-------------------------------*/
 
 /*---------------------------------raycasting---------------------------------*/
