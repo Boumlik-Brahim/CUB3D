@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keyevent_hooking.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:06:49 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 11:07:35 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:17:47 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-/*free data*/
+
 int	ft_close(t_root *root)
 {
 	mlx_destroy_image(root->window.mlx, root->window.img.mlx_img);

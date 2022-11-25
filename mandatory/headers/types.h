@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 21:27:15 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:22:57 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef struct s_inter
 
 typedef struct s_rays
 {
-	double		*wall_hx;
-	double		*wall_hy;
-	double		*wall_vx;
-	double		*wall_vy;
-	double		*dis_v;
-	double		*dis_h;
+	double		wall_hx;
+	double		wall_hy;
+	double		wall_vx;
+	double		wall_vy;
+	double		dis_v;
+	double		dis_h;
 }	t_rays;
 
 typedef struct s_player

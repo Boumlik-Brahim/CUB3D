@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 21:30:10 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:11 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,7 @@ void	ft_find_pdirection(t_root *root)
 	}
 }
 
-void	calcule_new_x_y(t_root *root)
-{
-	root->player.newx = root->player.posx - 100;
-	root->player.newy = root->player.posy - 100;
-}
 
-void	where_player(t_root *root)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (root->map.content[j])
-	{
-		i = 0;
-		while (root->map.content[j][i])
-		{
-			if (root->map.content[j][i] == 'N' || root->map.content[j][i] == 'S'
-			|| root->map.content[j][i] == 'W' || root->map.content[j][i] == 'N')
-			{
-				root->player.posx = (double)i * 32;
-				root->player.posy = (double)j * 32;
-			}
-			i++;
-		}
-		j++;
-	}
-}
 
 void	ft_raycasting(t_root *root)
 {

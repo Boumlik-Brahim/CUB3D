@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 19:34:24 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/24 21:08:03 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:24:46 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void add_texture(t_root *root)
 	}
 }
 
-void put_texture(t_root *root, int i)
+void put_texture(t_root *root)
 {
 	root->x_text = 0;
-	if (root->rays.dis_v[i] < root->rays.dis_h[i])
+	if (root->rays.dis_v < root->rays.dis_h)
 	{
-		root->x_text = root->rays.wall_vy[i];
+		root->x_text = root->rays.wall_vy / 32.0;
 		root->x_text = root->x_text - (int)root->x_text;
 	}
-	if (root->rays.dis_v[i] > root->rays.dis_h[i])
+	if (root->rays.dis_v > root->rays.dis_h)
 	{
-		root->x_text = root->rays.wall_hx[i];
+		root->x_text = root->rays.wall_hx / 32.0;
 		root->x_text = root->x_text - (int)root->x_text;
 	}
 	root->x_text = root->x_text * root->window.tex.t_width;

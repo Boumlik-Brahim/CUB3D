@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/24 20:59:46 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:23:49 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,74 +34,13 @@ void	check_wall(t_root *root)
 	}
 }
 
-void	check_intersection_vertical(t_root *root, int id)
-{
-	check_wall(root);
-	root->player.is_intv = 1;
-	root->rays.wall_vx[id] = root->inter.x_intercet;
-	root->rays.wall_vy[id] = root->inter.y_intercet;
-	root->rays.dis_v[id] = dist_bet_posx_and_inter(root,
-			root->rays.wall_vx[id], root->rays.wall_vy[id]);
-}
-
-void	find_intersection_verticale(t_root *root, int id)
-{
-	root->inter.x_intercet = floor(root->player.posx / 32) * 32;
-	if (root->player.right == 1)
-		root->inter.x_intercet += 32;
-	root->inter.y_intercet = root->player.posy
-		+ ((root->inter.x_intercet - root->player.posx)
-			* tan(root->player.ray_angle));
-	root->inter.xsteep = 32;
-	if (root->player.left == 1)
-		root->inter.xsteep *= -1;
-	root->inter.ysteep = 32 * tan(root->player.ray_angle);
-	if ((root->player.down == 1 && root->inter.ysteep > 0)
-		|| (root->player.up == 1 && root->inter.ysteep < 0))
-		root->inter.ysteep *= -1;
-	if (root->player.left == 1)
-		root->inter.x_intercet--;
-	root->player.is_intv = 0;
-	check_intersection_vertical(root, id);
-}
-
-void	check_intersection_horiz(t_root *root, int id)
-{
-	check_wall(root);
-	root->player.is_inth = 1;
-	root->rays.wall_hx[id] = root->inter.x_intercet;
-	root->rays.wall_hy[id] = root->inter.y_intercet;
-	root->rays.dis_h[id] = dist_bet_posx_and_inter(root, root->rays.wall_hx[id],
-			root->rays.wall_hy[id]);
-}
-
-void	find_intersection_horiz(t_root *root,int	id)
-{
-	root->inter.y_intercet = floor(root->player.posy / 32) * 32;
-	if (root->player.up == 1)
-		root->inter.y_intercet += 32;
-	root->inter.ysteep = 32;
-	if (root->player.down == 1)
-		root->inter.ysteep *= -1;
-	root->inter.x_intercet = root->player.posx
-		+ ((root->inter.y_intercet - root->player.posy)
-			/ tan(root->player.ray_angle));
-	root->inter.xsteep = root->inter.ysteep / tan(root->player.ray_angle);
-	if ((root->player.left == 1 && root->inter.xsteep > 0)
-		|| (root->player.right == 1 && root->inter.xsteep < 0))
-		root->inter.xsteep *= -1;
-	if (root->player.down == 1)
-			root->inter.y_intercet--;
-	root->player.is_inth = 0;
-	check_intersection_horiz(root, id);
-}
 
 void	check_angle(t_root *root)
 {
 	if (root->player.ray_angle >= 0 && root->player.ray_angle <= M_PI)
-		root->player.up = 1;
-	else
 		root->player.down = 1;
+	else
+		root->player.up = 1;
 	if (root->player.ray_angle <= M_PI_2 || root->player.ray_angle >= PI_5)
 		root->player.right = 1;
 	else
@@ -114,6 +53,12 @@ void	init_ray(t_root *root)
 	root->player.up = 0;
 	root->player.left = 0;
 	root->player.right = 0;
+	root->rays.wall_hx = 0;
+	root->rays.wall_hy = 0;
+	root->rays.wall_vx = 0;
+	root->rays.wall_vy = 0;
+	root->rays.dis_v = 0;
+	root->rays.dis_h = 0;
 	check_angle(root);
 }
 
@@ -133,13 +78,13 @@ int	add_tree_project_wall(t_root *root)
 	{
 		root->player.ray_angle = normalize_angle(root->player.ray_angle);
 		init_ray(root);
-		find_intersection_horiz(root, i);
-		find_intersection_verticale(root, i);
+		find_intersection_horiz(root);
+		find_intersection_verticale(root);
 		coss = cos(root->player.ray_angle - root->player.rot_angle);
-		if (root->rays.dis_v[i] < root->rays.dis_h[i])
-			root->inter.raydistance = root->rays.dis_v[i] * coss;
+		if (root->rays.dis_v < root->rays.dis_h)
+			root->inter.raydistance = root->rays.dis_v * coss;
 		else
-			root->inter.raydistance = root->rays.dis_h[i] * coss;
+			root->inter.raydistance = root->rays.dis_h * coss;
 		root->inter.projectplan = HALF_WIN_WIDTH / tan(root->player.fov_angle / 2);
 		root->inter.wallstripheight = (32 / root->inter.raydistance) * root->inter.projectplan;
 		halfwallstripheight = (root->inter.wallstripheight / 2);
@@ -149,7 +94,7 @@ int	add_tree_project_wall(t_root *root)
 		root->inter.bottom = HALF_WIN_HEIGHT + halfwallstripheight;
 		if (root->inter.bottom > WIN_HEIGHT)
 			root->inter.bottom = WIN_HEIGHT;
-		put_texture(root, i);
+		put_texture(root);
 		draw_wall(root, i);
 		root->player.ray_angle += rangle;
 		i++;

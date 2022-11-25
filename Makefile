@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
+#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/24 11:08:12 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/25 19:31:12 by zel-hach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ MAIN := mandatory/main.c
 
 PARSSING := parssing get_next_line parssing_utils chk_header chk_body read_map \
 			chk_map chk_texture chk_color calc_color
-RAYCASING := raycasting init_data keyevent_hooking afficher_window derection_player draw_wall \
-			drawPlayer texture
+RAYCASING := raycasting init_data keyevent_hooking derection_player draw_wall ddl_algo\
+			drawPlayer texture intersection_horizontal intersection_vertical update_window mini_map check_intersection
 
 SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \
 		$(addprefix mandatory/src/raycasting/, $(addsuffix .c, $(RAYCASING)))

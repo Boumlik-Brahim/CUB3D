@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/24 21:31:00 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:26:47 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void	draw_background(t_root *root);
 void	img_pix_put(t_img *img, int x, int y, int color);
 double	dist_bet_posx_and_inter(t_root *root, double inter_x, double inter_y);
 void	check_wall(t_root *root);
-void	check_intersection_vertical(t_root *root, int id);
-void	find_intersection_verticale(t_root *root, int id);
-void	check_intersection_horiz(t_root *root, int id);
-void	find_intersection_horiz(t_root *root, int id);
+void	check_intersection_vertical(t_root *root);
+void	find_intersection_verticale(t_root *root);
+void	check_intersection_horiz(t_root *root);
+void	find_intersection_horiz(t_root *root);
 void	check_angle(t_root *root);
 void	init_ray(t_root *root);
 int		add_tree_project_wall(t_root *root);
@@ -104,9 +104,10 @@ void	creatl_ddl_alg(t_root *root, double newposx, double newposy, int color);
 void	mini_map(t_root *root);
 
 /*--------------------------------texture funct-------------------------------*/
-void    put_texture(t_root *root, int i);
+void    put_texture(t_root *root);
 void    add_texture(t_root *root);
 void    draw_wall(t_root *root,int i);
+void	ckeck_hor_ver(t_root *root);
 // /*--------------------------------texture funct-------------------------------*/
 
 /*---------------------------------raycasting---------------------------------*/
