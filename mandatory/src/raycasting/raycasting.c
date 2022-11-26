@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/25 20:19:57 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/26 14:04:01 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_raycasting(t_root *root)
 	root->window.win = mlx_new_window(root->window.mlx,
 			WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	add_texture(root);
-	// mlx_put_image_to_window(root->window.mlx, root->window.win, root->window.tex.texture1,0,0);
 	root->window.img.mlx_img = mlx_new_image(root->window.mlx,
 			WIN_WIDTH, WIN_HEIGHT);
 	root->window.img.addr = mlx_get_data_addr(root->window.img.mlx_img,

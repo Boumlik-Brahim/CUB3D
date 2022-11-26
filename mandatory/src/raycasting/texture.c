@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 19:34:24 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/25 19:24:46 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:33:28 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
 	{
-		pixel = (char *)img->addr + (y * img->line_len + x * (img->bpp / 8));
+		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 		*(int *)pixel = color;
 	}
-	else
-		return ;
 }
 
 void	draw_wall(t_root *root,int i)
@@ -92,25 +90,14 @@ void	draw_wall(t_root *root,int i)
 	color = 0xFFFFFF;
 	while (j < (int)root->inter.bottom)
 	{
-		distancefromtop = j;
-		// + (root->inter.wallstripheight / 2) - (WIN_HEIGHT / 2)
+		distancefromtop = (j + (root->inter.wallstripheight / 2)) - (WIN_HEIGHT / 2);
+		if (distancefromtop  < 0)
+			distancefromtop *=-1;
 		root->y_text =  y * distancefromtop;
 		root->y_text  = (int)root->y_text % root->window.tex.t_height;
 		colorx = ((double)root->window.tex.t_width * root->y_text) + root->x_text;
-		if (root->player.ray_angle <= M_PI)
-		{
-			ptr = (int *)root->window.tex.addr1;
-			color = ptr[(int)colorx];
-		}
-		else if (root->player.ray_angle >= (3/2) * M_PI)
-		{
-			ptr = (int *)root->window.tex.addr2;
-			color = ptr[(int)colorx];
-		}
-		// else if (root->player.ray_angle >= (1/2) * M_PI)
-		// 	ptr = (int *)root->window.tex.addr3;
-		// else if (root->player.ray_angle >= 0)
-		// 	ptr = (int *)root->window.tex.addr4;
+		ptr = (int *)root->window.tex.addr1;
+		color = ptr[(int)colorx];
 		img_pix_put(&root->window.img, i, j, color);
 		j++;
 	}

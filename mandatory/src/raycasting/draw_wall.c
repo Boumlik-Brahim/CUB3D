@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/25 19:47:14 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/26 13:44:08 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ int	add_tree_project_wall(t_root *root)
 
 	i = 0;
 	rangle = (root->player.fov_angle / root->player.num_rays);
-	root->player.ray_angle = root->player.rot_angle
-		- (root->player.fov_angle / 2);
-	add_texture(root);
+	root->player.ray_angle = root->player.rot_angle - (root->player.fov_angle / 2);
 	while (i < root->player.num_rays)
 	{
 		root->player.ray_angle = normalize_angle(root->player.ray_angle);
