@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/26 14:04:01 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:34:48 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	ft_find_pdirection(t_root *root)
 	}
 }
 
-
-
 void	ft_raycasting(t_root *root)
 {
 	root->window.mlx = mlx_init();
@@ -79,9 +77,9 @@ void	ft_raycasting(t_root *root)
 	mlx_hook(root->window.win, 17, 0, ft_close, (void *)root);
 	mlx_hook(root->window.win, 03, 2L, funct_ptr_release, (void *)root);
 	mlx_hook(root->window.win, 02, 1L, funct_ptr, (void *)root);
-	mlx_hook(root->window.win, 04, (1L<<8), on_mouseclick, (void *)root);
-	mlx_hook(root->window.win, 06, (1L<<8), on_mousemove, (void *)root);
-	mlx_hook(root->window.win, 05, (1L<<6), on_mousrelease, (void *)root);
+	mlx_hook(root->window.win, 04, (1L << 8), on_mouseclick, (void *)root);
+	mlx_hook(root->window.win, 06, (1L << 8), on_mousemove, (void *)root);
+	mlx_hook(root->window.win, 05, (1L << 6), on_mousrelease, (void *)root);
 	mlx_loop_hook(root->window.mlx, &handle_keypress, (void *)root);
 	mlx_loop(root->window.mlx);
 }

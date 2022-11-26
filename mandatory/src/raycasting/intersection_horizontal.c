@@ -6,19 +6,35 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:08:32 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/25 19:25:38 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:42:43 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-
 void	check_intersection_horiz(t_root *root)
 {
-	check_wall(root);
-	root->player.is_inth = 1;
-	root->rays.wall_hx = root->inter.x_intercet;
-	root->rays.wall_hy = root->inter.y_intercet;
+	double	yhit_wall;
+
+	root->player.is_inth = 0;
+	while (1)
+	{
+		yhit_wall = root->inter.y_intercet;
+		if (root->player.up == 1)
+			yhit_wall--;
+		if (is_wall(root, root->inter.x_intercet, yhit_wall))
+		{
+			root->player.is_inth = 1;
+			root->rays.wall_hx = root->inter.x_intercet;
+			root->rays.wall_hy = root->inter.y_intercet;
+			break ;
+		}
+		else
+		{
+			root->inter.x_intercet += root->inter.xsteep;
+			root->inter.y_intercet += root->inter.ysteep;
+		}
+	}
 	root->rays.dis_h = dist_bet_posx_and_inter(root, root->rays.wall_hx,
 			root->rays.wall_hy);
 }
@@ -38,8 +54,5 @@ void	find_intersection_horiz(t_root *root)
 	if ((root->player.left == 1 && root->inter.xsteep > 0)
 		|| (root->player.right == 1 && root->inter.xsteep < 0))
 		root->inter.xsteep *= -1;
-	if (root->player.up == 1)
-			root->inter.y_intercet--;
-	root->player.is_inth = 0;
 	check_intersection_horiz(root);
 }

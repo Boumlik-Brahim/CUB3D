@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:07:24 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/25 19:10:08 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:43:07 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,27 @@
 
 void	check_intersection_vertical(t_root *root)
 {
-	check_wall(root);
-	root->player.is_intv = 1;
-	root->rays.wall_vx = root->inter.x_intercet;
-	root->rays.wall_vy = root->inter.y_intercet;
+	double	xwallhit;
+
+	root->player.is_intv = 0;
+	while (1)
+	{
+		xwallhit = root->inter.x_intercet;
+		if (root->player.left == 1)
+			xwallhit--;
+		if (is_wall(root, xwallhit, root->inter.y_intercet))
+		{
+			root->player.is_intv = 1;
+			root->rays.wall_vx = root->inter.x_intercet;
+			root->rays.wall_vy = root->inter.y_intercet;
+			break ;
+		}
+		else
+		{
+			root->inter.x_intercet += root->inter.xsteep;
+			root->inter.y_intercet += root->inter.ysteep;
+		}
+	}
 	root->rays.dis_v= dist_bet_posx_and_inter(root,
 			root->rays.wall_vx, root->rays.wall_vy);
 }
@@ -37,8 +54,5 @@ void	find_intersection_verticale(t_root *root)
 	if ((root->player.up == 1 && root->inter.ysteep > 0)
 		|| (root->player.down == 1 && root->inter.ysteep < 0))
 		root->inter.ysteep *= -1;
-	if (root->player.left == 1)
-		root->inter.x_intercet--;
-	root->player.is_intv = 0;
 	check_intersection_vertical(root);
 }

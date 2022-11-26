@@ -6,12 +6,11 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:06:49 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/25 19:17:47 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 20:26:32 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
-
 
 int	ft_close(t_root *root)
 {

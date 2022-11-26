@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/25 19:42:43 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:39:00 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_rays
 	double		wall_vy;
 	double		dis_v;
 	double		dis_h;
+	double		step;
+	double		x_inc;
+	double		y_inc;
+	int			is_vertical;
 }	t_rays;
 
 typedef struct s_player

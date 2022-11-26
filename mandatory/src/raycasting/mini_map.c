@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 12:02:00 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/25 19:26:05 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:12:33 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	create_angle(t_root *root)
 	while (i < root->player.num_rays)
 	{
 		root->player.ray_angle = normalize_angle(root->player.ray_angle);
-		init_ray(root);
-		find_intersection_horiz(root);
-		find_intersection_verticale(root);
+		cast(root);
 		ckeck_hor_ver(root);
 		root->player.ray_angle += rangle;
 		i++;
