@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   derection_player.c                                 :+:      :+:    :+:   */
+/*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/28 20:29:51 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:28:56 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,22 @@ int	is_wall(t_root *root, int x, int y)
 		return (1);
 	j = ft_strlen(root->map.content[mapgrid_y]);
 	if (mapgrid_x > j || mapgrid_x < 0
-		|| root->map.content[mapgrid_y][mapgrid_x] == '1' || root->map.content[mapgrid_y][mapgrid_x] == ' ')
+		|| root->map.content[mapgrid_y][mapgrid_x] == '1'
+		|| root->map.content[mapgrid_y][mapgrid_x] == ' ')
 		return (1);
 	return (0);
+}
+
+void	check_angle(t_root *root)
+{
+	if (root->player.ray_angle >= 0 && root->player.ray_angle <= M_PI)
+		root->player.down = 1;
+	else
+		root->player.up = 1;
+	if (root->player.ray_angle <= M_PI_2 || root->player.ray_angle >= PI_5)
+		root->player.right = 1;
+	else
+		root->player.left = 1;
 }
 
 double	normalize_angle(double angle)

@@ -3,15 +3,31 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
+#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/29 15:09:01 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/29 21:42:14 by zel-hach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = CC
+
+define HEADER
+ ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄        ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄  
+▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░▌      ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ 
+▐░█▀▀▀▀▀▀▀▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌      ▀▀▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌
+▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌               ▐░▌▐░▌       ▐░▌
+▐░▌          ▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌      ▄▄▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌
+▐░▌          ▐░▌       ▐░▌▐░░░░░░░░░░▌      ▐░░░░░░░░░░░▌▐░▌       ▐░▌
+▐░▌          ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌      ▀▀▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌
+▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌               ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌      ▄▄▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌      ▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ 
+ ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀        ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀  
+
+endef
+export HEADER
 
 # ---------------------------------- Flags ----------------------------------- #
 CFLAGS := -Wall -Wextra -Werror -fsanitize=address -static-libsan -Ofast -march=native -fno-signed-zeros -fno-trapping-math
@@ -29,9 +45,9 @@ MAIN := mandatory/main.c
 
 PARSSING := parssing read_map get_next_line chk_map chk_texture chk_color init_header init_body chk_body \
 			parssing_utils
-RAYCASING := raycasting init_data keyevent_hooking mousevent_hooking derection_player \
+RAYCASING := raycasting init_data keyevent_hooking mousevent_hooking move_player \
 			draw_wall ddl_algo background texture intersection_horizontal intersection_vertical \
-			update_window mini_map check_intersection
+			update_window mini_map check_intersection utile_draw_wall
 
 SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \
 		$(addprefix mandatory/src/raycasting/, $(addsuffix .c, $(RAYCASING)))
@@ -41,24 +57,31 @@ OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME)
+$(NAME): print_header $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
+	@echo "Making dependencies, please wait ..."
+	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME)
+	@echo "${NAME}: Compiled successfully 👍👍"
+
+print_header:
+	@echo "\033[0;35m $$HEADER \033[0;30m"
 
 %.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(LIBFT)
-	$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
 	@$(MAKE) -C libs/libft
 	@$(MAKE) bonus -C libs/libft
 
 clean:
-	rm -f $(OBJ)
-	$(MAKE) -C libs/mlx/ clean
-	$(MAKE) -C libs/libft/ clean
+	@rm -f $(OBJ)
+	@echo "\033[0;30m"
+	@$(MAKE) -C libs/mlx/ clean
+	@$(MAKE) -C libs/libft/ clean
+	@echo "\033[0;30m delete successfully \033[0;30m"
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C libs/libft/ fclean
+	@rm -f $(NAME)
+	@$(MAKE) -C libs/libft/ fclean
 
 re: fclean all
 

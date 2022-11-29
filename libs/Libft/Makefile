@@ -21,19 +21,21 @@ OBJ_B = $(SRC_B:.c=.o)
 all: $(NAME)
 
 $(NAME):$(OBJ)
-	$(AR) $(NAME) $?
+	@echo "Making dependencies, please wait ..."
+	@$(AR) $(NAME) $?
+	@echo "${NAME}: Compiled successfully 👍👍"
 
 bonus: $(OBJ_B)
-	$(AR) $(NAME) $?
+	@$(AR) $(NAME) $?
 
 .c.o:
-	$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ) $(OBJ_B)
+	@rm -f $(OBJ) $(OBJ_B)
 
 fclean: 	clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
