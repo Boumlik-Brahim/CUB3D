@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:33:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 11:40:46 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:07:58 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int	ft_split_color(char *color)
 	tab[1] = ft_convert_color(tmp[1]);
 	tab[2] = ft_convert_color(tmp[2]);
 	rescolor = (tab[0] << 16 | tab[1] << 8 | tab[2]);
-	return (rescolor);
 	ft_free_table(tmp);
+	return (rescolor);
 }
 
 static void	ft_init_colors(t_root *root)
