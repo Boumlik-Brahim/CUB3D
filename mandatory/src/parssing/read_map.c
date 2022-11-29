@@ -6,13 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:09 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/22 17:44:17 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:28:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	ft_get_map_line(int fd, t_root *root)
+static void	ft_get_map_line(int fd, t_root *root)
 {
 	char	*line;
 	int		i;

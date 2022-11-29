@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:14:06 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 14:40:14 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:15:29 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* -------------------------------------------------------------------------- */
 
-int	ft_chk_space(char *tmp)
+static int	ft_chk_space(char *tmp)
 {
 	int	j;
 
@@ -29,7 +29,7 @@ int	ft_chk_space(char *tmp)
 
 /* -------------------------------------------------------------------------- */
 
-int	ft_chk_num(char *color)
+static int	ft_chk_num(char *color)
 {
 	int		i;
 	char	*tmp;
@@ -47,7 +47,7 @@ int	ft_chk_num(char *color)
 	}
 	tmp = ft_substr(color, i, (len - i));
 	res = ft_atoi(tmp);
-	if (res < 0 || res > 255 || ft_chk_space(tmp) != 0)
+	if (res < 0 || res > 255 || ft_chk_space(tmp))
 		return (EXIT_FAILURE);
 	free(tmp);
 	return (EXIT_SUCCESS);
@@ -55,7 +55,7 @@ int	ft_chk_num(char *color)
 
 /* -------------------------------------------------------------------------- */
 
-int	ft_colortoint(char *color)
+static int	ft_colortoint(char *color)
 {
 	char	**tmp;
 	int		i;
@@ -69,7 +69,7 @@ int	ft_colortoint(char *color)
 	i = -1;
 	while (tmp[++i])
 	{
-		if (ft_chk_num(tmp[i]) != 0)
+		if (ft_chk_num(tmp[i]))
 		{
 			ft_free_table(tmp);
 			return (EXIT_FAILURE);
@@ -81,7 +81,7 @@ int	ft_colortoint(char *color)
 
 /* -------------------------------------------------------------------------- */
 
-int	ft_chk_digit(char *color)
+static int	ft_chk_digit(char *color)
 {
 	int		i;
 	int		clen;

@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 08:27:22 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/18 18:34:56 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:13:00 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,79 @@
 
 /* -------------------------------------------------------------------------- */
 
-void	ft_chk_body(t_root *root, int *count)
+static int	ft_chkm_content(char c)
 {
-	t_list	*mbody;
+	if (c != '1' && c != '0' && c != ' '
+		&& c != 'N' && c != 'S' && c != 'E' && c != 'W')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
-	mbody = root->mbody;
-	while (mbody && !is_nempty_line(mbody->content))
-		mbody = mbody->next;
-	while (mbody && mbody->next)
+/* -------------------------------------------------------------------------- */
+
+static int	ft_chkmc_vertical(int r, int c, t_root *root)
+{
+	int	i;
+
+	i = r;
+	while (root->map.content[i] && root->map.content[i][c] != '1')
 	{
-		if (!ft_chk_txt(mbody->content) || !ft_chk_color(mbody->content))
-			ft_error("INVALID MAP HEADER");
-		if (!is_nempty_line(mbody->content)
-			&& is_nempty_line(mbody->next->content))
-			ft_error("INVALID MAP BODY");
-		else if (is_nempty_line(mbody->content))
-			(*count)++;
-		mbody = mbody->next;
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i++;
 	}
-}
-
-/* -------------------------------------------------------------------------- */
-
-void	ft_alloc_tables(t_root *root, int count)
-{
-	root->map.content = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!root->map.content)
-		ft_error("CONTENT TABLE ALLOC ERROR");
-	root->map.collor = (char **)malloc(sizeof(char *) * 3);
-	if (!root->map.collor)
-		ft_error("COLLOR TABLE ALLOC ERROR");
-	root->map.texture = (char **)malloc(sizeof(char *) * 5);
-	if (!root->map.texture)
-		ft_error("TEXTURE TABLE ALLOC ERROR");
-}
-
-/* -------------------------------------------------------------------------- */
-
-void	ft_init_body(t_root *root, int count)
-{
-	t_list	*mbody;
-	int		i;
-
-	mbody = root->mbody;
-	i = 0;
-	while (mbody && i < count)
+	if (!root->map.content[i])
+		return (EXIT_FAILURE);
+	i = r;
+	while (root->map.content[i] && root->map.content[i][c] != '1' && i > 0)
 	{
-		if (is_nempty_line(mbody->content))
-		{
-			root->map.content[i] = ft_strdup(mbody->content);
-			i++;
-		}
-		mbody = mbody->next;
+		if (root->map.content[i][c] != '0' && root->map.content[i][c] != 'N'
+			&& root->map.content[i][c] != 'S' && root->map.content[i][c] != 'W'
+			&& root->map.content[i][c] != 'E')
+			return (EXIT_FAILURE);
+		i--;
 	}
-	root->map.content[count] = NULL;
+	if (root->map.content[i][c] != '1')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 /* -------------------------------------------------------------------------- */
 
-void	ft_chk_player(t_root *root)
+static int	ft_chkmc_horizontal(int r, int c, t_root *root)
+{
+	int	j;
+
+	j = c;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1')
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j++;
+	}
+	if (root->map.content[r][j] != '1')
+		return (EXIT_FAILURE);
+	j = c;
+	while (root->map.content[r][j] && root->map.content[r][j] != '1' && j > 0)
+	{
+		if (root->map.content[r][j] != '0' && root->map.content[r][j] != 'N'
+			&& root->map.content[r][j] != 'S' && root->map.content[r][j] != 'W'
+			&& root->map.content[r][j] != 'E')
+			return (EXIT_FAILURE);
+		j--;
+	}
+	if (root->map.content[r][j] != '1')
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+/* -------------------------------------------------------------------------- */
+
+static void	ft_chk_player(t_root *root)
 {
 	int	r;
 	int	c;

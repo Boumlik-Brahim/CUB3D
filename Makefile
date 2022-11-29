@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
+#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/26 21:30:39 by zel-hach         ###   ########.fr        #
+#    Updated: 2022/11/29 12:11:47 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ MANDATORY_HEADERS := $(addprefix mandatory/headers/, $(addsuffix .h, $(HEADERS))
 
 MAIN := mandatory/main.c
 
-PARSSING := parssing get_next_line parssing_utils chk_header chk_body read_map \
-			chk_map chk_texture chk_color calc_color
+PARSSING := parssing read_map get_next_line chk_map chk_texture chk_color init_header init_body chk_body \
+			parssing_utils
 RAYCASING := raycasting init_data keyevent_hooking mousevent_hooking derection_player \
 			draw_wall ddl_algo background texture intersection_horizontal intersection_vertical \
 			update_window mini_map check_intersection

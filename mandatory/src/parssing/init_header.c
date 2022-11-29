@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_color.c                                       :+:      :+:    :+:   */
+/*   init_header.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 10:23:28 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 16:06:42 by bbrahim          ###   ########.fr       */
+/*   Created: 2022/11/29 11:33:09 by bbrahim           #+#    #+#             */
+/*   Updated: 2022/11/29 11:40:46 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* -------------------------------------------------------------------------- */
 
-int	ft_convert_color(char *color)
+static int	ft_convert_color(char *color)
 {
 	char	*res;
 	int		cval;
@@ -36,7 +36,7 @@ int	ft_convert_color(char *color)
 	return (cval);
 }
 
-int	ft_split_color(char *color)
+static int	ft_split_color(char *color)
 {
 	int		tab[3];
 	char	**tmp;
@@ -51,7 +51,7 @@ int	ft_split_color(char *color)
 	ft_free_table(tmp);
 }
 
-void	ft_init_colors(t_root *root)
+static void	ft_init_colors(t_root *root)
 {
 	int	r;
 
@@ -63,6 +63,62 @@ void	ft_init_colors(t_root *root)
 		else if (!ft_strncmp(root->map.collor[r], "F ", 2))
 			root->map.floorcolor = ft_split_color(root->map.collor[r]);
 	}
+}
+
+/* -------------------------------------------------------------------------- */
+
+static void	ft_chk_path(t_root *root)
+{
+	int		r;
+	char	*res;
+	char	*tmp;
+
+	r = -1;
+	while (root->map.texture[++r])
+	{
+		res = ft_substr(root->map.texture[r], 3,
+				(ft_strlen(root->map.texture[r]) - 3));
+		tmp = ft_strtrim(res, " ");
+		if (open(tmp, O_RDONLY) < 0)
+		{
+			free(res);
+			free(tmp);
+			ft_error("INVALID MAP HEADER");
+		}
+		free(res);
+		free(tmp);
+	}
+}
+
+/* -------------------------------------------------------------------------- */
+
+void	ft_init_header(t_root *root)
+{
+	t_list	*mheader;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	mheader = root->mheader;
+	while (mheader)
+	{
+		if (!ft_chk_txt(mheader->content))
+		{
+			root->map.texture[i] = ft_strdup(mheader->content);
+			i++;
+		}
+		else if (!ft_chk_color(mheader->content))
+		{
+			root->map.collor[j] = ft_strdup(mheader->content);
+			j++;
+		}
+		mheader = mheader->next;
+	}
+	root->map.texture[i] = NULL;
+	root->map.collor[j] = NULL;
+	ft_chk_path(root);
+	ft_init_colors(root);
 }
 
 /* -------------------------------------------------------------------------- */

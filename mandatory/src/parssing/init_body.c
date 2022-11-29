@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chk_map.c                                          :+:      :+:    :+:   */
+/*   init_body.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 11:17:44 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 12:13:26 by bbrahim          ###   ########.fr       */
+/*   Created: 2022/11/29 11:35:50 by bbrahim           #+#    #+#             */
+/*   Updated: 2022/11/29 11:37:41 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,38 @@
 
 /* -------------------------------------------------------------------------- */
 
-void	ft_chk_header(t_root *root)
+void	ft_alloc_tables(t_root *root, int count)
 {
-	t_list	*mheader;
-
-	mheader = root->mheader;
-	while (mheader)
-	{
-		if ((ft_chk_txt(mheader->content) && ft_chk_color(mheader->content))
-			|| (ft_chk_dup(&mheader, mheader->content, 3)
-				&& ft_chk_dup(&mheader, mheader->content, 2)))
-			ft_error("INVALID MAP HEADER");
-		mheader = mheader->next;
-	}
+	root->map.content = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!root->map.content)
+		ft_error("CONTENT TABLE ALLOC ERROR");
+	root->map.collor = (char **)malloc(sizeof(char *) * 3);
+	if (!root->map.collor)
+		ft_error("COLLOR TABLE ALLOC ERROR");
+	root->map.texture = (char **)malloc(sizeof(char *) * 5);
+	if (!root->map.texture)
+		ft_error("TEXTURE TABLE ALLOC ERROR");
 }
 
 /* -------------------------------------------------------------------------- */
 
-void	ft_chk_body(t_root *root, int *count)
+void	ft_init_body(t_root *root, int count)
 {
 	t_list	*mbody;
+	int		i;
 
 	mbody = root->mbody;
-	while (mbody && !is_nempty_line(mbody->content))
-		mbody = mbody->next;
-	while (mbody && mbody->next)
+	i = 0;
+	while (mbody && i < count)
 	{
-		if (!ft_chk_txt(mbody->content) || !ft_chk_color(mbody->content))
-			ft_error("INVALID MAP HEADER");
-		if (!is_nempty_line(mbody->content)
-			&& is_nempty_line(mbody->next->content))
-			ft_error("INVALID MAP BODY");
-		else if (is_nempty_line(mbody->content))
-			(*count)++;
+		if (is_nempty_line(mbody->content))
+		{
+			root->map.content[i] = ft_strdup(mbody->content);
+			i++;
+		}
 		mbody = mbody->next;
 	}
+	root->map.content[count] = NULL;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -6,13 +6,13 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:51:48 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:31:38 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 10:27:53 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-char	*ft_read_line(int fd, char *str)
+static char	*ft_read_line(int fd, char *str)
 {
 	int		r;
 	char	*buff;
@@ -39,7 +39,7 @@ char	*ft_read_line(int fd, char *str)
 	return (str);
 }
 
-char	*ft_get_line(char *str)
+static char	*ft_get_line(char *str)
 {
 	char	*line;
 	int		i;
@@ -55,7 +55,7 @@ char	*ft_get_line(char *str)
 	return (line);
 }
 
-char	*ft_line_update(char *str)
+static char	*ft_line_update(char *str)
 {
 	char	*tmp;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:20:43 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/23 16:41:41 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:26:36 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_backbone(char *av, t_root *root)
 {
 	ft_parssing(av, root);
 	ft_raycasting(root);
+	ft_free_map_listes(root);
+	ft_free_map_tables(root);
 }
 
 int	main(int ac, char **av)
@@ -23,10 +25,7 @@ int	main(int ac, char **av)
 	t_root	root;
 
 	if (ac != 2 || !av[1] || ft_chk_ext(av[1], ".cub"))
-	{
-		printf("\033[0;31mA MAP IN FORMAT `*.CUB` IS REQUIRED!\033[0;37m\n");
-		return (EXIT_FAILURE);
-	}
+		ft_error("Map in format `*.CUB` is required!");
 	ft_backbone(av[1], &root);
 	return (0);
 }
