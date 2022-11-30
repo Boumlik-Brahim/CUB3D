@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/30 20:25:25 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/11/30 21:52:08 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,30 @@ double	dist_bet_posx_and_inter(t_root *root, double inter_x, double inter_y);
 void	new_pointx(t_root *root, double x, double y);
 void	ckeck_hor_ver(t_root *root);
 
+/* ------------------------- /raycasting/check_wall.c --------------*/
+
+int		ft_chkzero_vertical(int r, int c, t_root *root);
+int		ft_chkzero_horizontal(int r, int c, t_root *root);
+void	replace(t_root *root);
+int		is_wall(t_root *root, int x, int y);
+
 /*---------------------------------/raycasting/ddl_algo.c--------------------*/
 
 void	creatl_dda_alg(t_root *root, double newposx, double newposy, int color);
 
-/*-------------------------------/raycasting/derection_player.c-------------*/
+/*-------------------------------/raycasting/move_player.c-------------*/
 
-int		is_wall(t_root *root, int x, int y);
 double	normalize_angle(double angle);
 void	move_player(t_root *root);
+void	check_angle(t_root *root);
 
 /*-------------------------------/raycasting/draw_wall.c--------------------*/
 
-void	check_angle(t_root *root);
 void	calcule_wallheight(t_root *root);
 void	cast(t_root *root);
 void	fish_bowl(t_root *root);
 int		add_tree_project_wall(t_root *root);
+void	draw(t_root *root, int i);
 
 /*-------------------------------/raycasting/init_data.c--------------------*/
 
@@ -120,17 +127,19 @@ void	ft_raycasting(t_root *root);
 
 /*--------------------------------/src/raycasting/texture.c---------------*/
 
+void	texture(t_root *root, t_texture1 *tex, char *text);
 void	add_texture(t_root *root);
-void	img_pix_put(t_img *img, int x, int y, int color);
-int		get_color(t_root *root, t_texture1	*tex);
-void	draw_wall(t_root *root, int i, t_texture1	*tex);
 /*-----------------------------------/raycasting/update_window.c-----------*/
 
 void	map_to_window(t_root *root, int x, int y, int color);
 void	update_win(t_root *root);
-bool	offset_x(t_root *root, t_texture1 *tex);
 
+/*-----------------------------------/raycasting/utile_draw_wall.c-----------*/
+
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		get_color(t_root *root, t_texture1	*tex);
+void	draw_wall(t_root *root, int i, t_texture1	*tex);
+bool	offset_x(t_root *root, t_texture1 *tex);
 /*---------------------------------raycasting---------------------------------*/
-void	replace(t_root *root);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 19:34:24 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/29 20:09:39 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 20:43:00 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ void	push_texture(t_root *root, int j)
 	if (ft_strncmp(root->map.texture[j], "SO", 2) == 0)
 	{
 		text = ft_strtrim(root->map.texture[j], "SO ");
-		texture(root, &root->window.tex1[0],text);
+		texture(root, &root->window.tex1[0], text);
 	}
 	if (ft_strncmp(root->map.texture[j], "WE", 2) == 0)
 	{
 		text = ft_strtrim(root->map.texture[j], "WE ");
-		texture(root, &root->window.tex1[1],text);
+		texture(root, &root->window.tex1[1], text);
 	}
 	if (ft_strncmp(root->map.texture[j], "EA", 2) == 0)
 	{
 		text = ft_strtrim(root->map.texture[j], "EA ");
-		texture(root, &root->window.tex1[2],text);
+		texture(root, &root->window.tex1[2], text);
 	}
 	if (ft_strncmp(root->map.texture[j], "NO", 2) == 0)
 	{
 		text = ft_strtrim(root->map.texture[j], "NO ");
-		texture(root, &root->window.tex1[3],text);
+		texture(root, &root->window.tex1[3], text);
 	}
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
+#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/30 20:23:37 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/11/30 21:59:20 by zel-hach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ MAIN := mandatory/main.c
 
 PARSSING := parssing read_map get_next_line chk_map chk_texture chk_color init_header init_body chk_body \
 			parssing_utils
-RAYCASING := raycasting init_data keyevent_hooking mousevent_hooking move_player \
+RAYCASING := raycasting init_data keyevent_hooking move_player \
 			draw_wall ddl_algo background texture intersection_horizontal intersection_vertical \
-			update_window mini_map check_intersection utile_draw_wall
+			check_intersection utile_draw_wall check_wall pos_player
 
 SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \
 		$(addprefix mandatory/src/raycasting/, $(addsuffix .c, $(RAYCASING)))
@@ -64,10 +64,10 @@ PARSSING_BONUS := parssing read_map get_next_line chk_map chk_texture chk_color 
 			parssing_utils
 RAYCASING_BONUS := raycasting init_data keyevent_hooking mousevent_hooking move_player \
 			draw_wall ddl_algo background texture intersection_horizontal intersection_vertical \
-			update_window mini_map check_intersection utile_draw_wall
+			update_window mini_map check_intersection utile_draw_wall  check_wall
 
-SRC_BONUS := $(addprefix bonus/src/parssing/, $(addsuffix .c, $(PARSSING))) \
-		$(addprefix bonus/src/raycasting/, $(addsuffix .c, $(RAYCASING)))
+SRC_BONUS := $(addprefix bonus/src/parssing/, $(addsuffix .c, $(PARSSING_BONUS))) \
+		$(addprefix bonus/src/raycasting/, $(addsuffix .c, $(RAYCASING_BONUS)))
 
 # -------------------------------- obj b files ---------------------------------- #
 
@@ -81,19 +81,19 @@ bonus: $(BONUS)
 
 $(NAME): print_header $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
 	@echo "Making mandatory dependencies, please wait ..."
-	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME) -g
+	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME) 
 	@echo "${NAME}: Compiled successfully 👍👍"
 	
 $(BONUS): print_header $(MAIN_BONUS) $(HEADERS_BONUS) $(LIBFT) $(OBJ_BONUS)
 	@echo "Making bonus dependencies, please wait ..."
-	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN_BONUS) $(LIBFT) $(OBJ_BONUS) -o $(BONUS) -g
+	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN_BONUS) $(LIBFT) $(OBJ_BONUS) -o $(BONUS)
 	@echo "${BONUS}: Compiled successfully 👍👍"
 
 print_header:
 	@echo "\033[0;35m $$HEADER \033[0;30m"
 
 %.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(HEADERS_BONUS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@ -g
+	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
 	@$(MAKE) -C libs/libft
