@@ -6,7 +6,7 @@
 #    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/29 21:42:14 by zel-hach         ###   ########.fr        #
+#    Updated: 2022/11/30 16:05:57 by zel-hach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,14 +59,14 @@ all: $(NAME)
 
 $(NAME): print_header $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
 	@echo "Making dependencies, please wait ..."
-	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME) -g
 	@echo "${NAME}: Compiled successfully 👍👍"
 
 print_header:
 	@echo "\033[0;35m $$HEADER \033[0;30m"
 
 %.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@ -g
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
 	@$(MAKE) -C libs/libft

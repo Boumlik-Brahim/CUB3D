@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:18:38 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/29 20:03:12 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:41:27 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ void	draw(t_root *root, int i)
 		if (!offset_x(root, &root->window.tex1[0]))
 			draw_wall(root, i, &root->window.tex1[0]);
 	}
-	if (root->player.right == 1)
-	{
-		if (offset_x(root, &root->window.tex1[1]))
-			draw_wall(root, i, &root->window.tex1[1]);
-	}
-	if (root->player.left == 1)
-	{
-		if (offset_x(root,&root->window.tex1[2]))
-			draw_wall(root, i, &root->window.tex1[2]);
-	}
-	if (root->player.up == 1)
+	else if (root->player.up == 1)
 	{
 		if (!offset_x(root, &root->window.tex1[3]))
 			draw_wall(root, i, &root->window.tex1[3]);
+	}
+	if (root->player.left == 1)
+	{
+		if (offset_x(root, &root->window.tex1[2]))
+			draw_wall(root, i, &root->window.tex1[2]);
+	}
+	else if (root->player.right == 1)
+	{
+		if (offset_x(root, &root->window.tex1[1]))
+			draw_wall(root, i, &root->window.tex1[1]);
 	}
 }
 

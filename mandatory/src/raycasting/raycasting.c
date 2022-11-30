@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 20:10:32 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:10:07 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_raycasting(t_root *root)
 			&root->window.img.endian);
 	init_data(root);
 	where_player(root);
+	replace(root);
 	calcule_new_x_y(root);
 	mlx_hook(root->window.win, 17, 0, ft_close, (void *)root);
 	mlx_hook(root->window.win, 03, 2L, funct_ptr_release, (void *)root);

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 21:40:56 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:15:28 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ void	update_win(t_root *root);
 bool	offset_x(t_root *root, t_texture1 *tex);
 
 /*---------------------------------raycasting---------------------------------*/
+void	replace(t_root *root);
 
 #endif

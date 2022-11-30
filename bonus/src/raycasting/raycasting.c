@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 20:10:32 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:08:33 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_find_pdirection(t_root *root)
 			if (root->map.content[i][j] == 'W')
 				root->player.rot_angle = M_PI;
 			if (root->map.content[i][j] == 'E')
-				root->player.rot_angle = 2 * M_PI;
+				root->player.rot_angle = 0;
 			j++;
 		}
 		i++;
