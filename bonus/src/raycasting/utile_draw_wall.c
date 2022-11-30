@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:33:48 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/30 17:02:56 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:48:15 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_wall(t_root *root, int i, t_texture1	*tex)
 	int			color;
 	double		distancefromtop;
 
-	j = (int)root->inter.top ;
+	j = (int)root->inter.top;
 	root->y_text = 0;
 	color = 0xFFFFFF;
 	while (j < (int)root->inter.bottom)
@@ -69,13 +69,12 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 int	get_color(t_root *root, t_texture1	*tex)
 {
-	double		colorx;
-	int			*ptr;
-	int			color;
+	int		colorx;
+	int		*ptr;
+	int		color;
 
-	colorx = ((double)tex->t_width1
-			* root->y_text) + root->x_text;
+	colorx = (tex->t_width1 * (int)root->y_text) + (int)root->x_text;
 	ptr = (int *)tex->addr1;
-	color = ptr[(int)colorx];
+	color = ptr[colorx];
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:42:24 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/30 16:41:27 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:11:35 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	init_player(t_root *root)
 	root->player.newx = 0.0;
 	root->player.newy = 0.0;
 	root->player.ray_angle = 0.0;
+	root->player.is_inth = 0;
+	root->player.is_intv = 0;
+	root->player.down = 0;
+	root->player.up = 0;
+	root->player.right = 0;
+	root->player.left = 0;
 }
 
 void	init_data(t_root *root)

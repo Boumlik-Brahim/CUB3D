@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
+#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/30 16:05:57 by zel-hach         ###   ########.fr        #
+#    Updated: 2022/11/30 20:23:37 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
+BONUS = cub3D_bonus
 CC = CC
 
 define HEADER
@@ -53,19 +54,45 @@ SRC := $(addprefix mandatory/src/parssing/, $(addsuffix .c, $(PARSSING))) \
 		$(addprefix mandatory/src/raycasting/, $(addsuffix .c, $(RAYCASING)))
 
 # -------------------------------- obj files ---------------------------------- #
+
+# ----------------------------- B Source files -------------------------------- #
+HEADERS_BONUS := $(addprefix bonus/headers/, $(addsuffix .h, $(HEADERS)))
+
+MAIN_BONUS := bonus/main.c
+
+PARSSING_BONUS := parssing read_map get_next_line chk_map chk_texture chk_color init_header init_body chk_body \
+			parssing_utils
+RAYCASING_BONUS := raycasting init_data keyevent_hooking mousevent_hooking move_player \
+			draw_wall ddl_algo background texture intersection_horizontal intersection_vertical \
+			update_window mini_map check_intersection utile_draw_wall
+
+SRC_BONUS := $(addprefix bonus/src/parssing/, $(addsuffix .c, $(PARSSING))) \
+		$(addprefix bonus/src/raycasting/, $(addsuffix .c, $(RAYCASING)))
+
+# -------------------------------- obj b files ---------------------------------- #
+
 OBJ := $(SRC:.c=.o)
+
+OBJ_BONUS := $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
+bonus: $(BONUS)
+
 $(NAME): print_header $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
-	@echo "Making dependencies, please wait ..."
+	@echo "Making mandatory dependencies, please wait ..."
 	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME) -g
 	@echo "${NAME}: Compiled successfully 👍👍"
+	
+$(BONUS): print_header $(MAIN_BONUS) $(HEADERS_BONUS) $(LIBFT) $(OBJ_BONUS)
+	@echo "Making bonus dependencies, please wait ..."
+	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN_BONUS) $(LIBFT) $(OBJ_BONUS) -o $(BONUS) -g
+	@echo "${BONUS}: Compiled successfully 👍👍"
 
 print_header:
 	@echo "\033[0;35m $$HEADER \033[0;30m"
 
-%.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(LIBFT)
+%.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(HEADERS_BONUS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@ -g
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
@@ -74,6 +101,7 @@ $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
 
 clean:
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BONUS)
 	@echo "\033[0;30m"
 	@$(MAKE) -C libs/mlx/ clean
 	@$(MAKE) -C libs/libft/ clean
@@ -81,6 +109,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(BONUS)
 	@$(MAKE) -C libs/libft/ fclean
 
 re: fclean all
@@ -89,5 +118,8 @@ norm:
 	@norminette $(MAIN)
 	@norminette $(SRC)
 	@norminette $(MANDATORY_HEADERS)
+	@norminette $(MAIN_BONUS)
+	@norminette $(SRC_BONUS)
+	@norminette $(HEADERS_BONUS)
 
 .PHONY: all clean fclean re norm

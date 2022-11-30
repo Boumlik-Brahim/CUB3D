@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:21:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/30 17:08:33 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:10:07 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_find_pdirection(t_root *root)
 			if (root->map.content[i][j] == 'W')
 				root->player.rot_angle = M_PI;
 			if (root->map.content[i][j] == 'E')
-				root->player.rot_angle = 0;
+				root->player.rot_angle = 2 * M_PI;
 			j++;
 		}
 		i++;
@@ -72,6 +72,7 @@ void	ft_raycasting(t_root *root)
 			&root->window.img.endian);
 	init_data(root);
 	where_player(root);
+	replace(root);
 	calcule_new_x_y(root);
 	mlx_hook(root->window.win, 17, 0, ft_close, (void *)root);
 	mlx_hook(root->window.win, 03, 2L, funct_ptr_release, (void *)root);
