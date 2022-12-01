@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mousevent_hooking.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:56:31 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/26 20:32:18 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:50:24 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	on_mousemove(int x, int y, void *param)
 
 	root = (t_root *)param;
 	(void)y;
-	if (root->isclick == true && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
+	if (root->window.isclick == true && x < WIN_WIDTH
+		&& y > 0 && y < WIN_HEIGHT)
 	{
-		if ((root->oldx - x) > 0)
+		if ((root->window.oldx - x) > 0)
 				root->player.rot_angle -= 0.05;
-		else if ((root->oldx - x) < 0)
+		else if ((root->window.oldx - x) < 0)
 				root->player.rot_angle += 0.05;
-		root->oldx = x;
+		root->window.oldx = x;
 	}
 	return (0);
 }
@@ -37,8 +38,8 @@ int	on_mouseclick(int button, int x, int y, void *param)
 	if ((button == LEFT_CLICK) && (x > 0)
 		&& (x < WIN_WIDTH) && (y > 0) && (y < WIN_HEIGHT))
 	{
-		root->isclick = true;
-		root->oldx = x;
+		root->window.isclick = true;
+		root->window.oldx = x;
 	}
 	return (0);
 }
@@ -51,7 +52,7 @@ int	on_mousrelease(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	root = (t_root *)param;
-	if (root->isclick == true)
-	root->isclick = false;
+	if (root->window.isclick == true)
+	root->window.isclick = false;
 	return (0);
 }

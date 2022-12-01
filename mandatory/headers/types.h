@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:27 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/29 21:38:03 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:37:07 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_player
 	int			add;
 }	t_player;
 
-/*--------------------------------texture struct-----------------------------*/
 typedef struct s_texture1
 {
 	void	*texture1;
@@ -76,10 +75,10 @@ typedef struct s_texture1
 	int		bpp;
 	int		line_len;
 	int		endian;
+	double	x_text;
+	double	y_text;
 
 }			t_texture1;
-
-/*--------------------------------texture struct-----------------------------*/
 
 typedef struct s_img
 {
@@ -116,13 +115,6 @@ typedef struct s_root
 	t_player	player;
 	t_rays		rays;
 	t_inter		inter;
-
-	double		x_text;
-	double		y_text;
-
-	bool		isclick;
-	int			oldx;
-	int			newx;
 }	t_root;
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
+#    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/12/01 13:38:41 by zel-hach         ###   ########.fr        #
+#    Updated: 2022/12/01 14:11:50 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ endef
 export HEADER
 
 # ---------------------------------- Flags ----------------------------------- #
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -static-libsan -Ofast -march=native -fno-signed-zeros -fno-trapping-math
+CFLAGS := -Wall -Wextra -Werror -Ofast -march=native -fno-signed-zeros -fno-trapping-math
 MLX_EFLAGS := -lmlx -framework OpenGL -framework AppKit
 MLX_OFLAGS := -Imlx
 # ---------------------------------- libs ------------------------------------ #
@@ -83,7 +83,7 @@ $(NAME): print_header $(MAIN) $(MANDATORY_HEADERS) $(LIBFT) $(OBJ)
 	@echo "Making mandatory dependencies, please wait ..."
 	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN) $(LIBFT) $(OBJ) -o $(NAME) 
 	@echo "${NAME}: Compiled successfully 👍👍"
-	
+
 $(BONUS): print_header $(MAIN_BONUS) $(HEADERS_BONUS) $(LIBFT) $(OBJ_BONUS)
 	@echo "Making bonus dependencies, please wait ..."
 	@$(CC) $(CFLAGS) $(MLX_EFLAGS) $(MAIN_BONUS) $(LIBFT) $(OBJ_BONUS) -o $(BONUS)
