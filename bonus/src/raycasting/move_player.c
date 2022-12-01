@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:15:21 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/30 21:28:59 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:47:08 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	move_player(t_root *root)
 		angle = normalize_angle(root->player.rot_angle);
 	posx = root->player.posx + cos(angle) * movestep;
 	posy = root->player.posy + sin(angle) * movestep;
-	if (!is_wall(root, posx, posy))
+	if (!is_wall_coll(root, posx, posy))
 	{
 		root->player.posx = posx;
 		root->player.posy = posy;

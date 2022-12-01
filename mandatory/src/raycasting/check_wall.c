@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:44:44 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/30 20:48:25 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:46:24 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,28 @@ void	replace(t_root *root)
 }
 
 int	is_wall(t_root *root, int x, int y)
+{
+	int	mapgrid_x;
+	int	mapgrid_y;
+	int	i;
+	int	j;
+
+	mapgrid_x = (x / 32);
+	mapgrid_y = (y / 32);
+	i = 0;
+	while (root->map.content[i])
+		i++;
+	if (mapgrid_y < 0 || mapgrid_y >= i)
+		return (1);
+	j = ft_strlen(root->map.content[mapgrid_y]);
+	if (mapgrid_x > j || mapgrid_x < 0
+		|| root->map.content[mapgrid_y][mapgrid_x] == '1'
+		|| root->map.content[mapgrid_y][mapgrid_x] == ' ')
+		return (1);
+	return (0);
+}
+
+int	is_wall_coll(t_root *root, int x, int y)
 {
 	int	mapgrid_x;
 	int	mapgrid_y;

@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/12/01 13:40:07 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:47:58 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		ft_chkzero_vertical(int r, int c, t_root *root);
 int		ft_chkzero_horizontal(int r, int c, t_root *root);
 void	replace(t_root *root);
 int		is_wall(t_root *root, int x, int y);
+int		is_wall_coll(t_root *root, int x, int y);
 /*---------------------------------/raycasting/ddl_algo.c--------------------*/
 
 void	creatl_dda_alg(t_root *root, double newposx, double newposy, int color);

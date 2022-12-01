@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/12/01 13:39:22 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:47:38 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		ft_chkzero_vertical(int r, int c, t_root *root);
 int		ft_chkzero_horizontal(int r, int c, t_root *root);
 void	replace(t_root *root);
 int		is_wall(t_root *root, int x, int y);
+int		is_wall_coll(t_root *root, int x, int y);
 
 /*---------------------------------/raycasting/ddl_algo.c--------------------*/
 
@@ -126,5 +127,4 @@ int		get_color(t_root *root, t_texture1	*tex);
 void	draw_wall(t_root *root, int i, t_texture1	*tex);
 bool	offset_x(t_root *root, t_texture1 *tex);
 /*---------------------------------raycasting---------------------------------*/
-
 #endif
