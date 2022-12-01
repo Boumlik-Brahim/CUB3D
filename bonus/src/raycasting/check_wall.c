@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:44:44 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/12/01 13:46:55 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:55:28 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,7 @@ int	is_wall(t_root *root, int x, int y)
 	j = ft_strlen(root->map.content[mapgrid_y]);
 	if (mapgrid_x > j || mapgrid_x < 0
 		|| root->map.content[mapgrid_y][mapgrid_x] == '1'
-		|| root->map.content[mapgrid_y][mapgrid_x] == ' '
-		|| (root->map.content[(int )(root->player.posy / 32)] \
-		[(int)(root->player.posx / 32)] == '2'
-		&& root->map.content[mapgrid_y][mapgrid_x] == '2'
-		&& (int)(root->player.posy / 32) != mapgrid_y
-		&& (int)(root->player.posx / 32) != mapgrid_x))
+		|| root->map.content[mapgrid_y][mapgrid_x] == ' ')
 		return (1);
 	return (0);
 }
