@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 12:04:18 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/30 15:59:46 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:37:40 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	update_win(t_root *root)
 			if (root->map.content[j][i] == '1')
 				map_to_window(root, i * 32 - root->player.newx,
 					j * 32 - root->player.newy, 0x3F3BEE);
-			if (root->map.content[j][i] == '0' || root->map.content[j][i] == '2')
+			if (root->map.content[j][i] == '0'
+				|| root->map.content[j][i] == '2')
 				map_to_window(root, i * 32 - root->player.newx,
 					j * 32 - root->player.newy, 0xFFFFFF);
 			if (root->map.content[j][i] == 'N' || root->map.content[j][i] == 'S'
