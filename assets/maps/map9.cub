@@ -1,0 +1,21 @@
+C 79, 88, 89
+F 33,59,23
+
+EA ./assets/textures/brick1.xpm          
+NO ./assets/textures/brick2.xpm
+SO ./assets/textures/brick3.xpm
+WE ./assets/textures/brick4.xpm
+
+1111111111
+1000000001
+1111000001
+1000000001
+100N001001
+1000001001
+1000001001
+1111111111
+
+
+
+
+

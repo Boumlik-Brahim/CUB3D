@@ -1,10 +1,10 @@
-C 1,30,100  
-F 255,10,50
+C 79, 88, 89
+F 33,59,23
 
-EA ./assets/textures/ea.xpm
-NO ./assets/textures/no.xpm
-SO ./assets/textures/so.xpm
-WE ./assets/textures/we.xpm
+EA ./assets/textures/brick1.xpm          
+NO ./assets/textures/brick2.xpm
+SO ./assets/textures/brick3.xpm
+WE ./assets/textures/brick4.xpm
 
 
 11111111111111111111111111111111111111111111111111111111111111111111111111111111
