@@ -6,7 +6,7 @@
 /*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:24:21 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/30 21:30:02 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:39:22 by zel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_chk_dup(t_list **list, char *text, int size);
 int		ft_colorlen(char **tmp);
 int		ft_chk_color(char *color);
 int		ft_chk_ext(char *str, char	*ext);
-int		ft_chk_txt(char *text);
+int		ft_chk_txt(char *text); 
 int		is_nempty_line(char *line);
 void	ft_init_body(t_root *root, int count);
 void	ft_init_header(t_root *root);

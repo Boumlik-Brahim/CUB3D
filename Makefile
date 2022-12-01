@@ -6,7 +6,7 @@
 #    By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/11/30 21:59:20 by zel-hach         ###   ########.fr        #
+#    Updated: 2022/12/01 13:38:41 by zel-hach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ $(BONUS): print_header $(MAIN_BONUS) $(HEADERS_BONUS) $(LIBFT) $(OBJ_BONUS)
 print_header:
 	@echo "\033[0;35m $$HEADER \033[0;30m"
 
-%.o: $(SRC)/%.c $(MANDATORY_HEADERS) $(HEADERS_BONUS) $(LIBFT)
+%.o: %.c $(MANDATORY_HEADERS) $(HEADERS_BONUS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(MLX_OFLAGS) -c $< -o $@
 
 $(LIBFT): $(shell find libs/libft -name "*.c" -type f)
