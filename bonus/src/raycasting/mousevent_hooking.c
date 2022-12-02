@@ -6,7 +6,7 @@
 /*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:56:31 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/12/01 14:50:24 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:03:43 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	on_mousrelease(int button, int x, int y, void *param)
 	(void)y;
 	root = (t_root *)param;
 	if (root->window.isclick == true)
-	root->window.isclick = false;
+		root->window.isclick = false;
 	return (0);
 }

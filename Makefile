@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/12/01 14:11:50 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/12/02 10:27:58 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ MLX_OFLAGS := -Imlx
 # ---------------------------------- libs ------------------------------------ #
 LIBFT := libs/Libft/libft.a
 MLX := libs/mlx/libmlx.a
-
 # ----------------------------- M Source files -------------------------------- #
 HEADERS := cub3d macros types
 MANDATORY_HEADERS := $(addprefix mandatory/headers/, $(addsuffix .h, $(HEADERS)))
