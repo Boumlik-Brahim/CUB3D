@@ -1,6 +1,6 @@
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -Ofast -march=native -fno-signed-zeros -fno-trapping-math
+CFLAGS = -Wall -Werror -Wextra
 AR = ar rcs
 NAME = libft.a
 

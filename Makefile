@@ -6,7 +6,7 @@
 #    By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 10:27:09 by bbrahim           #+#    #+#              #
-#    Updated: 2022/12/02 10:27:58 by bbrahim          ###   ########.fr        #
+#    Updated: 2022/12/02 11:46:00 by bbrahim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ endef
 export HEADER
 
 # ---------------------------------- Flags ----------------------------------- #
-CFLAGS := -Wall -Wextra -Werror -Ofast -march=native -fno-signed-zeros -fno-trapping-math
+CFLAGS := -Wall -Wextra -Werror
 MLX_EFLAGS := -lmlx -framework OpenGL -framework AppKit
 MLX_OFLAGS := -Imlx
 # ---------------------------------- libs ------------------------------------ #

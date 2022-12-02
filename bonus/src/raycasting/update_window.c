@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 12:04:18 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/12/01 13:37:40 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/02 11:42:28 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	update_win(t_root *root)
 			root->player.add = 32;
 			if (root->map.content[j][i] == '1')
 				map_to_window(root, i * 32 - root->player.newx,
-					j * 32 - root->player.newy, 0x3F3BEE);
+					j * 32 - root->player.newy, 0x501d1b);
 			if (root->map.content[j][i] == '0'
 				|| root->map.content[j][i] == '2')
 				map_to_window(root, i * 32 - root->player.newx,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 12:26:52 by zel-hach          #+#    #+#             */
-/*   Updated: 2022/11/29 13:28:10 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/02 11:44:50 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	new_pointx(t_root *root, double x, double y)
 
 	pointx = x - root->player.newx;
 	pointy = y - root->player.newy;
-	creatl_dda_alg(root, pointx, pointy, 0xD4D925);
+	creatl_dda_alg(root, pointx, pointy, 0x394e19);
 }
 
 void	ckeck_hor_ver(t_root *root)

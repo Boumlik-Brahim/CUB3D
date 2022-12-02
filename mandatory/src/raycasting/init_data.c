@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-hach <zel-hach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbrahim <bbrahim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:42:24 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/11/30 20:39:59 by zel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:43:28 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void	init_player(t_root *root)
 	root->player.turnspeed = 4.0 * (M_PI / 180);
 	root->player.fov_angle = 60 * (M_PI / 180);
 	root->player.num_rays = WIN_WIDTH;
-	root->player.deltax = 0.0;
-	root->player.deltay = 0.0;
-	root->player.newx = 0.0;
-	root->player.newy = 0.0;
 	root->player.ray_angle = 0.0;
 }
 
