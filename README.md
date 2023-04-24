@@ -36,3 +36,13 @@ The cub3D program supports many of the basic functionalities of a 3D game engine
 # Conclusion:
 
 The Cub3d project is a fun and engaging project that will help you to gain a better understanding of 3D game engines and the Raycasting technique. By completing this project, you will gain a deeper understanding of how to create a simple game from scratch, and how to use basic game functionalities to create more complex games.
+
+# Contributors:
+
+- Zineb El Hachimi (zel-hach).
+
+    [Zineb El Hachimi](https://github.com/zel-hach)
+
+- Brahim Boumlik (Boumlik-Brahim).
+
+    [Brahim Boumlik](https://github.com/Boumlik-Brahim)
